@@ -2,10 +2,7 @@ package main.modules.critters.models;
 
 import main.classes.critters.Animal;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -63,7 +60,22 @@ public class AnimalModel {
     }
 
     private static Animal deserialize (File toRead) {
-        return null;
+        Animal animal = null;
+        try {
+            FileInputStream fileIn = new FileInputStream(toRead);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            animal = (Animal) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return null;
+        } catch (ClassNotFoundException c) {
+            System.out.println("Animal class not found");
+            c.printStackTrace();
+            return null;
+        }
+        return animal;
     }
 
     //GENERAL PURPOSE
