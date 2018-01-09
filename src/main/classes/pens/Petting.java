@@ -1,4 +1,14 @@
 package main.classes.pens;
 
-public class Petting extends Pen {
+import java.io.Serializable;
+
+public class Petting extends Pen implements Serializable {
+    public Petting () {
+        setPenType();
+    }
+
+    @Override
+    public void setPenType() {
+        penType = "petting";
+    }
 }

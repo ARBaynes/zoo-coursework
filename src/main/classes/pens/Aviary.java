@@ -12,7 +12,7 @@ public class Aviary extends Pen implements HighPen, Serializable {
     }
 
     @Override
-    public void setPenType() { penType = "Aviary"; }
+    public void setPenType() { penType = "aviary"; }
 
     @Override
     public void setHeight(Integer height) { this.height = height; }
