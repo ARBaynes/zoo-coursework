@@ -3,6 +3,9 @@ package main.modules.critters.models;
 import main.classes.critters.Animal;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -43,8 +46,20 @@ public class AnimalModel {
 
     //PRIVATE DATA MANIPULATION
 
-    private static void serialize () {
+    private static void serialize (Animal animal) {
+        if (animal.getID() == null) { animal.setID(createAnimalID()); }
+        try {
+            FileOutputStream fileOut =
+                    new FileOutputStream(filePath + animal.getID()+".animal");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(animal);
+            out.close();
+            fileOut.close();
 
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+        setAllAnimals();
     }
 
     private static Animal deserialize (File toRead) {
