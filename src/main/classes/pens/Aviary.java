@@ -1,6 +1,6 @@
 package main.classes.pens;
 
-import main.interfaces.pens.HighPen;
+import main.interfaces.HighPen;
 
 import java.io.Serializable;
 

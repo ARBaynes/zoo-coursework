@@ -1,6 +1,6 @@
 package main.classes.pens;
 
-import main.interfaces.pens.WaterPen;
+import main.interfaces.WaterPen;
 
 import java.io.Serializable;
 

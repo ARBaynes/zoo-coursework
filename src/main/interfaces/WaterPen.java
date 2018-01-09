@@ -1,4 +1,4 @@
-package main.interfaces.pens;
+package main.interfaces;
 
 public interface WaterPen {
 
