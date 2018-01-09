@@ -40,7 +40,7 @@ public class DryModel {
 
     //PRIVATE DATA MANIPULATION
 
-    private static void serialize (Dry aquarium) {
+    private static void serialize (Dry dry) {
 
     }
 
