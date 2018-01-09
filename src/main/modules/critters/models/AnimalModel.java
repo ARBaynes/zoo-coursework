@@ -2,24 +2,29 @@ package main.modules.critters.models;
 
 import main.classes.critters.Animal;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 public class AnimalModel {
-    protected static String filePath = "data/Animal_Data/";
+    protected static String filePath = "data/animal_data/";
     protected static ArrayList<Animal> allAnimals = new ArrayList<>();
 
     //SETTERS
 
     public static void setAllAnimals() {
-
+        allAnimals.clear();
+        File folder = new File(filePath);
+        ArrayList<Animal> animals = new ArrayList<>();
+        for (File fileEntry : folder.listFiles()) {
+            animals.add(deserialize(fileEntry));
+        }
+        allAnimals.addAll(animals);
     }
 
     //GETTERS
 
-    public static ArrayList<Animal> getAllAnimals () {
-        return null;
-    }
+    public static ArrayList<Animal> getAllAnimals () { return allAnimals; }
 
 
     //PUBLIC DATA MANIPULATION
@@ -42,7 +47,7 @@ public class AnimalModel {
 
     }
 
-    private static Animal deserialize () {
+    private static Animal deserialize (File toRead) {
         return null;
     }
 
