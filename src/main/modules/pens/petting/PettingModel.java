@@ -33,7 +33,7 @@ public class PettingModel {
 
     }
 
-    public static void removeDryPen (Petting toFind) {
+    public static void removePetting (Petting toFind) {
 
     }
 
