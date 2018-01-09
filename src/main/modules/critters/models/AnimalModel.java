@@ -3,6 +3,8 @@ package main.modules.critters.models;
 import main.classes.critters.Animal;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -29,16 +31,25 @@ public class AnimalModel {
 
     //PUBLIC DATA MANIPULATION
 
-    public static void addAnimal () {
-
+    public static void addData (Animal animal) {
+        serialize(animal);
+        setAllAnimals();
     }
 
-    public static void editAnimal () {
-
+    public static void editData (Animal toFind, Animal toReplaceWith) {
+        removeData(toFind);
+        addData(toReplaceWith);
     }
 
-    public static void removeAnimal () {
-
+    public static void removeData (Animal toFind) {
+        try {
+            Path pathToFile = Paths.get(filePath + toFind.getID() + ".animal");
+            java.nio.file.Files.deleteIfExists(pathToFile);
+            System.out.println("File Deleted.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setAllAnimals();
     }
 
     //PRIVATE DATA MANIPULATION
