@@ -7,7 +7,8 @@ public interface WaterPen {
     Integer getWaterVolume();
 
     //Water Type
-    String getWaterType();
     void setWaterType(String waterType);
+    String getWaterType();
+
 
 }
