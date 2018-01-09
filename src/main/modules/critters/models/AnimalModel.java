@@ -31,17 +31,17 @@ public class AnimalModel {
 
     //PUBLIC DATA MANIPULATION
 
-    public static void addData (Animal animal) {
+    public static void addAnimal (Animal animal) {
         serialize(animal);
         setAllAnimals();
     }
 
-    public static void editData (Animal toFind, Animal toReplaceWith) {
-        removeData(toFind);
-        addData(toReplaceWith);
+    public static void editAnimal (Animal toFind, Animal toReplaceWith) {
+        removeAnimal(toFind);
+        addAnimal(toReplaceWith);
     }
 
-    public static void removeData (Animal toFind) {
+    public static void removeAnimal (Animal toFind) {
         try {
             Path pathToFile = Paths.get(filePath + toFind.getID() + ".animal");
             java.nio.file.Files.deleteIfExists(pathToFile);
