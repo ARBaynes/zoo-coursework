@@ -13,6 +13,13 @@ public class AquariumModel {
     //SETTERS
 
     public static void setAllAquariums() {
+        allAquariums.clear();
+        File folder = new File(filePath);
+        ArrayList<Aquarium> aquariums = new ArrayList<>();
+        for (File fileEntry : folder.listFiles()) {
+            aquariums.add(deserialize(fileEntry));
+        }
+        allAquariums.addAll(aquariums);
     }
 
 

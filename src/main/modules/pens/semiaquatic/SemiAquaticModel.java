@@ -1,7 +1,5 @@
 package main.modules.pens.semiaquatic;
 
-import main.classes.pens.Dry;
-import main.classes.pens.Petting;
 import main.classes.pens.SemiAquatic;
 
 import java.io.File;
@@ -14,6 +12,13 @@ public class SemiAquaticModel {
     //SETTERS
 
     public static void setAllSemiAquatic() {
+        allSemiAquatic.clear();
+        File folder = new File(filePath);
+        ArrayList<SemiAquatic> semiAquatics = new ArrayList<>();
+        for (File fileEntry : folder.listFiles()) {
+            semiAquatics.add(deserialize(fileEntry));
+        }
+        allSemiAquatic.addAll(semiAquatics);
     }
 
 

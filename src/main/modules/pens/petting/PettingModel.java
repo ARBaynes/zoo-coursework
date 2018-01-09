@@ -13,6 +13,13 @@ public class PettingModel {
     //SETTERS
 
     public static void setAllPetting() {
+        allPetting.clear();
+        File folder = new File(filePath);
+        ArrayList<Petting> pettings = new ArrayList<>();
+        for (File fileEntry : folder.listFiles()) {
+            pettings.add(deserialize(fileEntry));
+        }
+        allPetting.addAll(pettings);
     }
 
 
@@ -43,7 +50,7 @@ public class PettingModel {
 
     }
 
-    private static Dry deserialize (File toRead) {
+    private static Petting deserialize (File toRead) {
         return null;
     }
 

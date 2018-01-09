@@ -12,6 +12,13 @@ public class StaffModel {
     //SETTERS
 
     public static void setAllStaff() {
+        allStaff.clear();
+        File folder = new File(filePath);
+        ArrayList<Staff> staff = new ArrayList<>();
+        for (File fileEntry : folder.listFiles()) {
+            staff.add(deserialize(fileEntry));
+        }
+        allStaff.addAll(staff);
     }
 
 

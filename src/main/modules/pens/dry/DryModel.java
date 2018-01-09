@@ -14,6 +14,13 @@ public class DryModel {
     //SETTERS
 
     public static void setAllDryPens() {
+        allDryPens.clear();
+        File folder = new File(filePath);
+        ArrayList<Dry> dry = new ArrayList<>();
+        for (File fileEntry : folder.listFiles()) {
+            dry.add(deserialize(fileEntry));
+        }
+        allDryPens.addAll(dry);
     }
 
 

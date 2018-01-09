@@ -8,18 +8,25 @@ import java.util.ArrayList;
 
 public class AviaryModel {
     protected static String filePath = "data/pen_data/aviary_data/";
-    protected static ArrayList<Aviary> allAviary = new ArrayList<>();
+    protected static ArrayList<Aviary> allAviaries = new ArrayList<>();
 
     //SETTERS
 
-    public static void setAllAviary() {
+    public static void setAllAviaries() {
+        allAviaries.clear();
+        File folder = new File(filePath);
+        ArrayList<Aviary> aviaries = new ArrayList<>();
+        for (File fileEntry : folder.listFiles()) {
+            aviaries.add(deserialize(fileEntry));
+        }
+        allAviaries.addAll(aviaries);
     }
 
 
     //GETTERS
 
-    public static ArrayList<Aviary> getAllAviary() {
-        return allAviary;
+    public static ArrayList<Aviary> getAllAviaries() {
+        return allAviaries;
     }
 
 
