@@ -5,7 +5,7 @@ import main.interfaces.HighPen;
 import java.io.Serializable;
 
 public class Aviary extends Pen implements HighPen, Serializable {
-    private Integer height;
+    private Double height;
 
     public Aviary () {
         setPenType();
@@ -15,8 +15,8 @@ public class Aviary extends Pen implements HighPen, Serializable {
     public void setPenType() { penType = "aviary"; }
 
     @Override
-    public void setHeight(Integer height) { this.height = height; }
+    public void setHeight(Double height) { this.height = height; }
 
     @Override
-    public int getHeight() { return height; }
+    public Double getHeight() { return height; }
 }

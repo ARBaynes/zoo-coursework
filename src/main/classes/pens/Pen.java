@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public abstract class Pen {
 
     private Integer penID;
-    private Integer length;
-    private Integer width;
-    private Integer temperature;
+    private Double length;
+    private Double width;
+    private Double temperature;
     private ArrayList<Animal> containedAnimals = new ArrayList<>();
     private Staff staffResponsible;
     public  String penType;
@@ -19,15 +19,15 @@ public abstract class Pen {
 
     public void setPenID (Integer penID) { this.penID = penID; }
 
-    public void setWidth(Integer width) {
+    public void setWidth(Double width) {
         this.width = width;
     }
 
-    public void setLength(Integer length) {
+    public void setLength(Double length) {
         this.length = length;
     }
 
-    public void setTemperature(Integer temperature) {
+    public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
 
@@ -37,11 +37,11 @@ public abstract class Pen {
 
     //GETTERS
 
-    public Integer getWidth() { return width; }
+    public Double getWidth() { return width; }
 
-    public Integer getLength() { return length; }
+    public Double getLength() { return length; }
 
-    public Integer getTemperature() { return temperature; }
+    public Double getTemperature() { return temperature; }
 
     public Staff staffResponsible() { return staffResponsible; }
 
@@ -55,15 +55,15 @@ public abstract class Pen {
 
     //AREA GETTERS
 
-    public Integer getCurrentSpace () {
-        Integer area = getArea();
+    public Double getCurrentSpace () {
+        Double area = getArea();
         for ( Animal containedAnimal : this.containedAnimals) {
             area -= containedAnimal.getBreed().getRequirements();
         }
         return area;
     }
 
-    public Integer getArea () {
+    public Double getArea () {
         return getLength() * getWidth();
     }
 

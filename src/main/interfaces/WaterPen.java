@@ -3,8 +3,8 @@ package main.interfaces;
 public interface WaterPen {
 
     //Water Volume
-    void setWaterVolume(Integer waterVolume);
-    Integer getWaterVolume();
+    void setWaterVolume(Double waterVolume);
+    Double getWaterVolume();
 
     //Water Type
     void setWaterType(String waterType);

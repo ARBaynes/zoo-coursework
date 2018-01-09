@@ -5,7 +5,7 @@ import main.interfaces.WaterPen;
 import java.io.Serializable;
 
 public class SemiAquatic extends Pen implements WaterPen, Serializable {
-    private Integer waterVolume;
+    private Double waterVolume;
     private String waterType;
 
     @Override
@@ -14,12 +14,12 @@ public class SemiAquatic extends Pen implements WaterPen, Serializable {
     }
 
     @Override
-    public void setWaterVolume(Integer waterVolume) {
+    public void setWaterVolume(Double waterVolume) {
         this.waterVolume = waterVolume;
     }
 
     @Override
-    public Integer getWaterVolume() {
+    public Double getWaterVolume() {
         return waterVolume;
     }
 

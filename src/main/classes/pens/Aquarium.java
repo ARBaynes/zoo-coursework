@@ -6,8 +6,8 @@ import main.interfaces.WaterPen;
 import java.io.Serializable;
 
 public class Aquarium extends Pen implements HighPen, WaterPen, Serializable{
-    private Integer height;
-    private Integer waterVolume;
+    private Double height;
+    private Double waterVolume;
     private String waterType;
 
     public Aquarium () {
@@ -18,16 +18,16 @@ public class Aquarium extends Pen implements HighPen, WaterPen, Serializable{
     public void setPenType() { penType = "aquarium"; }
 
     @Override
-    public void setHeight(Integer height) { this.height = height; }
+    public void setHeight(Double height) { this.height = height; }
 
     @Override
-    public int getHeight() { return height; }
+    public Double getHeight() { return height; }
 
     @Override
-    public void setWaterVolume(Integer waterVolume) { this.waterVolume = waterVolume; }
+    public void setWaterVolume(Double waterVolume) { this.waterVolume = waterVolume; }
 
     @Override
-    public Integer getWaterVolume() { return waterVolume; }
+    public Double getWaterVolume() { return waterVolume; }
 
     @Override
     public void setWaterType(String waterType) { this.waterType = waterType;    }
