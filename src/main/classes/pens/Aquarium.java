@@ -10,7 +10,21 @@ public class Aquarium extends Pen implements HighPen, WaterPen, Serializable{
     private Double waterVolume;
     private String waterType;
 
-    public Aquarium () {
+    /*private Integer penID;
+    private Double length;
+    private Double width;
+    private Double temperature;
+    private ArrayList<Animal> containedAnimals = new ArrayList<>();
+    private Staff staffResponsible;
+    public  String penType;*/
+
+    public Aquarium (Double length, Double width, Double temperature, Double height, Double waterVolume, String waterType) {
+        setLength(length);
+        setTemperature(temperature);
+        setWidth(width);
+        setWaterVolume(waterVolume);
+        setWaterType(waterType);
+        setHeight(height);
         setPenType();
     }
 

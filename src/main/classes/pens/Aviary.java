@@ -7,7 +7,11 @@ import java.io.Serializable;
 public class Aviary extends Pen implements HighPen, Serializable {
     private Double height;
 
-    public Aviary () {
+    public Aviary (Double length, Double width, Double temperature, Double height) {
+        setLength(length);
+        setTemperature(temperature);
+        setWidth(width);
+        setHeight(height);
         setPenType();
     }
 

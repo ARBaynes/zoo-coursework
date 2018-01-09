@@ -8,6 +8,15 @@ public class SemiAquatic extends Pen implements WaterPen, Serializable {
     private Double waterVolume;
     private String waterType;
 
+    public SemiAquatic (Double length, Double width, Double temperature, Double waterVolume, String waterType) {
+        setLength(length);
+        setTemperature(temperature);
+        setWidth(width);
+        setWaterVolume(waterVolume);
+        setWaterType(waterType);
+        setPenType();
+    }
+
     @Override
     public void setPenType() {
         penType = "semiaquatic";
