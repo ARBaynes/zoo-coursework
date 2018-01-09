@@ -1,8 +1,154 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="main.modules.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.modules.Controller">
+    <children>
+        <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab text="Animals">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.7004008016032064" prefHeight="692.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <items>
+                                        <AnchorPane fx:id="breedParentAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                            <children>
+                                                <TableView fx:id="breedTableView" prefHeight="158.0" prefWidth="55.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="breedName" prefWidth="150.0" text="Breed Name" />
+                                                        <TableColumn fx:id="breedPenType" prefWidth="150.0" text="Pen Type" />
+                                                        <TableColumn fx:id="breedRequirements" prefWidth="150.0" text="Requirements" />
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                            <children>
+                                                <BorderPane prefHeight="690.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <center>
+                                                        <TableView fx:id="animalTableView" prefHeight="690.0" prefWidth="402.0" BorderPane.alignment="CENTER">
+                                                            <columns>
+                                                                <TableColumn fx:id="animalTableColID" prefWidth="113.0" text="ID" />
+                                                                <TableColumn fx:id="animalTableColName" prefWidth="87.0" text="Name" />
+                                                            </columns>
+                                                        </TableView>
+                                                    </center>
+                                                    <top>
+                                                        <Label fx:id="animalTypeLabel" text="Double-Click a Breed to Show Animals" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                                            <font>
+                                                                <Font name="System Bold" size="15.0" />
+                                                            </font>
+                                                            <padding>
+                                                                <Insets bottom="5.0" top="5.0" />
+                                                            </padding>
+                                                        </Label>
+                                                    </top>
+                                                </BorderPane>
+                                            </children>
+                                        </AnchorPane>
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Pens">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Accordion prefHeight="692.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <panes>
+                                        <TitledPane animated="false" text="Aquariums">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <AnchorPane prefHeight="616.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <SplitPane dividerPositions="0.7004008016032064" prefHeight="595.2" prefWidth="977.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                    <items>
+                                                                        <AnchorPane fx:id="aquariumPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                            <children>
+                                                                                <BorderPane prefHeight="594.0" prefWidth="679.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                    <center>
+                                                                                        <TableView fx:id="aquariumPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
+                                                                                            <columns>
+                                                                                                <TableColumn fx:id="aquariumPenID" prefWidth="68.99999856948853" text="Pen ID" />
+                                                                                                <TableColumn fx:id="aquariumTemp" prefWidth="104.00000762939453" text="Temperature" />
+                                                                                                <TableColumn fx:id="aquariumMaxArea" prefWidth="127.0" text="Maximum Area" />
+                                                                                                <TableColumn fx:id="aquariumCurrentArea" prefWidth="126.0" text="Current Area" />
+                                                                                                <TableColumn fx:id="aquariumContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
+                                                                                                <TableColumn fx:id="aquariumHeight" prefWidth="87.0" text="Height" />
+                                                                                                <TableColumn fx:id="aquariumWaterVolume" prefWidth="172.0" text="Water Volume" />
+                                                                                                <TableColumn fx:id="aquariumWaterType" prefWidth="100.0" text="Water Type" />
+                                                                                            </columns>
+                                                                                        </TableView>
+                                                                                    </center>
+                                                                                    <top>
+                                                                                        <ToolBar fx:id="aquariumToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                                                            <items>
+                                                                                                <Button fx:id="addAquariumButton" mnemonicParsing="false" text="Add New Aquarium" />
+                                                                                            </items>
+                                                                                        </ToolBar>
+                                                                                    </top>
+                                                                                </BorderPane>
+                                                                            </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane fx:id="aquariumAnimalAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                            <children>
+                                                                                <BorderPane prefHeight="690.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                    <top>
+                                                                                        <Label fx:id="aquariumAnimalLabel" text="Double-Click a Pen to Show Contents" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                                                                            <font>
+                                                                                                <Font name="System Bold" size="15.0" />
+                                                                                            </font>
+                                                                                            <padding>
+                                                                                                <Insets bottom="5.0" top="5.0" />
+                                                                                            </padding>
+                                                                                        </Label>
+                                                                                    </top>
+                                                                                    <center>
+                                                                                        <TableView fx:id="aquariumAnimalTableView" prefHeight="594.0" prefWidth="394.0" BorderPane.alignment="CENTER">
+                                                                                            <columns>
+                                                                                                <TableColumn fx:id="aquariumAnimalName" prefWidth="119.0" text="Animal Name" />
+                                                                                                <TableColumn fx:id="aquariumAnimalBreed" minWidth="2.0" prefWidth="63.0" text="Breed" />
+                                                                                                <TableColumn fx:id="aquariumAnimalSize" prefWidth="167.0" text="Size Requirements" />
+                                                                                            </columns>
+                                                                                        </TableView>
+                                                                                    </center>
+                                                                                </BorderPane>
+                                                                            </children>
+                                                                        </AnchorPane>
+                                                                    </items>
+                                                                </SplitPane>
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Aviaries">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Dry Pens">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                            </content>
+                                        </TitledPane>
+                                    </panes>
+                                </Accordion>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
