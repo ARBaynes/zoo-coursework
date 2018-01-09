@@ -2,5 +2,21 @@ package main.classes.pens;
 
 import main.interfaces.pens.HighPen;
 
-public class Aviary extends Pen implements HighPen {
+import java.io.Serializable;
+
+public class Aviary extends Pen implements HighPen, Serializable {
+    public Integer height;
+
+    public Aviary () {
+        setPenType();
+    }
+
+    @Override
+    public void setPenType() { penType = "Aviary"; }
+
+    @Override
+    public void setHeight(Integer height) { this.height = height; }
+
+    @Override
+    public int getHeight() { return height; }
 }
