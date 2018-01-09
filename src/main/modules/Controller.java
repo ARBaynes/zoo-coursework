@@ -13,6 +13,7 @@ import main.classes.staff.Staff;
 import java.io.IOException;
 
 public class Controller {
+
     //ANIMALS TAB ------------------------------
 
     public AnchorPane breedParentAnchorPane;
@@ -124,7 +125,7 @@ public class Controller {
     //TABLE ITEMS
 
     //PENS
-    ObservableList<Aquarium> aquariumTableViewItems = FXCollections.observableArrayList();
+
     ObservableList<Aviary> aviaryTableViewItems = FXCollections.observableArrayList();
     ObservableList<Dry> dryTableViewItems = FXCollections.observableArrayList();
     ObservableList<SemiAquatic> SemiAquaticTableViewItems = FXCollections.observableArrayList();
@@ -140,7 +141,7 @@ public class Controller {
     // -----------------------------------------
 
     //STAFF TAB ------------------------------
-    
+
     //TABLE ITEMS
     ObservableList<Staff> staffTableViewItems = FXCollections.observableArrayList();
 
@@ -148,6 +149,14 @@ public class Controller {
 
     @FXML
     public void initialize()  throws IOException {
+
+        //MAIN TAB
+
+        //ANIMAL TAB
+
+        //PEN TAB
+
+        //STAFF TAB
 
     }
 }
