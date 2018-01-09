@@ -81,10 +81,17 @@ public class AnimalModel {
     //GENERAL PURPOSE
 
     public static Integer createAnimalID () {
-        return null;
+        File folder = new File(filePath);
+        Integer ID = folder.listFiles().length + 1;
+        return ID;
     }
 
     public static Comparator<Animal> animalComparator () {
-        return null;
+        return new Comparator<Animal>() {
+            @Override
+            public int compare(Animal animal1, Animal animal2) {
+                return animal1.getID().compareTo(animal2.getID());
+            }
+        };
     }
 }
