@@ -5,12 +5,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import main.classes.pens.Aquarium;
 
-import javafx.scene.control.TableView;
+import java.util.HashMap;
+import java.util.Optional;
 
 public class AquariumController {
     protected ObservableList<Aquarium> aquariumTableViewItems = FXCollections.observableArrayList();
@@ -22,7 +26,7 @@ public class AquariumController {
 
     //OUTLINE/ROUGH SKETCH TABLE DATA
 
-    public void outlineTableData (TableView tableView, TableColumn IDCol, TableColumn tempCol,
+    public void outlinePenTableData (TableView tableView, TableColumn IDCol, TableColumn tempCol,
                                   TableColumn areaCol, TableColumn currentSpaceCol, TableColumn containedAnimalNumberCol,
                                   TableColumn heightCol, TableColumn waterVolCol, TableColumn waterTypeCol) {
         IDCol.setCellValueFactory( new PropertyValueFactory<Aquarium, Integer>("penID"));
@@ -66,4 +70,118 @@ public class AquariumController {
         aquariumTableViewItems.addAll(AquariumModel.getAllAquariums());
     }
 
+    public void refreshTable (TableView<Aquarium> tableView) {
+        tableView.refresh();
+        updateObservableTableData();
+        tableView.refresh();
+    }
+
+    //AQUARIUM BUTTON MANIPULATION
+
+    public void setAddAquariumButtonAction (Button addAquariumButton, TableView<Aquarium> tableView) {
+        addAquariumButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                addAquariumDialog(tableView);
+            }
+        });
+    }
+
+
+    //DIALOGS
+
+    public void addAquariumDialog (TableView table) {
+        Dialog<Aquarium> dialog = new Dialog<>();
+        dialog.setTitle("Add Aquarium");
+        dialog.setHeaderText("Add a new aquarium: ");
+        dialog.setResizable(true);
+        Label label ;
+
+
+        Label lengthLabel= new Label("Length: ");
+        TextField lengthTextField = new TextField();
+        Label widthLabel = new Label("Width: ");
+        TextField widthTextField =  new TextField();
+        Label heightLabel = new Label("Height: ");
+        TextField heightTextField =  new TextField();
+        Label waterVolLabel = new Label("Water Volume: ");
+        TextField waterVolTextField = new TextField();
+
+
+        Label waterTypeLabel = new Label("Water Type: ");
+        ChoiceBox<String> waterTypeChoiceBox = new ChoiceBox<String>(waterTypes());
+        GridPane waterTypePane =  waterTypeGridPane(waterTypeChoiceBox);
+
+
+        Label tempLabel = new Label("Temperature: ");
+        TextField tempTextField =  new TextField();
+        Label staffLabel = new Label("Staff Responsible: ");
+        ChoiceBox staffChoiceBox = new ChoiceBox<>();
+
+        GridPane aquariumDialogGridPane = new GridPane();
+        aquariumDialogGridPane.add(lengthLabel, 1, 1);
+        aquariumDialogGridPane.add(lengthTextField, 2, 1);
+        aquariumDialogGridPane.add(widthLabel, 1, 2);
+        aquariumDialogGridPane.add(widthTextField, 2, 2);
+        aquariumDialogGridPane.add(heightLabel, 1, 3);
+        aquariumDialogGridPane.add(heightTextField, 2, 3);
+        aquariumDialogGridPane.add(waterVolLabel, 1, 4);
+        aquariumDialogGridPane.add(waterVolTextField, 2, 4);
+        aquariumDialogGridPane.add(waterTypeLabel, 1, 5);
+        aquariumDialogGridPane.add(waterTypePane, 2, 5);
+        aquariumDialogGridPane.add(tempLabel, 1, 6);
+        aquariumDialogGridPane.add(tempTextField, 2, 6);
+        aquariumDialogGridPane.add(staffLabel, 1, 7);
+        aquariumDialogGridPane.add(staffChoiceBox, 2, 7);
+
+        dialog.getDialogPane().setContent(aquariumDialogGridPane);
+
+        ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+
+        dialog.setResultConverter(new Callback<ButtonType, Aquarium>() {
+            @Override
+            public Aquarium call(ButtonType button) {
+                if (button == buttonTypeOk) {
+                    Aquarium pen = new Aquarium(
+                            Double.parseDouble(lengthTextField.getText()),
+                            Double.parseDouble(widthTextField.getText()),
+                            Double.parseDouble(heightTextField.getText()),
+                            Double.parseDouble(waterVolTextField.getText()),
+                            Double.parseDouble(tempTextField.getText()),
+                            waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()
+                    );
+                    //pen.setStaffResponsible();
+                    return pen;
+                }
+                return null;
+            }
+        });
+
+        Optional<Aquarium> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            AquariumModel.addAquarium(result.get());
+            refreshTable(table);
+        }
+    }
+
+    public void editAquariumDialog () {
+
+    }
+
+
+    private GridPane waterTypeGridPane (ChoiceBox<String> waterTypeChoiceBox) {
+        GridPane waterTypePane = new GridPane();
+        waterTypePane.add(waterTypeChoiceBox, 1, 1);
+        waterTypePane.add(new Label(" Water"), 2, 1);
+        return waterTypePane;
+    }
+
+    private ObservableList<String> waterTypes () {
+        return FXCollections.observableArrayList("Salt", "Fresh");
+    }
+
+    public void removeAquariumDialog () {
+
+    }
 }
