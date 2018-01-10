@@ -3,9 +3,10 @@ package main.classes.pens;
 import main.classes.critters.Animal;
 import main.classes.staff.Staff;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Pen {
+public abstract class Pen implements Serializable {
 
     private Integer penID;
     private Double length;
@@ -94,6 +95,8 @@ public abstract class Pen {
 
     @Override
     public String toString() {
-        return getPenID() + " - [Contained Animals: " + getContainedAnimalNumber() + "]" + System.lineSeparator();
+        return getPenID() + " - {Contained Animals: " + getContainedAnimalNumber() + "}" + System.lineSeparator() +
+                "Length: " + getLength() + ", Width: "+ getWidth() + System.lineSeparator()+
+                "Temperature: " + getTemperature();
     }
 }

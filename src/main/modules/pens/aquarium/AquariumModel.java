@@ -24,12 +24,14 @@ public class AquariumModel extends PenModel{
             aquariums.add(deserialize(fileEntry));
         }
         allAquariums.addAll(aquariums);
+        System.out.println(allAquariums.toString());
     }
 
 
     //GETTERS
 
     public static ArrayList<Aquarium> getAllAquariums() {
+        if (allAquariums.isEmpty()) { setAllAquariums(); }
         return allAquariums;
     }
 
@@ -60,7 +62,9 @@ public class AquariumModel extends PenModel{
     //PRIVATE DATA MANIPULATION
 
     private static void serialize (Aquarium pen) {
+
         if (pen.getPenID() == null) { pen.setPenID(createID(filePath)); }
+        System.out.println("After setting ID: " + pen.toString());
         try {
             FileOutputStream fileOut =
                     new FileOutputStream(filePath + pen.getPenID() +".aquarium");
@@ -68,29 +72,24 @@ public class AquariumModel extends PenModel{
             out.writeObject(pen);
             out.close();
             fileOut.close();
-            System.out.printf("Serialized aquarium pen data is saved!!");
+            System.out.println("Serialized aquarium pen data saved as " + pen.toString());
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
     private static Aquarium deserialize (File toRead) {
-        Aquarium pen = null;
-        try {
-            FileInputStream fileIn = new FileInputStream(toRead);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            pen = (Aquarium) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException c) {
-            System.out.println("Aquarium class not found");
-            c.printStackTrace();
-            return null;
+        Aquarium si=null ;
+        try
+        {
+            FileInputStream fis = new FileInputStream(toRead);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            si = (Aquarium) ois.readObject();
         }
-        return pen;
+        catch (Exception e)
+        {
+            e.printStackTrace(); }
+        return si;
     }
 
     //GENERAL PURPOSE

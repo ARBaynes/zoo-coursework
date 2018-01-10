@@ -62,7 +62,9 @@ public class AquariumController {
     //LOAD AND UPDATE TABLE ITEMS
 
     public void setTableItems (TableView<Aquarium> tableView) {
+        updateObservableTableData();
         tableView.setItems(aquariumTableViewItems);
+        tableView.refresh();
     }
 
     public void updateObservableTableData () {
@@ -95,8 +97,6 @@ public class AquariumController {
         dialog.setTitle("Add Aquarium");
         dialog.setHeaderText("Add a new aquarium: ");
         dialog.setResizable(true);
-        Label label ;
-
 
         Label lengthLabel= new Label("Length: ");
         TextField lengthTextField = new TextField();
@@ -109,7 +109,7 @@ public class AquariumController {
 
 
         Label waterTypeLabel = new Label("Water Type: ");
-        ChoiceBox<String> waterTypeChoiceBox = new ChoiceBox<String>(waterTypes());
+        ChoiceBox<String> waterTypeChoiceBox = new ChoiceBox<>(waterTypes());
         GridPane waterTypePane =  waterTypeGridPane(waterTypeChoiceBox);
 
 

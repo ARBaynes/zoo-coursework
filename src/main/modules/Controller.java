@@ -161,13 +161,32 @@ public class Controller {
 
         AquariumController aquariumTab = new AquariumController();
 
+        //Outline table data
+
         aquariumTab.outlinePenTableData(
                 aquariumPenTableView, aquariumPenID, aquariumTemp,
                 aquariumMaxArea, aquariumCurrentArea, aquariumContainedAnimals,
                 aquariumHeight, aquariumWaterVolume, aquariumWaterType
         );
 
+        //Outline table row actions
+
+
+
+        //Load table items
+
+        aquariumTab.setTableItems(aquariumPenTableView);
+
+        //Set button action
+
         aquariumTab.setAddAquariumButtonAction(addAquariumButton, aquariumPenTableView);
+
+
+
+
+
+
+
 
         //AVIARY PANE
 
