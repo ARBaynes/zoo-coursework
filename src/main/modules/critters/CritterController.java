@@ -48,11 +48,12 @@ public class CritterController {
         });
     }
 
-    public void outlineBreedTableRows (TableView<Breed> breedTableView, TableView<Animal> animalTableView) {
+    public void outlineBreedTableRows (TableView<Breed> breedTableView, TableView<Animal> animalTableView, Label animalLabel) {
         breedTableView.setRowFactory( tv -> {
             TableRow<Breed> breedRow = new TableRow<>();
             breedRow.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && (!breedRow.isEmpty()) ) {
+                    animalLabel.setText(breedRow.getItem().getName() + "s: ");
                     updateObservableAnimalTableData(breedRow.getItem());
                 }
                 if (event.getButton() == MouseButton.SECONDARY  && (!breedRow.isEmpty()) ) {
@@ -72,12 +73,12 @@ public class CritterController {
         tableView.refresh();
     }
 
-    public void updateObservableBreedTableData () {
+    private void updateObservableBreedTableData() {
         breedTableViewItems.clear();
         breedTableViewItems.addAll(BreedModel.getAllBreeds());
     }
 
-    public void refreshBreedTable (TableView<Breed> tableView) {
+    private void refreshBreedTable(TableView<Breed> tableView) {
         tableView.refresh();
         updateObservableBreedTableData();
         tableView.refresh();
@@ -97,7 +98,7 @@ public class CritterController {
 
     //DIALOGS
 
-    public void addBreedDialog (TableView<Breed> table) {
+    private void addBreedDialog(TableView<Breed> table) {
         Dialog<Breed> dialog = new Dialog<>();
         dialog.setTitle("Add Breed");
         dialog.setHeaderText("Add a new breed: ");
@@ -198,18 +199,18 @@ public class CritterController {
         }
     }
 
-    public void editBreedDialog (TableRow<Breed> rowData, TableView<Breed> breedTable) {
+    private void editBreedDialog(TableRow<Breed> rowData, TableView<Breed> breedTable) {
 
     }
 
-    public void removeBreedDialog (TableRow<Breed> rowData, TableView<Breed> breedTable) {
+    private void removeBreedDialog(TableRow<Breed> rowData, TableView<Breed> breedTable) {
 
     }
 
     //CONTEXT MENUS
 
-    public void breedTableContextMenu (TableRow<Breed> breedRow, TableView<Breed> breedTable,
-                                       TableView<Animal> animalTableView ) {
+    private void breedTableContextMenu(TableRow<Breed> breedRow, TableView<Breed> breedTable,
+                                       TableView<Animal> animalTableView) {
 
         Breed selectedBreed = breedRow.getItem();
         final ContextMenu contextMenu = new ContextMenu();
@@ -258,9 +259,14 @@ public class CritterController {
 
     //OUTLINE/ROUGH SKETCH TABLE DATA
 
-    public void outlineAnimalTableData (TableColumn IDCol, TableColumn nameCol, TableColumn hasPenCol) {
+    public void outlineAnimalTableData (TableColumn IDCol, TableColumn nameCol, TableColumn breedCol, TableColumn hasPenCol) {
         IDCol.setCellValueFactory( new PropertyValueFactory<Animal, Integer>("ID"));
         nameCol.setCellValueFactory( new PropertyValueFactory<Animal, String>("name"));
+        breedCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
+                return new SimpleStringProperty(p.getValue().getBreedName());
+            }
+        });
         hasPenCol.setCellValueFactory( new PropertyValueFactory<Animal, Boolean>("hasPen"));
     }
 
@@ -285,12 +291,12 @@ public class CritterController {
         tableView.refresh();
     }
 
-    public void updateObservableAnimalTableData () {
+    private void updateObservableAnimalTableData() {
         animalTableViewItems.clear();
         animalTableViewItems.addAll(AnimalModel.getAllAnimals());
     }
 
-    public void updateObservableAnimalTableData (Breed breedToFind) {
+    private void updateObservableAnimalTableData(Breed breedToFind) {
         animalTableViewItems.clear();
         ArrayList<Animal> allAnimalsWhere = AnimalModel.getAllAnimalsWhere(breedToFind);
         if (allAnimalsWhere.isEmpty()) {
@@ -303,19 +309,13 @@ public class CritterController {
         }
         animalTableViewItems.addAll(allAnimalsWhere);
     }
-
-    public void refreshAnimalTable (TableView<Animal> tableView) {
-        tableView.refresh();
-        updateObservableAnimalTableData();
-        tableView.refresh();
-    }
     //DIALOGS
 
     public void addAnimalDialog (TableView<Animal> table) {
         addAnimalDialog(table, null);
     }
 
-    public void addAnimalDialog (TableView<Animal> table, Breed breedData) {
+    private void addAnimalDialog(TableView<Animal> table, Breed breedData) {
         Dialog<Animal> dialog = new Dialog<>();
         dialog.setTitle("Add Animal");
         dialog.setHeaderText("Add a new animal: ");
@@ -327,6 +327,7 @@ public class CritterController {
         ObservableList<String> breedNames = FXCollections.observableArrayList();
         breedNames.addAll(BreedModel.getAllBreedNames());
         ChoiceBox<String> breedChoiceBox =  new ChoiceBox<>(breedNames);
+
         if (breedData != null) {
             breedChoiceBox.getSelectionModel().select(breedData.getName());
         }
@@ -346,11 +347,10 @@ public class CritterController {
             @Override
             public Animal call(ButtonType button) {
                 if (button == buttonTypeOk) {
-                    Animal animal = new Animal(
+                    return new Animal(
                             nameTextField.getText(),
                             BreedModel.getABreedWhere(breedChoiceBox.getSelectionModel().getSelectedItem())
                     );
-                    return animal;
                 }
                 return null;
             }
@@ -359,20 +359,22 @@ public class CritterController {
         Optional<Animal> result = dialog.showAndWait();
         if (result.isPresent()) {
             AnimalModel.addAnimal(result.get());
-            refreshAnimalTable(table);
+            table.refresh();
+            updateObservableAnimalTableData(result.get().getBreed());
+            table.refresh();
         }
     }
 
 
-    public void editAnimalDialog (TableRow<Animal> animalRow, TableView<Animal> animalTable) {
+    private void editAnimalDialog(TableRow<Animal> animalRow, TableView<Animal> animalTable) {
 
     }
 
-    public void removeAnimalDialog (TableRow<Animal> animalRow, TableView<Animal> animalTable) {
+    private void removeAnimalDialog(TableRow<Animal> animalRow, TableView<Animal> animalTable) {
 
     }
 
-    public void animalTableContextMenu (TableRow<Animal> animalRow, TableView<Animal> animalTable ) {
+    private void animalTableContextMenu(TableRow<Animal> animalRow, TableView<Animal> animalTable) {
 
         Animal selectedAnimal = animalRow.getItem();
         final ContextMenu contextMenu = new ContextMenu();

@@ -47,6 +47,7 @@
                                                             <columns>
                                                                 <TableColumn fx:id="animalTableColID" prefWidth="113.0" text="ID" />
                                                                 <TableColumn fx:id="animalTableColName" prefWidth="87.0" text="Name" />
+                                                                <TableColumn fx:id="animalTableColBreed" prefWidth="113.0" text="Breed" />
                                                                 <TableColumn fx:id="animalTableColHasPen" prefWidth="75.0" text="Has Pen?" />
                                                             </columns>
                                                         </TableView>

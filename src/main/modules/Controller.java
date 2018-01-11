@@ -30,7 +30,7 @@ public class Controller {
     public Label animalTypeLabel;
     public Button addBreedButton;
     public ToolBar breedToolbar;
-
+    public TableColumn animalTableColBreed;
 
 
     //TABLE ITEMS
@@ -166,11 +166,11 @@ public class Controller {
                 breedName, breedPenType, breedRequirements
         );
 
-        critterTab.outlineAnimalTableData(animalTableColID, animalTableColName, animalTableColHasPen);
+        critterTab.outlineAnimalTableData(animalTableColID, animalTableColName, animalTableColBreed, animalTableColHasPen);
 
         //Outline table row actions
 
-        critterTab.outlineBreedTableRows(breedTableView, animalTableView);
+        critterTab.outlineBreedTableRows(breedTableView, animalTableView, animalTypeLabel);
 
         critterTab.outlineAnimalTableRows(animalTableView, animalTypeLabel);
 
