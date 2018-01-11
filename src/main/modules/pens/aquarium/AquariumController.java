@@ -151,7 +151,10 @@ public class AquariumController {
                             Double.parseDouble(tempTextField.getText()),
                             waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()
                     );
-                    //pen.setStaffResponsible();
+                    if (staffChoiceBox.getSelectionModel().getSelectedItem() != null) {
+                        //pen.setStaffResponsible(staffChoiceBox.getSelectionModel().getSelectedItem());
+                    }
+
                     return pen;
                 }
                 return null;

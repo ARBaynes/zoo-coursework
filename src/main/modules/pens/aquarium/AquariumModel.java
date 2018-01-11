@@ -62,9 +62,7 @@ public class AquariumModel extends PenModel{
     //PRIVATE DATA MANIPULATION
 
     private static void serialize (Aquarium pen) {
-
         if (pen.getPenID() == null) { pen.setPenID(createID(filePath)); }
-        System.out.println("After setting ID: " + pen.toString());
         try {
             FileOutputStream fileOut =
                     new FileOutputStream(filePath + pen.getPenID() +".aquarium");
@@ -72,24 +70,24 @@ public class AquariumModel extends PenModel{
             out.writeObject(pen);
             out.close();
             fileOut.close();
-            System.out.println("Serialized aquarium pen data saved as " + pen.toString());
+            System.out.println("Serialized aquarium pen data is saved.");
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
     private static Aquarium deserialize (File toRead) {
-        Aquarium si=null ;
+        Aquarium pen=null ;
         try
         {
-            FileInputStream fis = new FileInputStream(toRead);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            si = (Aquarium) ois.readObject();
+            FileInputStream fileInputStream = new FileInputStream(toRead);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            pen = (Aquarium) objectInputStream.readObject();
         }
         catch (Exception e)
         {
             e.printStackTrace(); }
-        return si;
+        return pen;
     }
 
     //GENERAL PURPOSE
