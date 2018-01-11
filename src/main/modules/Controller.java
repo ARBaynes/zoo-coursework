@@ -9,6 +9,7 @@ import main.classes.critters.Animal;
 import main.classes.critters.Breed;
 import main.classes.pens.*;
 import main.classes.staff.Staff;
+import main.modules.critters.CritterController;
 import main.modules.pens.aquarium.AquariumController;
 
 import java.io.IOException;
@@ -26,7 +27,8 @@ public class Controller {
     public TableColumn animalTableColID;
     public TableColumn animalTableColName;
     public Label animalTypeLabel;
-
+    public Button addBreedButton;
+    public ToolBar breedToolbar;
 
 
     //TABLE ITEMS
@@ -151,13 +153,35 @@ public class Controller {
     @FXML
     public void initialize()  throws IOException {
 
-        //MAIN TAB
+        //MAIN TAB --------------------------------------------------------------------------------------------------------------------------------------
 
-        //ANIMAL TAB
+        //CRITTER TAB --------------------------------------------------------------------------------------------------------------------------------------
+        CritterController critterTab = new CritterController();
 
-        //PEN TAB
+        //BREED PANE ------------------------------------------------------------------------
+        //Outline table data
 
-        //AQUARIUM PANE
+        critterTab.outlineBreedTableData(
+                breedTableView, breedName, breedPenType, breedRequirements
+        );
+
+        //Outline table row actions
+
+
+
+        //Load table items
+
+        critterTab.setBreedTableItems(breedTableView);
+
+        //Set button action
+
+        critterTab.setAddBreedButtonAction(addBreedButton, breedTableView);
+
+        //ANIMAL PANE ------------------------------------------------------------------------
+
+        //PEN TAB --------------------------------------------------------------------------------------------------------------------------------------
+
+        //AQUARIUM PANE ------------------------------------------------------------------------
 
         AquariumController aquariumTab = new AquariumController();
 
@@ -188,15 +212,15 @@ public class Controller {
 
 
 
-        //AVIARY PANE
+        //AVIARY PANE ------------------------------------------------------------------------
 
-        //DRY PEN PANE
+        //DRY PEN PANE ------------------------------------------------------------------------
 
-        //PETTING PANE
+        //PETTING PANE ------------------------------------------------------------------------
 
-        //SEMI AQUATIC PANE
+        //SEMI AQUATIC PANE ------------------------------------------------------------------------
 
-        //STAFF TAB
+        //STAFF TAB --------------------------------------------------------------------------------------------------------------------------------------
 
     }
 }

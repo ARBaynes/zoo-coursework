@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class Breed implements Serializable {
     private String name;
     private String penType;
-    private Integer requirements;
+    private Double requirements;
 
-    public Breed (String name, String penType, Integer requirements) {
+    public Breed (String name, String penType, Double requirements) {
         this.setName(name);
         this.setPenType(penType);
         this.setRequirements(requirements);
@@ -19,7 +19,7 @@ public class Breed implements Serializable {
         this.penType = penType;
     }
 
-    public void setRequirements(Integer requirements) {
+    public void setRequirements(Double requirements) {
         this.requirements = requirements;
     }
 
@@ -31,7 +31,7 @@ public class Breed implements Serializable {
         return penType;
     }
 
-    public Integer getRequirements() {
+    public Double getRequirements() {
         return requirements;
     }
 

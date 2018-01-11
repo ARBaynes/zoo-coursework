@@ -46,7 +46,7 @@ public class Animal implements Serializable{
 
     public String getBreedName () {return breed.getName();}
     public String getBreedPenType  () {return breed.getPenType();}
-    public Integer getBreedRequirements () {return breed.getRequirements();}
+    public Double getBreedRequirements () {return breed.getRequirements();}
 
     //OTHER
 

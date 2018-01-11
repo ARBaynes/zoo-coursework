@@ -13,7 +13,9 @@ public class BreedModel {
 
     //GETTERS
 
-    public static ArrayList<Breed> getAllBreeds() { return allBreeds; }
+    public static ArrayList<Breed> getAllBreeds() {
+        if (allBreeds.isEmpty()) { setAllBreeds(); }
+        return allBreeds; }
 
     //SETTERS
 
