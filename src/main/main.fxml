@@ -81,7 +81,7 @@
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                     <children>
-                                                          <SplitPane dividerPositions="0.7004008016032064" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                          <SplitPane dividerPositions="0.5108517608517609" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                               <items>
                                                                   <AnchorPane fx:id="aquariumPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                       <children>
@@ -102,7 +102,7 @@
                                                                               <top>
                                                                                   <ToolBar fx:id="aquariumToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                                                                       <items>
-                                                                                          <Button fx:id="addAquariumButton" mnemonicParsing="false" text="Add New Aquarium" />
+                                                                                          <Button fx:id="addAquariumButton" defaultButton="true" mnemonicParsing="false" text="Add New Aquarium" />
                                                                                       </items>
                                                                                   </ToolBar>
                                                                               </top>
@@ -131,6 +131,13 @@
                                                                                       </columns>
                                                                                   </TableView>
                                                                               </center>
+                                                         <bottom>
+                                                            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="475.0" BorderPane.alignment="CENTER">
+                                                              <items>
+                                                                <Button fx:id="aquariumAddNewAnimalToPenButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Add New Animal" textAlignment="RIGHT" wrapText="true" />
+                                                              </items>
+                                                            </ToolBar>
+                                                         </bottom>
                                                                           </BorderPane>
                                                                       </children>
                                                                   </AnchorPane>

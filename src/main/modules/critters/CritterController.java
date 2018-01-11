@@ -1,6 +1,7 @@
 package main.modules.critters;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -267,7 +268,16 @@ public class CritterController {
                 return new SimpleStringProperty(p.getValue().getBreedName());
             }
         });
-        hasPenCol.setCellValueFactory( new PropertyValueFactory<Animal, Boolean>("hasPen"));
+        hasPenCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
+                if (p.getValue().hasPen()) {
+                    return new SimpleStringProperty("Yes");
+                } else {
+                    return new SimpleStringProperty("No");
+                }
+
+            }
+        });
     }
 
     public void outlineAnimalTableRows (TableView<Animal> animalTableView, Label animalTypeLabel) {

@@ -45,6 +45,27 @@ public class AnimalModel {
         return allAnimalsWhere;
     }
 
+    public static  ArrayList<Animal> getAllAnimalsWhere (String penType) {
+        if (allAnimals.isEmpty()) { setAllAnimals(); }
+        ArrayList<Animal> allAnimalsWhere = new ArrayList<>();
+        for (Animal animal : allAnimals) {
+            if (animal.getBreedPenType().equals(penType.toLowerCase()) || animal.getBreedPenType().contains(penType.toLowerCase()) && !animal.hasPen()) {
+                allAnimalsWhere.add(animal);
+            }
+        }
+        return allAnimalsWhere;
+    }
+
+    public static  Animal getAnAnimalWhere (Integer ID) {
+        if (allAnimals.isEmpty()) { setAllAnimals(); }
+        for (Animal animal : allAnimals) {
+            if (animal.getID() == ID) {
+                return animal;
+            }
+        }
+        return null;
+    }
+
 
     //PUBLIC DATA MANIPULATION
 

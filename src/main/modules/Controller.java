@@ -33,6 +33,7 @@ public class Controller {
     public TableColumn animalTableColBreed;
 
 
+
     //TABLE ITEMS
     ObservableList<Breed> breedTableViewItems = FXCollections.observableArrayList();
     ObservableList<Animal> animalsObservableList = FXCollections.observableArrayList();
@@ -54,6 +55,7 @@ public class Controller {
     public TableColumn aquariumWaterType;
 
     public Label aquariumAnimalLabel;
+    public Button aquariumAddNewAnimalToPenButton;
     public TableView aquariumAnimalTableView = new TableView<Animal>();
     public TableColumn aquariumAnimalName;
     public TableColumn aquariumAnimalBreed;
@@ -71,6 +73,7 @@ public class Controller {
     public TableColumn aviaryHeight;
 
     public Label aviaryAnimalLabel;
+    public Button aviaryAddNewAnimalToPenButton;
     public TableView aviaryAnimalTableView = new TableView<Animal>();
     public TableColumn aviaryAnimalName;
     public TableColumn aviaryAnimalBreed;
@@ -87,6 +90,7 @@ public class Controller {
     public TableColumn dryContainedAnimals;
 
     public Label dryAnimalLabel;
+    public Button dryAddNewAnimalToPenButton;
     public TableView dryAnimalTableView = new TableView<Animal>();
     public TableColumn dryAnimalName;
     public TableColumn dryAnimalBreed;
@@ -105,6 +109,7 @@ public class Controller {
     public TableColumn SemiAquaticWaterType;
 
     public Label SemiAquaticAnimalLabel;
+    public Button SemiAquaticAddNewAnimalToPenButton;
     public TableView SemiAquaticAnimalTableView = new TableView<Animal>();
     public TableColumn SemiAquaticAnimalName;
     public TableColumn SemiAquaticAnimalBreed;
@@ -121,6 +126,7 @@ public class Controller {
     public TableColumn pettingContainedAnimals;
 
     public Label pettingAnimalLabel;
+    public Button pettingAddNewAnimalToPenButton;
     public TableView pettingAnimalTableView = new TableView<Animal>();
     public TableColumn pettingAnimalName;
     public TableColumn pettingAnimalBreed;
@@ -201,6 +207,7 @@ public class Controller {
 
         //Outline table row actions
 
+        aquariumTab.outlineTableRows(aquariumPenTableView, aquariumAnimalTableView, aquariumAnimalLabel);
 
 
         //Load table items
