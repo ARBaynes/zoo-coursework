@@ -1,5 +1,6 @@
 package main.modules.critters.models;
 
+import main.classes.critters.Animal;
 import main.classes.critters.Breed;
 
 import java.io.*;
@@ -15,7 +16,28 @@ public class BreedModel {
 
     public static ArrayList<Breed> getAllBreeds() {
         if (allBreeds.isEmpty()) { setAllBreeds(); }
-        return allBreeds; }
+        return allBreeds;
+    }
+
+    public static ArrayList<String> getAllBreedNames() {
+        if (allBreeds.isEmpty()) { setAllBreeds(); }
+        ArrayList<String> names = new ArrayList<>();
+        for ( Breed breed : allBreeds) {
+            names.add(breed.getName());
+        }
+        return names;
+    }
+
+    public static Breed getABreedWhere (String name) {
+        if (allBreeds.isEmpty()) { setAllBreeds(); }
+        System.out.println(allBreeds.toString());
+        for (Breed breed : allBreeds) {
+            if (breed.getName().equals(name)) {
+                return breed;
+            }
+        }
+        return null;
+    }
 
     //SETTERS
 

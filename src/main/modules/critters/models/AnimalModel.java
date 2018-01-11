@@ -1,6 +1,7 @@
 package main.modules.critters.models;
 
 import main.classes.critters.Animal;
+import main.classes.critters.Breed;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -26,7 +27,23 @@ public class AnimalModel {
 
     //GETTERS
 
-    public static ArrayList<Animal> getAllAnimals () { return allAnimals; }
+    public static ArrayList<Animal> getAllAnimals () {
+        if (allAnimals.isEmpty()) { setAllAnimals(); }
+        return allAnimals;
+    }
+
+    public static  ArrayList<Animal> getAllAnimalsWhere (Breed breed) {
+        if (allAnimals.isEmpty()) { setAllAnimals(); }
+        ArrayList<Animal> allAnimalsWhere = new ArrayList<>();
+        for (Animal animal : allAnimals) {
+            if (animal.getBreedName().equals(breed.getName()) &&
+                    animal.getBreedRequirements().equals(breed.getRequirements()) &&
+                    animal.getBreedPenType().equals(breed.getPenType())) {
+                allAnimalsWhere.add(animal);
+            }
+        }
+        return allAnimalsWhere;
+    }
 
 
     //PUBLIC DATA MANIPULATION

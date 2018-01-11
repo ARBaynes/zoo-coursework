@@ -47,6 +47,7 @@
                                                             <columns>
                                                                 <TableColumn fx:id="animalTableColID" prefWidth="113.0" text="ID" />
                                                                 <TableColumn fx:id="animalTableColName" prefWidth="87.0" text="Name" />
+                                                                <TableColumn fx:id="animalTableColHasPen" prefWidth="75.0" text="Has Pen?" />
                                                             </columns>
                                                         </TableView>
                                                     </center>
@@ -89,11 +90,10 @@
                                                                                       <columns>
                                                                                           <TableColumn fx:id="aquariumPenID" prefWidth="68.99999856948853" text="Pen ID" />
                                                                                           <TableColumn fx:id="aquariumTemp" prefWidth="104.00000762939453" text="Temperature" />
-                                                                                          <TableColumn fx:id="aquariumMaxArea" prefWidth="127.0" text="Maximum Area" />
-                                                                                          <TableColumn fx:id="aquariumCurrentArea" prefWidth="126.0" text="Current Area" />
+                                                                                          <TableColumn fx:id="aquariumWaterVolume" prefWidth="127.0" text="Maximum Volume" />
+                                                                                          <TableColumn fx:id="aquariumCurrentVolume" prefWidth="126.0" text="Current Volume" />
                                                                                           <TableColumn fx:id="aquariumContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
                                                                                           <TableColumn fx:id="aquariumHeight" prefWidth="87.0" text="Height" />
-                                                                                          <TableColumn fx:id="aquariumWaterVolume" prefWidth="172.0" text="Water Volume" />
                                                                                           <TableColumn fx:id="aquariumWaterType" prefWidth="100.0" text="Water Type" />
                                                                                       </columns>
                                                                                   </TableView>

@@ -1,12 +1,13 @@
 package main.classes.critters;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Animal implements Serializable{
     private String name;
     private Breed breed;
     private Integer ID;
-    private boolean hasPen;
+    private Boolean hasPen;
 
     public Animal (String name, Breed breed) {
         this.name = name;
@@ -16,7 +17,7 @@ public class Animal implements Serializable{
 
     //SETTERS
 
-    public void setHasPen(boolean hasPen) {
+    public void setHasPen(Boolean hasPen) {
         this.hasPen = hasPen;
     }
 
@@ -40,13 +41,13 @@ public class Animal implements Serializable{
 
     public Breed getBreed() { return breed; }
 
-    public boolean hasPen() { return hasPen; }
+    public Boolean hasPen() { return hasPen; }
 
     //BREED GETTERS
 
     public String getBreedName () {return breed.getName();}
     public String getBreedPenType  () {return breed.getPenType();}
-    public Double getBreedRequirements () {return breed.getRequirements();}
+    public HashMap<String, Double> getBreedRequirements () {return breed.getRequirements();}
 
     //OTHER
 

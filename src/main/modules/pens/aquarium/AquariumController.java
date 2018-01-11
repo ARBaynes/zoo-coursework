@@ -26,31 +26,28 @@ public class AquariumController {
 
     //OUTLINE/ROUGH SKETCH TABLE DATA
 
-    public void outlinePenTableData (TableView tableView, TableColumn IDCol, TableColumn tempCol,
-                                  TableColumn areaCol, TableColumn currentSpaceCol, TableColumn containedAnimalNumberCol,
-                                  TableColumn heightCol, TableColumn waterVolCol, TableColumn waterTypeCol) {
+    public void outlinePenTableData (TableColumn IDCol, TableColumn tempCol, TableColumn waterVolCol,
+                                     TableColumn currentVolumeCol, TableColumn containedAnimalNumberCol,
+                                     TableColumn heightCol, TableColumn waterTypeCol) {
         IDCol.setCellValueFactory( new PropertyValueFactory<Aquarium, Integer>("penID"));
         tempCol.setCellValueFactory( new PropertyValueFactory<Aquarium, Double>("temperature"));
-        areaCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Double>, ObservableValue<Double>>() {
+        waterVolCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Double>, ObservableValue<Double>>() {
             public ObservableValue<Double> call(TableColumn.CellDataFeatures<Aquarium, Double> p) {
-                ObservableValue<Double> area = new SimpleDoubleProperty(p.getValue().getArea()).asObject();
-                return area;
+                return new SimpleDoubleProperty(p.getValue().getVolume()).asObject();
             }
         });
-        currentSpaceCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Double>, ObservableValue<Double>>() {
+        currentVolumeCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Double>, ObservableValue<Double>>() {
             public ObservableValue<Double> call(TableColumn.CellDataFeatures<Aquarium, Double> p) {
-                ObservableValue<Double> currentSpace = new SimpleDoubleProperty(p.getValue().getCurrentSpace()).asObject();
-                return currentSpace;
+                return new SimpleDoubleProperty(p.getValue().getCurrentVolume()).asObject();
             }
         });
         containedAnimalNumberCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Integer>, ObservableValue<Integer>>() {
             public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Aquarium, Integer> p) {
-                ObservableValue<Integer> containedAnimalNumber = new SimpleIntegerProperty(p.getValue().getContainedAnimalNumber()).asObject();
-                return containedAnimalNumber;
+                return new SimpleIntegerProperty(p.getValue().getContainedAnimalNumber()).asObject();
             }
         });
         heightCol.setCellValueFactory( new PropertyValueFactory<Aquarium, Double>("height"));
-        waterVolCol.setCellValueFactory( new PropertyValueFactory<Aquarium, Double>("waterVolume"));
+
         waterTypeCol.setCellValueFactory( new PropertyValueFactory<Aquarium, String>("waterType"));
     }
 
@@ -104,8 +101,6 @@ public class AquariumController {
         TextField widthTextField =  new TextField();
         Label heightLabel = new Label("Height: ");
         TextField heightTextField =  new TextField();
-        Label waterVolLabel = new Label("Water Volume: ");
-        TextField waterVolTextField = new TextField();
 
 
         Label waterTypeLabel = new Label("Water Type: ");
@@ -125,14 +120,12 @@ public class AquariumController {
         aquariumDialogGridPane.add(widthTextField, 2, 2);
         aquariumDialogGridPane.add(heightLabel, 1, 3);
         aquariumDialogGridPane.add(heightTextField, 2, 3);
-        aquariumDialogGridPane.add(waterVolLabel, 1, 4);
-        aquariumDialogGridPane.add(waterVolTextField, 2, 4);
-        aquariumDialogGridPane.add(waterTypeLabel, 1, 5);
-        aquariumDialogGridPane.add(waterTypePane, 2, 5);
-        aquariumDialogGridPane.add(tempLabel, 1, 6);
-        aquariumDialogGridPane.add(tempTextField, 2, 6);
-        aquariumDialogGridPane.add(staffLabel, 1, 7);
-        aquariumDialogGridPane.add(staffChoiceBox, 2, 7);
+        aquariumDialogGridPane.add(waterTypeLabel, 1, 4);
+        aquariumDialogGridPane.add(waterTypePane, 2, 4);
+        aquariumDialogGridPane.add(tempLabel, 1, 5);
+        aquariumDialogGridPane.add(tempTextField, 2, 5);
+        aquariumDialogGridPane.add(staffLabel, 1, 6);
+        aquariumDialogGridPane.add(staffChoiceBox, 2, 6);
 
         dialog.getDialogPane().setContent(aquariumDialogGridPane);
 
@@ -147,7 +140,6 @@ public class AquariumController {
                             Double.parseDouble(lengthTextField.getText()),
                             Double.parseDouble(widthTextField.getText()),
                             Double.parseDouble(heightTextField.getText()),
-                            Double.parseDouble(waterVolTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
                             waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()
                     );

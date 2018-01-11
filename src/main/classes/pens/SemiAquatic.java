@@ -1,19 +1,25 @@
 package main.classes.pens;
 
-import main.interfaces.WaterPen;
+import main.classes.critters.Animal;
+import main.interfaces.Area;
+import main.interfaces.Volume;
+import main.interfaces.WaterTypes;
+import main.interfaces.WaterVolume;
 
 import java.io.Serializable;
 
-public class SemiAquatic extends Pen implements WaterPen, Serializable {
-    private Double waterVolume;
+public class SemiAquatic extends Pen implements WaterVolume, Area, WaterTypes, Serializable {
     private String waterType;
+    private Double waterDepth;
+    private Double waterLength;
+    private Double waterWidth;
 
-    public SemiAquatic (Double length, Double width, Double temperature, Double waterVolume, String waterType) {
+    public SemiAquatic (Double length, Double width, Double temperature, String waterType, Double waterDepth) {
         setLength(length);
         setTemperature(temperature);
         setWidth(width);
-        setWaterVolume(waterVolume);
         setWaterType(waterType);
+        setWaterDepth(waterDepth);
         setPenType();
     }
 
@@ -22,15 +28,50 @@ public class SemiAquatic extends Pen implements WaterPen, Serializable {
         penType = "semiaquatic";
     }
 
+    //WATER VOLUME
     @Override
-    public void setWaterVolume(Double waterVolume) {
-        this.waterVolume = waterVolume;
+    public void setWaterDepth (Double waterDepth) {
+        this.waterDepth = waterDepth;
+    }
+
+    @Override
+    public Double getWaterDepth () { return waterDepth; }
+
+    @Override
+    public void setWaterLength(Double waterLength) {
+        this.waterLength = waterLength;
+    }
+
+    @Override
+    public Double getWaterLength() {
+        return waterLength;
+    }
+
+    @Override
+    public void setWaterWidth(Double waterWidth) {
+        this.waterWidth = waterWidth;
+    }
+
+    @Override
+    public Double getWaterWidth() {
+        return waterWidth;
     }
 
     @Override
     public Double getWaterVolume() {
+        return getWaterWidth() * getWaterLength() * getWaterDepth();
+    }
+
+    @Override
+    public Double getCurrentWaterVolume() {
+        Double waterVolume = getWaterVolume();
+        for ( Animal containedAnimal : this.getContainedAnimals()) {
+            waterVolume -= containedAnimal.getBreed().getRequirements().get("water");
+        }
         return waterVolume;
     }
+
+    //WATER TYPE
 
     @Override
     public void setWaterType(String waterType) {
@@ -41,4 +82,21 @@ public class SemiAquatic extends Pen implements WaterPen, Serializable {
     public String getWaterType() {
         return waterType;
     }
+
+    //AREA
+
+    @Override
+    public Double getArea() {
+        return getLength() * getWidth();
+    }
+
+    @Override
+    public Double getCurrentArea() {
+        Double area = getArea();
+        for ( Animal containedAnimal : this.getContainedAnimals()) {
+            area -= containedAnimal.getBreed().getRequirements().get("land");
+        }
+        return area;
+    }
+
 }

@@ -26,9 +26,11 @@ public class Controller {
     public TableColumn breedRequirements;
     public TableColumn animalTableColID;
     public TableColumn animalTableColName;
+    public TableColumn animalTableColHasPen;
     public Label animalTypeLabel;
     public Button addBreedButton;
     public ToolBar breedToolbar;
+
 
 
     //TABLE ITEMS
@@ -45,11 +47,10 @@ public class Controller {
     public TableView aquariumPenTableView = new TableView<Aquarium>();
     public TableColumn aquariumPenID;
     public TableColumn aquariumTemp;
-    public TableColumn aquariumMaxArea;
-    public TableColumn aquariumCurrentArea;
     public TableColumn aquariumContainedAnimals;
     public TableColumn aquariumHeight;
     public TableColumn aquariumWaterVolume;
+    public TableColumn aquariumCurrentVolume;
     public TableColumn aquariumWaterType;
 
     public Label aquariumAnimalLabel;
@@ -162,16 +163,21 @@ public class Controller {
         //Outline table data
 
         critterTab.outlineBreedTableData(
-                breedTableView, breedName, breedPenType, breedRequirements
+                breedName, breedPenType, breedRequirements
         );
+
+        critterTab.outlineAnimalTableData(animalTableColID, animalTableColName, animalTableColHasPen);
 
         //Outline table row actions
 
+        critterTab.outlineBreedTableRows(breedTableView, animalTableView);
 
+        critterTab.outlineAnimalTableRows(animalTableView, animalTypeLabel);
 
         //Load table items
 
         critterTab.setBreedTableItems(breedTableView);
+        critterTab.setAnimalTableItems(animalTableView);
 
         //Set button action
 
@@ -188,9 +194,9 @@ public class Controller {
         //Outline table data
 
         aquariumTab.outlinePenTableData(
-                aquariumPenTableView, aquariumPenID, aquariumTemp,
-                aquariumMaxArea, aquariumCurrentArea, aquariumContainedAnimals,
-                aquariumHeight, aquariumWaterVolume, aquariumWaterType
+                aquariumPenID, aquariumTemp, aquariumWaterVolume,
+                aquariumCurrentVolume, aquariumContainedAnimals,
+                aquariumHeight, aquariumWaterType
         );
 
         //Outline table row actions

@@ -54,25 +54,9 @@ public abstract class Pen implements Serializable {
 
     public Integer getContainedAnimalNumber () { return this.containedAnimals.size(); }
 
-    //AREA GETTERS
-
-    public Double getCurrentSpace () {
-        Double area = getArea();
-        for ( Animal containedAnimal : this.containedAnimals) {
-            area -= containedAnimal.getBreed().getRequirements();
-        }
-        return area;
-    }
-
-    public Double getArea () {
-        return getLength() * getWidth();
-    }
-
     //CONTAINED ANIMAL MANIPULATION
 
-    public void addAnimalToPen (Animal animal) {
-        this.containedAnimals.add(animal);
-    }
+    public void addAnimalToPen (Animal animal) { this.containedAnimals.add(animal); }
 
     public void removeAnimalFromPen (Animal animal) {
         this.containedAnimals.remove(animal);
@@ -90,8 +74,6 @@ public abstract class Pen implements Serializable {
     public void clearPen () {
         containedAnimals.clear();
     }
-
-
 
     @Override
     public String toString() {

@@ -18,7 +18,7 @@ public abstract class PenModel {
 
     public static ObservableList<String> getAllPenTypes () {
         return FXCollections.observableArrayList(
-                "Aquarium","Aviary","Dry","Part Water, Part Dry","Petting"
+                "Aquarium","Aviary","Dry","Petting","Dry or Petting","SemiAquatic"
         );
     }
 }
