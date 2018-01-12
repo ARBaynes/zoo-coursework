@@ -1,25 +1,38 @@
 package main.modules.pens.aquarium;
 
+import javafx.animation.Animation;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import main.classes.critters.Animal;
+import main.classes.critters.Breed;
 import main.classes.pens.Aquarium;
 import main.modules.critters.models.AnimalModel;
+import main.modules.critters.models.BreedModel;
 
 import java.lang.reflect.Array;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -111,16 +124,6 @@ public class AquariumController {
             }
         });
     }
-
-    public void setAddAnimalToAquariumButtonAction (Button addAnimalToAquariumButton, TableView<Aquarium> aquariumTableView, TableView<Animal> animalTableView) {
-        addAnimalToAquariumButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                addAnimalToPenDialog(aquariumTableView.getSelectionModel().getSelectedItem(), aquariumTableView, animalTableView );
-            }
-        });
-    }
-
 
     //DIALOGS
 
@@ -226,7 +229,6 @@ public class AquariumController {
         final MenuItem addNewPenMenuItem = new MenuItem("Add New Aquarium");
         final MenuItem editPenMenuItem = new MenuItem("Edit Aquarium #" + selectedPen.getPenID());
         final MenuItem removePenMenuItem = new MenuItem("Remove Aquarium #" + selectedPen.getPenID());
-        final MenuItem addAnimalToPenMenuItem = new MenuItem("Add Animals to Aquarium #"  + selectedPen.getPenID());
         addNewPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -245,76 +247,15 @@ public class AquariumController {
                 removeAquariumDialog(penRow, penTable);
             }
         });
-        addAnimalToPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                addAnimalToPenDialog(penRow.getItem(), penTable, penAnimalTable);
-            }
-        });
         contextMenu.getItems().add(addNewPenMenuItem);
         contextMenu.getItems().add(editPenMenuItem);
         contextMenu.getItems().add(removePenMenuItem);
         contextMenu.getItems().add(new SeparatorMenuItem());
-        contextMenu.getItems().add(addAnimalToPenMenuItem);
         // Set context menu on row, but use a binding to make it only show for non-empty rows:
         penRow.contextMenuProperty().bind(
                 Bindings.when(penRow.emptyProperty())
                         .then((ContextMenu)null)
                         .otherwise(contextMenu)
         );
-    }
-
-    //ANIMAL TO PEN
-
-    private void addAnimalToPenDialog (Aquarium pen, TableView<Aquarium> aquariumTable, TableView<Animal> animalTable) {
-        Dialog<Aquarium> dialog = new Dialog<>();
-        dialog.setTitle("Add Animal To Aquarium #" + pen.getPenID());
-        dialog.setHeaderText("Select which animals you would like to add to this pen: ");
-        dialog.setResizable(true);
-        ArrayList<Animal> allAnimals = AnimalModel.getAllAnimalsWhere(pen.getPenType());
-
-        /*for ( Animal animal : allAnimals) {
-            checkBoxes.add(new CheckBox(animal.getID().toString() + " - " + animal.getName() + " - " + animal.getBreedName()));
-        }
-
-        GridPane animalToPenDialogGridPane = new GridPane();
-        for ( int i = 0; i < checkBoxes.size() ; i++) {
-            animalToPenDialogGridPane.add(checkBoxes.get(i), 1, i + 1);
-        }
-*/
-        //dialog.getDialogPane().setContent(animalToPenDialogGridPane);
-
-        //https://stackoverflow.com/questions/36414735/how-to-make-my-checkboxtablecell-editable-in-javafx
-
-        ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
-
-        dialog.setResultConverter(new Callback<ButtonType, Aquarium>() {
-            @Override
-            public Aquarium call(ButtonType button) {
-                if (button == buttonTypeOk) {
-                    /*for (CheckBox checkBox: checkBoxes) {
-                        if (checkBox.isSelected()) {
-                            AnimalModel.getAnAnimalWhere(checkBox.getText());
-                        }
-                    }
-                    pen.addAnimalToPen();
-*/
-                    return pen;
-                }
-                return null;
-            }
-        });
-
-        Optional<Aquarium> result = dialog.showAndWait();
-        if (result.isPresent()) {
-            AquariumModel.addAquarium(result.get());
-            refreshPenTable(aquariumTable);
-            refreshAnimalTable(animalTable);
-        }
-    }
-
-    private void removeAnimalFromPenDialog (Aquarium pen, Animal toRemove) {
-
     }
 }

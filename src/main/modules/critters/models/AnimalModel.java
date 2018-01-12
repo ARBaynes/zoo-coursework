@@ -36,13 +36,16 @@ public class AnimalModel {
         if (allAnimals.isEmpty()) { setAllAnimals(); }
         ArrayList<Animal> allAnimalsWhere = new ArrayList<>();
         for (Animal animal : allAnimals) {
-            if (animal.getBreedName().equals(breed.getName()) &&
-                    animal.getBreedRequirements().equals(breed.getRequirements()) &&
-                    animal.getBreedPenType().equals(breed.getPenType())) {
+            if (animal.getBreedName().toLowerCase().equals(breed.getName().toLowerCase())) {
                 allAnimalsWhere.add(animal);
             }
         }
-        return allAnimalsWhere;
+
+        if (allAnimalsWhere.isEmpty()) {
+            return null;
+        } else {
+            return allAnimalsWhere;
+        }
     }
 
     public static  ArrayList<Animal> getAllAnimalsWhere (String penType) {

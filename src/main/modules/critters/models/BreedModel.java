@@ -19,6 +19,17 @@ public class BreedModel {
         return allBreeds;
     }
 
+    public static ArrayList<Breed> getAllBreedsWhere(String penType) {
+        if (allBreeds.isEmpty()) { setAllBreeds(); }
+        ArrayList<Breed> breedsWhere = new ArrayList<>();
+        for (Breed breed : allBreeds) {
+            if (breed.getPenType().equals(penType)) {
+                breedsWhere.add(breed);
+            }
+        }
+        return breedsWhere;
+    }
+
     public static ArrayList<String> getAllBreedNames() {
         if (allBreeds.isEmpty()) { setAllBreeds(); }
         ArrayList<String> names = new ArrayList<>();
@@ -30,7 +41,6 @@ public class BreedModel {
 
     public static Breed getABreedWhere (String name) {
         if (allBreeds.isEmpty()) { setAllBreeds(); }
-        System.out.println(allBreeds.toString());
         for (Breed breed : allBreeds) {
             if (breed.getName().equals(name)) {
                 return breed;

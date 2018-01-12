@@ -131,13 +131,6 @@
                                                                                       </columns>
                                                                                   </TableView>
                                                                               </center>
-                                                         <bottom>
-                                                            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="475.0" BorderPane.alignment="CENTER">
-                                                              <items>
-                                                                <Button fx:id="aquariumAddNewAnimalToPenButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="122.0" text="Add New Animal" textAlignment="RIGHT" wrapText="true" />
-                                                              </items>
-                                                            </ToolBar>
-                                                         </bottom>
                                                                           </BorderPane>
                                                                       </children>
                                                                   </AnchorPane>

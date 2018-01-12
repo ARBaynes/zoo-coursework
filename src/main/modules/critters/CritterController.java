@@ -17,11 +17,17 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import main.classes.critters.Animal;
 import main.classes.critters.Breed;
-import main.classes.pens.Aquarium;
+import main.classes.pens.*;
 import main.modules.critters.models.AnimalModel;
 import main.modules.critters.models.BreedModel;
 import main.modules.pens.PenModel;
+import main.modules.pens.aquarium.AquariumModel;
+import main.modules.pens.aviary.AviaryModel;
+import main.modules.pens.dry.DryModel;
+import main.modules.pens.petting.PettingModel;
+import main.modules.pens.semiaquatic.SemiAquaticModel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -315,15 +321,10 @@ public class CritterController {
             noAnimals.setContentText("There are no animals of the "+ breedToFind.getName() + " type!");
             noAnimals.showAndWait();
             return;
-
         }
         animalTableViewItems.addAll(allAnimalsWhere);
     }
     //DIALOGS
-
-    public void addAnimalDialog (TableView<Animal> table) {
-        addAnimalDialog(table, null);
-    }
 
     private void addAnimalDialog(TableView<Animal> table, Breed breedData) {
         Dialog<Animal> dialog = new Dialog<>();
@@ -391,7 +392,9 @@ public class CritterController {
 
         final MenuItem editAnimalMenuItem = new MenuItem("Edit " + selectedAnimal.getName());
         final MenuItem removeAnimalMenuItem = new MenuItem("Remove " + selectedAnimal.getName());
-        final MenuItem addAnimalMenuItem = new MenuItem("Add New " + selectedAnimal.getBreed() + " Animal");
+        final MenuItem addAnimaltoPenMenuItem = new MenuItem("Add " + selectedAnimal.getName() + " to Pen");
+        final MenuItem removeAnimalfromPenMenuItem = new MenuItem("Remove " + selectedAnimal.getName() + " from Pen");
+        final MenuItem addAnimalMenuItem = new MenuItem("Add New " + selectedAnimal.getBreedName() + " Animal");
         editAnimalMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -404,6 +407,18 @@ public class CritterController {
                 removeAnimalDialog(animalRow, animalTable);
             }
         });
+        addAnimaltoPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                addAnimaltoPen(animalRow.getItem());
+            }
+        });
+        removeAnimalfromPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                removeAnimalfromPen(animalRow.getItem());
+            }
+        });
         addAnimalMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -413,6 +428,12 @@ public class CritterController {
         contextMenu.getItems().add(editAnimalMenuItem);
         contextMenu.getItems().add(removeAnimalMenuItem);
         contextMenu.getItems().add(new SeparatorMenuItem());
+        if (animalRow.getItem().hasPen()) {
+            contextMenu.getItems().add(removeAnimalfromPenMenuItem);
+        } else {
+            contextMenu.getItems().add(addAnimaltoPenMenuItem);
+        }
+        contextMenu.getItems().add(new SeparatorMenuItem());
         contextMenu.getItems().add(addAnimalMenuItem);
         // Set context menu on row, but use a binding to make it only show for non-empty rows:
         animalRow.contextMenuProperty().bind(
@@ -421,4 +442,93 @@ public class CritterController {
                         .otherwise(contextMenu)
         );
     }
+
+    //ANIMAL TO PEN
+
+    public void addAnimaltoPen (Animal animal) {
+        Dialog<Animal> dialog = new Dialog<>();
+
+        dialog.setTitle("Add Animal To A Pen");
+        dialog.setHeaderText("Add " + animal.getName() + " to " + animal.getBreedPenType());
+
+
+        dialog.setResizable(true);
+
+        if (!animal.getBreedPenType().toLowerCase().equals("dry or petting")) {
+
+            Label desc = new Label("Pens: ");
+            //ObservableList<> observablePens = FXCollections.observableArrayList();
+
+
+
+            /*switch (animal.getBreedPenType().toLowerCase()) {
+                case "aquarium":
+                    ArrayList<Aquarium> aquariums = AquariumModel.getAllAquariums();
+                    for (Aquarium aquarium: aquariums) {
+                        pens.addAll(aquarium.toString());
+                    }
+                    break;
+                case "aviary":
+                    ArrayList<Aviary> aviaries = AviaryModel.getAllAviaries();
+                    for (Aviary aviary: aviaries) {
+                        pens.addAll(aviary.toString());
+                    }
+                    break;
+                case "dry":
+                    ArrayList<Dry> dryArrayList = DryModel.getAllDryPens();
+                    for (Dry dry : dryArrayList) {
+                        pens.addAll(dry.toString());
+                    }
+                    break;
+                case "petting":
+                    ArrayList<Petting> pettings = PettingModel.getAllPetting();
+                    for (Petting petting: pettings) {
+                        pens.addAll(petting.toString());
+                    }
+                    break;
+                case "semiAquatic":
+                    ArrayList<SemiAquatic> semiaquatics = SemiAquaticModel.getAllSemiAquatic();
+                    for (SemiAquatic semiAquatic: semiaquatics) {
+                        pens.addAll(semiAquatic.toString());
+                    }
+                    break;
+                default:
+
+            }
+            ChoiceBox<String> penChoiceBox = new ChoiceBox<>(pens);
+            TableView<Animal> animalsInPen = new TableView<>();
+
+
+
+            GridPane animalDialogGridPane = new GridPane();
+            animalDialogGridPane.add(desc, 1, 1);
+            animalDialogGridPane.add(penChoiceBox, 2, 1);
+            dialog.getDialogPane().setContent(animalDialogGridPane);
+
+            ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+
+            dialog.setResultConverter(new Callback<ButtonType, Animal>() {
+                @Override
+                public Animal call(ButtonType button) {
+                    if (button == buttonTypeOk) {
+                        penChoiceBox.getSelectionModel().getSelectedItem();
+                    }
+                    return null;
+                }
+            });
+
+            Optional<Animal> result = dialog.showAndWait();
+            if (result.isPresent()) {
+
+            }
+
+            animal.getBreedPenType();*/
+        }
+    }
+
+    public void removeAnimalfromPen (Animal animal) {
+
+    }
+
 }
