@@ -9,6 +9,8 @@ import main.classes.critters.Animal;
 import main.classes.critters.Breed;
 import main.classes.pens.*;
 import main.classes.staff.Staff;
+import main.modules.critters.AnimalController;
+import main.modules.critters.BreedController;
 import main.modules.critters.CritterController;
 import main.modules.pens.aquarium.AquariumController;
 
@@ -53,6 +55,7 @@ public class Controller {
     public TableColumn aquariumWaterVolume;
     public TableColumn aquariumCurrentVolume;
     public TableColumn aquariumWaterType;
+    public TableColumn aquariumAnimalID;
 
     public Label aquariumAnimalLabel;
     public Button aquariumAddNewAnimalToPenButton;
@@ -168,28 +171,42 @@ public class Controller {
         //BREED PANE ------------------------------------------------------------------------
         //Outline table data
 
-        critterTab.outlineBreedTableData(
+        /*critterTab.outlineBreedTableData(
                 breedName, breedPenType, breedRequirements
         );
 
-        critterTab.outlineAnimalTableData(animalTableColID, animalTableColName, animalTableColBreed, animalTableColHasPen);
+        critterTab.outlineAnimalTableData(animalTableColID, animalTableColName, animalTableColBreed, animalTableColHasPen);*/
 
         //Outline table row actions
 
-        critterTab.outlineBreedTableRows(breedTableView, animalTableView, animalTypeLabel);
+        /*critterTab.outlineBreedTableRows(breedTableView, animalTableView, animalTypeLabel);
 
-        critterTab.outlineAnimalTableRows(animalTableView, animalTypeLabel);
+        critterTab.outlineAnimalTableRows(animalTableView, animalTypeLabel,
+                aquariumAnimalTableView, aquariumPenTableView,
+                aviaryAnimalTableView, aviaryPenTableView,
+                dryAnimalTableView, dryPenTableView,
+                pettingAnimalTableView, pettingPenTableView,
+                SemiAquaticPenTableView, SemiAquaticPenTableView);
 
         //Load table items
 
         critterTab.setBreedTableItems(breedTableView);
-        critterTab.setAnimalTableItems(animalTableView);
+        critterTab.setAnimalTableItems(animalTableView);*/
 
         //Set button action
 
-        critterTab.setAddBreedButtonAction(addBreedButton, breedTableView);
+        /*critterTab.setAddBreedButtonAction(addBreedButton, breedTableView);*/
 
         //ANIMAL PANE ------------------------------------------------------------------------
+
+        AnimalController.construct(animalTableView, animalTableColBreed, animalTableColID, animalTableColName, animalTableColHasPen, animalTypeLabel);
+        BreedController.construct(breedTableView, breedName, breedPenType, breedRequirements, addBreedButton);
+
+        AnimalController.outline();
+        BreedController.outline();
+
+        BreedController.refresh();
+        AnimalController.refresh();
 
         //PEN TAB --------------------------------------------------------------------------------------------------------------------------------------
 
@@ -204,15 +221,20 @@ public class Controller {
                 aquariumCurrentVolume, aquariumContainedAnimals,
                 aquariumHeight, aquariumWaterType
         );
+        aquariumTab.outlineAnimalPenTableData(
+                aquariumAnimalID, aquariumAnimalName, aquariumAnimalBreed, aquariumAnimalSize
+        );
 
         //Outline table row actions
 
         aquariumTab.outlineTableRows(aquariumPenTableView, aquariumAnimalTableView, aquariumAnimalLabel);
+        aquariumTab.outlineAnimalPenTableRows(aquariumAnimalTableView, aquariumPenTableView);
 
 
         //Load table items
 
         aquariumTab.setTableItems(aquariumPenTableView);
+        aquariumTab.setAnimalTableItems(aquariumAnimalTableView);
 
         //Set button action
 

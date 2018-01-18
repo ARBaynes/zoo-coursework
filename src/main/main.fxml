@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.modules.Controller">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.modules.Controller">
     <children>
-        <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="tab-bar" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
-                <Tab text="Animals">
+                <Tab styleClass="tab-button" text="Animals">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -71,7 +73,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Pens">
+                <Tab styleClass="tab-button" text="Pens">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -125,6 +127,7 @@
                                                                               <center>
                                                                                   <TableView fx:id="aquariumAnimalTableView" prefHeight="594.0" prefWidth="394.0" BorderPane.alignment="CENTER">
                                                                                       <columns>
+                                                                  <TableColumn fx:id="aquariumAnimalID" prefWidth="119.0" text="Animal ID" />
                                                                                           <TableColumn fx:id="aquariumAnimalName" prefWidth="119.0" text="Animal Name" />
                                                                                           <TableColumn fx:id="aquariumAnimalBreed" minWidth="2.0" prefWidth="63.0" text="Breed" />
                                                                                           <TableColumn fx:id="aquariumAnimalSize" prefWidth="167.0" text="Size Requirements" />
@@ -159,4 +162,7 @@
             </tabs>
         </TabPane>
     </children>
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
 </AnchorPane>

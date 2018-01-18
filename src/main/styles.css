@@ -1,0 +1,22 @@
+
+
+.tab-button {
+    -fx-background-color: #a3c1ad;
+    -fx-spacing: 12px;
+}
+
+.tab-button:hover {
+    -fx-background-color: #92AD9B;
+}
+
+.tab-button {
+    -fx-background-color: #92AD9B;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.table {
+
+}

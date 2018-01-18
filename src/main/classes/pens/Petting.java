@@ -19,6 +19,26 @@ public class Petting extends Pen implements Area, Serializable {
     }
 
     @Override
+    public void addAnimalToPen(Animal animal) {
+
+    }
+
+    @Override
+    public void removeAnimalFromPen(Animal animal) {
+
+    }
+
+    @Override
+    public void editAnimalInPen(Animal animal) {
+
+    }
+
+    @Override
+    public void clearPen() {
+
+    }
+
+    @Override
     public Double getArea() {
         return getLength() * getWidth();
     }

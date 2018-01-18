@@ -28,6 +28,26 @@ public class SemiAquatic extends Pen implements WaterVolume, Area, WaterTypes, S
         penType = "semiaquatic";
     }
 
+    @Override
+    public void addAnimalToPen(Animal animal) {
+
+    }
+
+    @Override
+    public void removeAnimalFromPen(Animal animal) {
+
+    }
+
+    @Override
+    public void editAnimalInPen(Animal animal) {
+
+    }
+
+    @Override
+    public void clearPen() {
+
+    }
+
     //WATER VOLUME
     @Override
     public void setWaterDepth (Double waterDepth) {

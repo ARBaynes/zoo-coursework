@@ -1,14 +1,17 @@
 package main.modules.critters;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,6 +24,7 @@ import main.classes.pens.*;
 import main.modules.critters.models.AnimalModel;
 import main.modules.critters.models.BreedModel;
 import main.modules.pens.PenModel;
+import main.modules.pens.aquarium.AquariumController;
 import main.modules.pens.aquarium.AquariumModel;
 import main.modules.pens.aviary.AviaryModel;
 import main.modules.pens.dry.DryModel;
@@ -286,12 +290,22 @@ public class CritterController {
         });
     }
 
-    public void outlineAnimalTableRows (TableView<Animal> animalTableView, Label animalTypeLabel) {
+    public void outlineAnimalTableRows (TableView<Animal> animalTableView, Label animalTypeLabel,
+                                        TableView<Animal> aquariumAnimalPenTableView, TableView<Aquarium> aquariumPenTableView,
+                                        TableView<Animal> aviaryAnimalPenTableView, TableView<Aviary> aviaryPenTableView,
+                                        TableView<Animal> dryAnimalPenTableView, TableView<Dry> dryPenTableView,
+                                        TableView<Animal> pettingAnimalPenTableView, TableView<Petting> pettingPenTableView,
+                                        TableView<Animal> semiAquaticAnimalPenTableView, TableView<SemiAquatic> semiAquaticPenTableView) {
         animalTableView.setRowFactory( tv -> {
             TableRow<Animal> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.SECONDARY  && (!row.isEmpty()) ) {
-                   animalTableContextMenu(row, animalTableView);
+                   animalTableContextMenu(row, animalTableView,
+                           aquariumAnimalPenTableView, aquariumPenTableView,
+                           aviaryAnimalPenTableView, aviaryPenTableView,
+                           dryAnimalPenTableView, dryPenTableView,
+                           pettingAnimalPenTableView, pettingPenTableView,
+                           semiAquaticAnimalPenTableView, semiAquaticPenTableView);
                 }
             });
             return row ;
@@ -315,7 +329,7 @@ public class CritterController {
     private void updateObservableAnimalTableData(Breed breedToFind) {
         animalTableViewItems.clear();
         ArrayList<Animal> allAnimalsWhere = AnimalModel.getAllAnimalsWhere(breedToFind);
-        if (allAnimalsWhere.isEmpty()) {
+        if (allAnimalsWhere == null) {
             Alert noAnimals = new Alert(Alert.AlertType.INFORMATION);
             noAnimals.setHeaderText("Caution");
             noAnimals.setContentText("There are no animals of the "+ breedToFind.getName() + " type!");
@@ -385,7 +399,12 @@ public class CritterController {
 
     }
 
-    private void animalTableContextMenu(TableRow<Animal> animalRow, TableView<Animal> animalTable) {
+    private void animalTableContextMenu(TableRow<Animal> animalRow, TableView<Animal> animalTable,
+                                        TableView<Animal> aquariumAnimalPenTableView, TableView<Aquarium> aquariumPenTableView,
+                                        TableView<Animal> aviaryAnimalPenTableView, TableView<Aviary> aviaryPenTableView,
+                                        TableView<Animal> dryAnimalPenTableView, TableView<Dry> dryPenTableView,
+                                        TableView<Animal> pettingAnimalPenTableView, TableView<Petting> pettingPenTableView,
+                                        TableView<Animal> semiAquaticAnimalPenTableView, TableView<SemiAquatic> semiAquaticPenTableView) {
 
         Animal selectedAnimal = animalRow.getItem();
         final ContextMenu contextMenu = new ContextMenu();
@@ -410,13 +429,18 @@ public class CritterController {
         addAnimaltoPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                addAnimaltoPen(animalRow.getItem());
+                addAnimaltoPen(animalRow.getItem(), animalTable, aquariumAnimalPenTableView, aviaryAnimalPenTableView, dryAnimalPenTableView, pettingAnimalPenTableView, semiAquaticAnimalPenTableView);
             }
         });
         removeAnimalfromPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                removeAnimalfromPen(animalRow.getItem());
+                removeAnimalfromPen(animalRow.getItem(), animalTable,
+                        aquariumAnimalPenTableView, aquariumPenTableView,
+                        aviaryAnimalPenTableView, aviaryPenTableView,
+                        dryAnimalPenTableView, dryPenTableView,
+                        pettingAnimalPenTableView, pettingPenTableView,
+                        semiAquaticAnimalPenTableView, semiAquaticPenTableView);
             }
         });
         addAnimalMenuItem.setOnAction(new EventHandler<ActionEvent>() {
@@ -445,89 +469,253 @@ public class CritterController {
 
     //ANIMAL TO PEN
 
-    public void addAnimaltoPen (Animal animal) {
-        Dialog<Animal> dialog = new Dialog<>();
-
+    private void animalToAquarium (Animal animal, TableView<Animal> animalInPenTableView, TableView<Animal> animalTabTableView) {
+        Dialog<Aquarium> dialog = new Dialog<>();
         dialog.setTitle("Add Animal To A Pen");
         dialog.setHeaderText("Add " + animal.getName() + " to " + animal.getBreedPenType());
-
-
         dialog.setResizable(true);
+        Label desc = new Label("Pens: ");
+        ObservableList<Aquarium> pens = FXCollections.observableArrayList();
+        ArrayList<Aquarium> aquariums = AquariumModel.getAllAquariumsWithSpaceRemaining(animal);
+        for (Aquarium aquarium: aquariums) {
+            pens.addAll(aquarium);
+        }
+        ChoiceBox<Aquarium> penChoiceBox = new ChoiceBox<>(pens);
 
+        TableView<Animal> currentAnimalsInPen = new TableView<>();
+        TableColumn<Animal, Integer> animalIDCol = new TableColumn<>("ID");
+        animalIDCol.setCellValueFactory(new PropertyValueFactory<Animal, Integer>("ID"));
+        TableColumn<Animal, String> animalNameCol = new TableColumn<>("Name");
+        animalNameCol.setCellValueFactory(new PropertyValueFactory<Animal, String>("Name"));
+        TableColumn<Animal, String> animalBreedCol = new TableColumn<>("Breed");
+        animalBreedCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
+                return new SimpleStringProperty(p.getValue().getBreedName());
+            }
+        });
+        TableColumn<Animal, String> animalRequirementsCol = new TableColumn<>("Requirements");
+        animalRequirementsCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
+                return new SimpleStringProperty(p.getValue().getBreedRequirementsToString());
+            }
+        });
+
+        currentAnimalsInPen.getColumns().addAll(animalIDCol, animalNameCol, animalBreedCol, animalRequirementsCol);
+
+        ObservableList<Animal> animalsinPen = FXCollections.observableArrayList();
+        currentAnimalsInPen.setItems(animalsinPen);
+
+        penChoiceBox.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((ObservableValue<? extends Aquarium> observable, Aquarium oldValue, Aquarium newValue) ->
+                        refreshAnimalsInPen(animalsinPen, newValue)
+                );
+
+        GridPane animalDialogGridPane = new GridPane();
+        animalDialogGridPane.add(desc, 1, 1);
+        animalDialogGridPane.add(penChoiceBox, 2, 1);
+        animalDialogGridPane.add(currentAnimalsInPen, 2, 2);
+        dialog.getDialogPane().setContent(animalDialogGridPane);
+
+        ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+
+        dialog.setResultConverter(new Callback<ButtonType, Aquarium>() {
+            @Override
+            public Aquarium call(ButtonType button) {
+                if (button == buttonTypeOk) {
+                    return penChoiceBox.getSelectionModel().getSelectedItem();
+                }
+                return null;
+            }
+        });
+
+        Optional<Aquarium> result = dialog.showAndWait();
+        if (result.isPresent()) {
+
+            animal.setCurrentPenID(result.get().getPenID());
+            AnimalModel.editAnimal(animal);
+
+            result.get().addAnimalToPen(animal);
+            AquariumModel.editAquarium(result.get());
+
+            updateObservableAnimalTableData(animal.getBreed());
+            animalTabTableView.refresh();
+
+
+            AquariumController aquariumController = new AquariumController();
+            aquariumController.updateObservableTableData();
+            animalInPenTableView.refresh();
+        }
+    }
+
+    private void refreshAnimalsInPen (ObservableList<Animal> animalList, Aquarium pen ) {
+        animalList.clear();
+        animalList.addAll(pen.getContainedAnimals());
+    }
+
+    private void animalToAviary (Animal animal) {
+        Dialog<Animal> dialog = new Dialog<>();
+        dialog.setTitle("Add Animal To A Pen");
+        dialog.setHeaderText("Add " + animal.getName() + " to " + animal.getBreedPenType());
+        dialog.setResizable(true);
+        Label desc = new Label("Pens: ");
+        ArrayList<Aviary> aviaries = AviaryModel.getAllAviaries();
+        ObservableList<String> pens = FXCollections.observableArrayList();
+        for (Aviary aviary: aviaries) {
+            pens.addAll(aviary.toString());
+        }
+    }
+
+    private void animalToDry (Animal animal) {
+        Dialog<Animal> dialog = new Dialog<>();
+        dialog.setTitle("Add Animal To A Pen");
+        dialog.setHeaderText("Add " + animal.getName() + " to " + animal.getBreedPenType());
+        dialog.setResizable(true);
+        Label desc = new Label("Pens: ");
+        ObservableList<String> pens = FXCollections.observableArrayList();
+        ArrayList<Dry> dryArrayList = DryModel.getAllDryPens();
+        for (Dry dry : dryArrayList) {
+            pens.addAll(dry.toString());
+        }
+    }
+
+    private void animalToPetting (Animal animal) {
+        Dialog<Animal> dialog = new Dialog<>();
+        dialog.setTitle("Add Animal To A Pen");
+        dialog.setHeaderText("Add " + animal.getName() + " to " + animal.getBreedPenType());
+        dialog.setResizable(true);
+        Label desc = new Label("Pens: ");
+        ObservableList<String> pens = FXCollections.observableArrayList();
+        ArrayList<Petting> pettings = PettingModel.getAllPetting();
+        for (Petting petting: pettings) {
+            pens.addAll(petting.toString());
+        }
+    }
+
+    private void animalToSemiAquatic (Animal animal) {
+        Dialog<Animal> dialog = new Dialog<>();
+        dialog.setTitle("Add Animal To A Pen");
+        dialog.setHeaderText("Add " + animal.getName() + " to " + animal.getBreedPenType());
+        dialog.setResizable(true);
+        Label desc = new Label("Pens: ");
+        ObservableList<String> pens = FXCollections.observableArrayList();
+        ArrayList<SemiAquatic> semiaquatics = SemiAquaticModel.getAllSemiAquatic();
+        for (SemiAquatic semiAquatic: semiaquatics) {
+            pens.addAll(semiAquatic.toString());
+        }
+    }
+
+    private void animalToDryOrPetting (Animal animal) {
+        Dialog<Animal> dialog = new Dialog<>();
+        dialog.setTitle("Add Animal To A Pen");
+        dialog.setHeaderText("Add " + animal.getName() + " to " + animal.getBreedPenType());
+        dialog.setResizable(true);
+        Label desc = new Label("Pens: ");
+        ObservableList<Dry> dryPens = FXCollections.observableArrayList();
+        ArrayList<Dry> dryArrayList = DryModel.getAllDryPens();
+        for (Dry dry: dryArrayList) {
+            dryPens.addAll(dry);
+        }
+        ObservableList<Petting> pettingPens = FXCollections.observableArrayList();
+        ArrayList<Petting> pettingArrayList = PettingModel.getAllPetting();
+        for (Petting petting: pettingArrayList) {
+            pettingPens.addAll(petting);
+        }
+    }
+
+    public void addAnimaltoPen (Animal animal, TableView<Animal> animalBreedTableView,
+                                TableView<Animal> aquariumAnimalPenTableView,
+                                TableView<Animal> aviaryAnimalPenTableView,
+                                TableView<Animal> dryAnimalPenTableView,
+                                TableView<Animal> pettingAnimalPenTableView,
+                                TableView<Animal> semiAquaticAnimalPenTableView) {
+        System.out.println(animal.getBreedPenType());
         if (!animal.getBreedPenType().toLowerCase().equals("dry or petting")) {
-
-            Label desc = new Label("Pens: ");
-            //ObservableList<> observablePens = FXCollections.observableArrayList();
-
-
-
-            /*switch (animal.getBreedPenType().toLowerCase()) {
+            switch (animal.getBreedPenType().toLowerCase()) {
                 case "aquarium":
-                    ArrayList<Aquarium> aquariums = AquariumModel.getAllAquariums();
-                    for (Aquarium aquarium: aquariums) {
-                        pens.addAll(aquarium.toString());
-                    }
+                    animalToAquarium(animal, animalBreedTableView, aquariumAnimalPenTableView);
                     break;
                 case "aviary":
-                    ArrayList<Aviary> aviaries = AviaryModel.getAllAviaries();
-                    for (Aviary aviary: aviaries) {
-                        pens.addAll(aviary.toString());
-                    }
+                    animalToAviary(animal);
                     break;
                 case "dry":
-                    ArrayList<Dry> dryArrayList = DryModel.getAllDryPens();
-                    for (Dry dry : dryArrayList) {
-                        pens.addAll(dry.toString());
-                    }
+                    animalToDry(animal);
                     break;
                 case "petting":
-                    ArrayList<Petting> pettings = PettingModel.getAllPetting();
-                    for (Petting petting: pettings) {
-                        pens.addAll(petting.toString());
-                    }
+                   animalToPetting(animal);
                     break;
                 case "semiAquatic":
-                    ArrayList<SemiAquatic> semiaquatics = SemiAquaticModel.getAllSemiAquatic();
-                    for (SemiAquatic semiAquatic: semiaquatics) {
-                        pens.addAll(semiAquatic.toString());
-                    }
+                    animalToSemiAquatic(animal);
                     break;
                 default:
 
             }
-            ChoiceBox<String> penChoiceBox = new ChoiceBox<>(pens);
-            TableView<Animal> animalsInPen = new TableView<>();
+        } else {
 
-
-
-            GridPane animalDialogGridPane = new GridPane();
-            animalDialogGridPane.add(desc, 1, 1);
-            animalDialogGridPane.add(penChoiceBox, 2, 1);
-            dialog.getDialogPane().setContent(animalDialogGridPane);
-
-            ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-            dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
-
-            dialog.setResultConverter(new Callback<ButtonType, Animal>() {
-                @Override
-                public Animal call(ButtonType button) {
-                    if (button == buttonTypeOk) {
-                        penChoiceBox.getSelectionModel().getSelectedItem();
-                    }
-                    return null;
-                }
-            });
-
-            Optional<Animal> result = dialog.showAndWait();
-            if (result.isPresent()) {
-
-            }
-
-            animal.getBreedPenType();*/
         }
     }
 
-    public void removeAnimalfromPen (Animal animal) {
+    public void removeAnimalfromPen (Animal animal, TableView<Animal> animalBreedTableView,
+                                TableView<Animal> aquariumAnimalPenTableView, TableView<Aquarium> aquariumPenTableView,
+                                TableView<Animal> aviaryAnimalPenTableView, TableView<Aviary> aviaryPenTableView,
+                                TableView<Animal> dryAnimalPenTableView, TableView<Dry> dryPenTableView,
+                                TableView<Animal> pettingAnimalPenTableView, TableView<Petting> pettingPenTableView,
+                                TableView<Animal> semiAquaticAnimalPenTableView, TableView<SemiAquatic> semiAquaticPenTableView) {
+        System.out.println(animal.getBreedPenType());
+        if (!animal.getBreedPenType().toLowerCase().equals("dry or petting")) {
+            switch (animal.getBreedPenType().toLowerCase()) {
+                case "aquarium":
+                    removeAnimalfromAquarium(animal, animalBreedTableView, aquariumAnimalPenTableView, aquariumPenTableView);
+                    break;
+                case "aviary":
+
+                    break;
+                case "dry":
+
+                    break;
+                case "petting":
+
+                    break;
+                case "semiAquatic":
+
+                    break;
+                default:
+
+            }
+        } else {
+
+        }
+    }
+
+    public void removeAnimalfromAquarium (Animal animal, TableView<Animal> animalTableView, TableView<Animal> aquariumAnimalPenTableView , TableView<Aquarium> aquariumPenTableView) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Removal");
+        alert.setHeaderText("Are you sure you wish to remove " +animal.getName()+ " from pen #" +animal.getCurrentPenID());
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            if (animal.getCurrentPenID() != null) {
+                Aquarium pen = AquariumModel.getAquariumBy(animal.getCurrentPenID());
+                if (pen != null) {
+                    pen.removeAnimalFromPen(animal);
+
+                    animal.setCurrentPenID(null);
+                    AnimalModel.editAnimal(animal);
+                    updateObservableAnimalTableData(animal.getBreed());
+                    animalTableView.refresh();
+
+                    AquariumController aquariumController = new AquariumController();
+                    aquariumController.updateAnimalObservableTableData(pen);
+                    aquariumController.updateObservableTableData();
+
+                    aquariumController.refreshAnimalPenTable(aquariumAnimalPenTableView);
+                    aquariumController.refreshPenTable(aquariumPenTableView);
+                }
+            }
+        } else {
+            System.out.println(animal.getName() + " will stay in their pen");
+        }
 
     }
 

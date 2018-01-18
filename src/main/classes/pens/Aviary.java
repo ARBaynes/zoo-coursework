@@ -1,12 +1,11 @@
 package main.classes.pens;
 
 import main.classes.critters.Animal;
-import main.interfaces.HighPen;
 import main.interfaces.Volume;
 
 import java.io.Serializable;
 
-public class Aviary extends Pen implements HighPen, Volume, Serializable {
+public class Aviary extends Pen implements Volume, Serializable {
     private Double height;
 
     public Aviary (Double length, Double width, Double temperature, Double height) {
@@ -19,6 +18,26 @@ public class Aviary extends Pen implements HighPen, Volume, Serializable {
 
     @Override
     public void setPenType() { penType = "aviary"; }
+
+    @Override
+    public void addAnimalToPen(Animal animal) {
+
+    }
+
+    @Override
+    public void removeAnimalFromPen(Animal animal) {
+
+    }
+
+    @Override
+    public void editAnimalInPen(Animal animal) {
+
+    }
+
+    @Override
+    public void clearPen() {
+
+    }
 
     @Override
     public void setHeight(Double height) { this.height = height; }

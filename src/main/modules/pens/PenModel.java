@@ -8,19 +8,19 @@ import main.classes.pens.Pen;
 import java.io.File;
 
 public abstract class PenModel {
-    protected static Integer createID (String filePath) {
+    protected static String createID (String filePath, String identifier) {
         Integer ID = 0;
         File folder = new File(filePath);
         if (folder.exists()) {
             ID = folder.listFiles().length + 1;
         }
-        return ID;
+        return identifier + ID;
     }
 
 
     public static ObservableList<String> getAllPenTypes () {
         return FXCollections.observableArrayList(
-                "Aquarium","Aviary","Dry","Petting","Dry or Petting","SemiAquatic"
+                "aquarium","aviary","dry","petting","dry or petting","semiaquatic"
         );
     }
 }

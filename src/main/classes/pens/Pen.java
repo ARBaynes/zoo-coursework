@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public abstract class Pen implements Serializable {
 
-    private Integer penID;
+    private String penID;
     private Double length;
     private Double width;
     private Double temperature;
@@ -18,7 +18,7 @@ public abstract class Pen implements Serializable {
 
     //SETTERS
 
-    public void setPenID (Integer penID) { this.penID = penID; }
+    public void setPenID (String penID) { this.penID = penID; }
 
     public void setWidth(Double width) {
         this.width = width;
@@ -50,30 +50,19 @@ public abstract class Pen implements Serializable {
 
     public String getPenType() { return penType; }
 
-    public Integer getPenID() { return penID; }
+    public String getPenID() { return penID; }
 
     public Integer getContainedAnimalNumber () { return this.containedAnimals.size(); }
 
     //CONTAINED ANIMAL MANIPULATION
 
-    public void addAnimalToPen (Animal animal) { this.containedAnimals.add(animal); }
+    public abstract void addAnimalToPen (Animal animal) ;
 
-    public void removeAnimalFromPen (Animal animal) {
-        this.containedAnimals.remove(animal);
-    }
+    public abstract void removeAnimalFromPen (Animal animal) ;
 
-    public void editAnimalInPen (Animal animal) {
-        for (int i = 0 ; i < containedAnimals.size(); i++) {
-            if (containedAnimals.get(i).getID() == animal.getID()) {
-                this.containedAnimals.remove(i);
-                this.containedAnimals.add(animal);
-            }
-        }
-    }
+    public abstract void editAnimalInPen (Animal animal) ;
 
-    public void clearPen () {
-        containedAnimals.clear();
-    }
+    public abstract void clearPen ();
 
     @Override
     public String toString() {

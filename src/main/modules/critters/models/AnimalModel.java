@@ -77,9 +77,8 @@ public class AnimalModel {
         setAllAnimals();
     }
 
-    public static void editAnimal (Animal toFind, Animal toReplaceWith) {
-        removeAnimal(toFind);
-        addAnimal(toReplaceWith);
+    public static void editAnimal (Animal toEdit) {
+        addAnimal(toEdit);
     }
 
     public static void removeAnimal (Animal toFind) {

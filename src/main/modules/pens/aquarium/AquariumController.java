@@ -38,96 +38,127 @@ import java.util.HashMap;
 import java.util.Optional;
 
 public class AquariumController {
-    protected ObservableList<Aquarium> aquariumTableViewItems = FXCollections.observableArrayList();
+    protected static ObservableList<Aquarium> aquariumTableViewItems = FXCollections.observableArrayList();
+    protected static ToolBar aquariumToolbar;
+    protected static Button addAquariumButton;
+    protected static TableView aquariumPenTableView;
+    protected static TableColumn aquariumPenID;
+    protected static TableColumn aquariumTemp;
+    protected static TableColumn aquariumContainedAnimals;
+    protected static TableColumn aquariumHeight;
+    protected static TableColumn aquariumWaterVolume;
+    protected static TableColumn aquariumCurrentVolume;
+    protected static TableColumn aquariumWaterType;
 
-    public AquariumController () {
-        updateObservableTableData();
+    private static String currentPenID;
+
+
+    public static void construct (ToolBar toolBar, Button addButton, TableView tableView, TableColumn id, TableColumn temp,
+                                  TableColumn containedAnimals, TableColumn height, TableColumn waterVolume, TableColumn currentVolume,
+                                  TableColumn waterType) {
+        aquariumToolbar = toolBar;
+        addAquariumButton = addButton;
+        aquariumPenTableView = tableView;
+        aquariumPenID = id;
+        aquariumTemp = temp;
+        aquariumContainedAnimals = containedAnimals;
+        aquariumHeight = height;
+        aquariumWaterVolume = waterVolume;
+        aquariumCurrentVolume = currentVolume;
+        aquariumWaterType = waterType;
+
+        aquariumPenTableView.setItems(aquariumTableViewItems);
     }
 
-
-    //OUTLINE/ROUGH SKETCH TABLE DATA
-
-    public void outlinePenTableData (TableColumn IDCol, TableColumn tempCol, TableColumn waterVolCol,
-                                     TableColumn currentVolumeCol, TableColumn containedAnimalNumberCol,
-                                     TableColumn heightCol, TableColumn waterTypeCol) {
-        IDCol.setCellValueFactory( new PropertyValueFactory<Aquarium, Integer>("penID"));
-        tempCol.setCellValueFactory( new PropertyValueFactory<Aquarium, Double>("temperature"));
-        waterVolCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Double>, ObservableValue<Double>>() {
+    public static void outline () {
+        aquariumPenID.setCellValueFactory( new PropertyValueFactory<Aquarium, Integer>("penID"));
+        aquariumTemp.setCellValueFactory( new PropertyValueFactory<Aquarium, Double>("temperature"));
+        aquariumWaterVolume.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Double>, ObservableValue<Double>>() {
             public ObservableValue<Double> call(TableColumn.CellDataFeatures<Aquarium, Double> p) {
                 return new SimpleDoubleProperty(p.getValue().getVolume()).asObject();
             }
         });
-        currentVolumeCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Double>, ObservableValue<Double>>() {
+        aquariumCurrentVolume.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Double>, ObservableValue<Double>>() {
             public ObservableValue<Double> call(TableColumn.CellDataFeatures<Aquarium, Double> p) {
                 return new SimpleDoubleProperty(p.getValue().getCurrentVolume()).asObject();
             }
         });
-        containedAnimalNumberCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Integer>, ObservableValue<Integer>>() {
+        aquariumContainedAnimals.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aquarium, Integer>, ObservableValue<Integer>>() {
             public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Aquarium, Integer> p) {
                 return new SimpleIntegerProperty(p.getValue().getContainedAnimalNumber()).asObject();
             }
         });
-        heightCol.setCellValueFactory( new PropertyValueFactory<Aquarium, Double>("height"));
+        aquariumHeight.setCellValueFactory( new PropertyValueFactory<Aquarium, Double>("height"));
 
-        waterTypeCol.setCellValueFactory( new PropertyValueFactory<Aquarium, String>("waterType"));
-    }
+        aquariumWaterType.setCellValueFactory( new PropertyValueFactory<Aquarium, String>("waterType"));
 
-    public void outlineTableRows (TableView<Aquarium> penTableView, TableView<Animal> penAnimalTableView, Label aquariumAnimalLabel) {
-        penTableView.setRowFactory( tv -> {
+        aquariumPenTableView.setRowFactory( tv -> {
             TableRow<Aquarium> penRow = new TableRow<>();
             penRow.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && (!penRow.isEmpty()) ) {
-                    aquariumAnimalLabel.setText("Aquarium #" + penRow.getItem().getPenID().toString() + ": ");
-                    updateObservableTableData();
+                    currentPenID = penRow.getItem().getPenID();
+                    AquariumAnimalController.getAquariumAnimalLabel().setText("Aquarium #" + penRow.getItem().getPenID() + ": ");
+                    AquariumAnimalController.refresh(penRow.getItem());
                 }
                 if (event.getButton() == MouseButton.SECONDARY  && (!penRow.isEmpty()) ) {
-                    aquariumTableContextMenu(penRow, penTableView, penAnimalTableView);
+                    aquariumTableContextMenu(penRow);
                 }
             });
             return penRow ;
         });
-    }
 
-
-    //LOAD AND UPDATE TABLE ITEMS
-
-    public void setTableItems (TableView<Aquarium> tableView) {
-        updateObservableTableData();
-        tableView.setItems(aquariumTableViewItems);
-        tableView.refresh();
-    }
-
-    public void updateObservableTableData () {
-        aquariumTableViewItems.clear();
-        aquariumTableViewItems.addAll(AquariumModel.getAllAquariums());
-    }
-
-    public void refreshPenTable (TableView<Aquarium> tableView) {
-        tableView.refresh();
-        updateObservableTableData();
-        tableView.refresh();
-    }
-
-    public void refreshAnimalTable (TableView<Animal> tableView) {
-        tableView.refresh();
-        updateObservableTableData();
-        tableView.refresh();
-    }
-
-    //AQUARIUM BUTTON MANIPULATION
-
-    public void setAddAquariumButtonAction (Button addAquariumButton, TableView<Aquarium> tableView) {
         addAquariumButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                addAquariumDialog(tableView);
+                addAquarium();
             }
         });
     }
 
-    //DIALOGS
+    public static void refresh () {
+        aquariumTableViewItems.clear();
+        aquariumTableViewItems.addAll(AquariumModel.getAllAquariums());
+    }
 
-    public void addAquariumDialog (TableView table) {
+    private static void aquariumTableContextMenu(TableRow<Aquarium> penRow) {
+
+        Aquarium selectedPen = penRow.getItem();
+        final ContextMenu contextMenu = new ContextMenu();
+        final MenuItem addNewPenMenuItem = new MenuItem("Add New Aquarium");
+        final MenuItem editPenMenuItem = new MenuItem("Edit Aquarium #" + selectedPen.getPenID());
+        final MenuItem removePenMenuItem = new MenuItem("Remove Aquarium #" + selectedPen.getPenID());
+
+        addNewPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                addAquarium();
+            }
+        });
+        editPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                editAquariumDialog(penRow.getItem());
+            }
+        });
+        removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                removeAquariumDialog(penRow.getItem());
+            }
+        });
+        contextMenu.getItems().add(addNewPenMenuItem);
+        contextMenu.getItems().add(editPenMenuItem);
+        contextMenu.getItems().add(removePenMenuItem);
+        contextMenu.getItems().add(new SeparatorMenuItem());
+        // Set context menu on row, but use a binding to make it only show for non-empty rows:
+        penRow.contextMenuProperty().bind(
+                Bindings.when(penRow.emptyProperty())
+                        .then((ContextMenu)null)
+                        .otherwise(contextMenu)
+        );
+    }
+
+    public static void addAquarium () {
         Dialog<Aquarium> dialog = new Dialog<>();
         dialog.setTitle("Add Aquarium");
         dialog.setHeaderText("Add a new aquarium: ");
@@ -142,8 +173,10 @@ public class AquariumController {
 
 
         Label waterTypeLabel = new Label("Water Type: ");
-        ChoiceBox<String> waterTypeChoiceBox = new ChoiceBox<>(waterTypes());
-        GridPane waterTypePane =  waterTypeGridPane(waterTypeChoiceBox);
+        ChoiceBox<String> waterTypeChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList("Salt", "Fresh"));
+        GridPane waterTypePane = new GridPane();
+        waterTypePane.add(waterTypeChoiceBox, 1, 1);
+        waterTypePane.add(new Label(" Water"), 2, 1);
 
 
         Label tempLabel = new Label("Temperature: ");
@@ -194,68 +227,85 @@ public class AquariumController {
         Optional<Aquarium> result = dialog.showAndWait();
         if (result.isPresent()) {
             AquariumModel.addAquarium(result.get());
-            refreshPenTable(table);
+            refresh();
         }
     }
 
-    private void editAquariumDialog(TableRow<Aquarium> penRow, TableView<Aquarium> penTable) {
+    public static void editAquariumDialog(Aquarium aquarium) {
 
     }
 
-    private void removeAquariumDialog(TableRow<Aquarium> penRow, TableView<Aquarium> penTable) {
+    public static void removeAquariumDialog(Aquarium aquarium) {
 
     }
 
-    private GridPane waterTypeGridPane (ChoiceBox<String> waterTypeChoiceBox) {
-        GridPane waterTypePane = new GridPane();
-        waterTypePane.add(waterTypeChoiceBox, 1, 1);
-        waterTypePane.add(new Label(" Water"), 2, 1);
-        return waterTypePane;
+
+    //ANIMAL AND PEN STUFF
+
+    //OUTLINES
+
+    
+
+    public void outlineAnimalPenTableRows (TableView<Animal> penAnimalTableView, TableView<Aquarium> penTableView) {
+        penAnimalTableView.setRowFactory( tv -> {
+            TableRow<Animal> penRow = new TableRow<>();
+            penRow.setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.SECONDARY  && (!penRow.isEmpty()) ) {
+                    aquariumAnimalTableContextMenu(penRow, penTableView, penAnimalTableView);
+                }
+            });
+            return penRow ;
+        });
     }
-
-    private ObservableList<String> waterTypes () {
-        return FXCollections.observableArrayList("Salt", "Fresh");
-    }
-
-
 
     //CONTEXT MENUS
 
-    private void aquariumTableContextMenu(TableRow<Aquarium> penRow, TableView<Aquarium> penTable,
-                                       TableView<Animal> penAnimalTable) {
+    private void aquariumAnimalTableContextMenu(TableRow<Animal> animalTableRow, TableView<Aquarium> penTable, TableView<Animal> penAnimalTable) {
 
-        Aquarium selectedPen = penRow.getItem();
+        Animal selectedAnimal = animalTableRow.getItem();
         final ContextMenu contextMenu = new ContextMenu();
-        final MenuItem addNewPenMenuItem = new MenuItem("Add New Aquarium");
-        final MenuItem editPenMenuItem = new MenuItem("Edit Aquarium #" + selectedPen.getPenID());
-        final MenuItem removePenMenuItem = new MenuItem("Remove Aquarium #" + selectedPen.getPenID());
-        addNewPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                addAquariumDialog(penTable);
-            }
-        });
-        editPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                editAquariumDialog(penRow, penTable);
-            }
-        });
+        final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen");
         removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                removeAquariumDialog(penRow, penTable);
+                removeAnimalFromPen(selectedAnimal, penTable, penAnimalTable);
             }
         });
-        contextMenu.getItems().add(addNewPenMenuItem);
-        contextMenu.getItems().add(editPenMenuItem);
         contextMenu.getItems().add(removePenMenuItem);
-        contextMenu.getItems().add(new SeparatorMenuItem());
         // Set context menu on row, but use a binding to make it only show for non-empty rows:
-        penRow.contextMenuProperty().bind(
-                Bindings.when(penRow.emptyProperty())
+        animalTableRow.contextMenuProperty().bind(
+                Bindings.when(animalTableRow.emptyProperty())
                         .then((ContextMenu)null)
                         .otherwise(contextMenu)
         );
+    }
+
+    //REMOVE ANIMAL FROM PEN
+
+    private void removeAnimalFromPen (Animal animalToRemove, TableView<Aquarium> aquariumTableView, TableView<Animal> animalTableView) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Removal");
+        alert.setHeaderText("Are you sure you wish to remove " +animalToRemove.getName()+ " from pen #" +currentPenID);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            if (currentPenID != null) {
+                Aquarium pen = AquariumModel.getAquariumBy(currentPenID);
+                if (pen != null) {
+                    pen.removeAnimalFromPen(animalToRemove);
+
+                    animalToRemove.setCurrentPenID(null);
+                    AnimalModel.editAnimal(animalToRemove);
+
+                    updateAnimalObservableTableData(pen);
+                    updateObservableTableData();
+
+                    refreshAnimalPenTable(animalTableView);
+                    refreshPenTable(aquariumTableView);
+                }
+            }
+        } else {
+            System.out.println(animalToRemove.getName() + " will stay in this pen");
+        }
     }
 }

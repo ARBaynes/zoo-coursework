@@ -1,18 +1,22 @@
 package main.modules.pens.aquarium;
 
+import main.classes.critters.Animal;
 import main.classes.pens.Aquarium;
 import main.classes.pens.Pen;
 import main.classes.staff.Staff;
 import main.modules.pens.PenModel;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class AquariumModel extends PenModel{
     protected static String filePath = "data/pen_data/aquarium_data/";
     protected static ArrayList<Aquarium> allAquariums = new ArrayList<>();
+
 
     //SETTERS
 
@@ -35,6 +39,32 @@ public class AquariumModel extends PenModel{
         return allAquariums;
     }
 
+    public static ArrayList<Aquarium> getAllAquariumsWithSpaceRemaining(Animal animalToFit) {
+        if (allAquariums.isEmpty()) { setAllAquariums(); }
+        ArrayList<Aquarium> aquariums = new ArrayList<>();
+        Double calculation = 0.0;
+        for (Aquarium aquarium : allAquariums) {
+            calculation += aquarium.getCurrentVolume();
+            for (Map.Entry<String,Double> requirements : animalToFit.getBreedRequirements().entrySet()) {
+                 calculation -= requirements.getValue();
+            }
+            if (calculation >= 0) {
+                aquariums.add(aquarium);
+            }
+        }
+        return aquariums;
+    }
+
+    public static Aquarium getAquariumBy(String aquariumID) {
+        if (allAquariums.isEmpty()) { setAllAquariums(); }
+        for (Aquarium aquarium : allAquariums) {
+            if (aquarium.getPenID().equals(aquariumID)) {
+                return aquarium;
+            }
+        }
+        return null;
+    }
+
 
     //PUBLIC DATA MANIPULATION
 
@@ -43,9 +73,19 @@ public class AquariumModel extends PenModel{
         setAllAquariums();
     }
 
-    public static void editAquarium (Aquarium toFind, Aquarium toReplaceWith) {
-        removeAquarium(toFind);
-        addAquarium(toReplaceWith);
+    public static void editAquarium (Aquarium toEdit) {
+        addAquarium(toEdit);
+    }
+
+    public static void removeAquarium (String IDtoFind) {
+        try {
+            Path pathToFile = Paths.get(filePath + IDtoFind + ".aquarium");
+            java.nio.file.Files.deleteIfExists(pathToFile);
+            System.out.println("File Deleted.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setAllAquariums();
     }
 
     public static void removeAquarium (Aquarium toFind) {
@@ -62,10 +102,10 @@ public class AquariumModel extends PenModel{
     //PRIVATE DATA MANIPULATION
 
     private static void serialize (Aquarium pen) {
-        if (pen.getPenID() == null) { pen.setPenID(createID(filePath)); }
+        if (pen.getPenID() == null) { pen.setPenID(createID(filePath, "AQ")); }
         try {
             FileOutputStream fileOut =
-                    new FileOutputStream(filePath + pen.getPenID() +".aquarium");
+                    new FileOutputStream(filePath +pen.getPenID() +".aquarium");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(pen);
             out.close();
