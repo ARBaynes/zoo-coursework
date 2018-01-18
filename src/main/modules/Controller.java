@@ -11,7 +11,7 @@ import main.classes.pens.*;
 import main.classes.staff.Staff;
 import main.modules.critters.AnimalController;
 import main.modules.critters.BreedController;
-import main.modules.critters.CritterController;
+import main.modules.pens.aquarium.AquariumAnimalController;
 import main.modules.pens.aquarium.AquariumController;
 
 import java.io.IOException;
@@ -33,12 +33,6 @@ public class Controller {
     public Button addBreedButton;
     public ToolBar breedToolbar;
     public TableColumn animalTableColBreed;
-
-
-
-    //TABLE ITEMS
-    ObservableList<Breed> breedTableViewItems = FXCollections.observableArrayList();
-    ObservableList<Animal> animalsObservableList = FXCollections.observableArrayList();
 
     // -----------------------------------------
 
@@ -135,22 +129,6 @@ public class Controller {
     public TableColumn pettingAnimalBreed;
     public TableColumn pettingAnimalSize;
 
-    //TABLE ITEMS
-
-    //PENS
-
-    ObservableList<Aviary> aviaryTableViewItems = FXCollections.observableArrayList();
-    ObservableList<Dry> dryTableViewItems = FXCollections.observableArrayList();
-    ObservableList<SemiAquatic> SemiAquaticTableViewItems = FXCollections.observableArrayList();
-    ObservableList<Petting> pettingTableViewItems = FXCollections.observableArrayList();
-
-    //PENANIMALS
-    ObservableList<Animal> aquariumAnimalTableViewItems = FXCollections.observableArrayList();
-    ObservableList<Animal> aviaryAnimalTableViewItems = FXCollections.observableArrayList();
-    ObservableList<Animal> dryAnimalTableViewItems = FXCollections.observableArrayList();
-    ObservableList<Animal> SemiAquaticAnimalTableViewItems = FXCollections.observableArrayList();
-    ObservableList<Animal> pettingAnimalTableViewItems = FXCollections.observableArrayList();
-
     // -----------------------------------------
 
     //STAFF TAB ------------------------------
@@ -163,99 +141,20 @@ public class Controller {
     @FXML
     public void initialize()  throws IOException {
 
-        //MAIN TAB --------------------------------------------------------------------------------------------------------------------------------------
-
-        //CRITTER TAB --------------------------------------------------------------------------------------------------------------------------------------
-        CritterController critterTab = new CritterController();
-
-        //BREED PANE ------------------------------------------------------------------------
-        //Outline table data
-
-        /*critterTab.outlineBreedTableData(
-                breedName, breedPenType, breedRequirements
-        );
-
-        critterTab.outlineAnimalTableData(animalTableColID, animalTableColName, animalTableColBreed, animalTableColHasPen);*/
-
-        //Outline table row actions
-
-        /*critterTab.outlineBreedTableRows(breedTableView, animalTableView, animalTypeLabel);
-
-        critterTab.outlineAnimalTableRows(animalTableView, animalTypeLabel,
-                aquariumAnimalTableView, aquariumPenTableView,
-                aviaryAnimalTableView, aviaryPenTableView,
-                dryAnimalTableView, dryPenTableView,
-                pettingAnimalTableView, pettingPenTableView,
-                SemiAquaticPenTableView, SemiAquaticPenTableView);
-
-        //Load table items
-
-        critterTab.setBreedTableItems(breedTableView);
-        critterTab.setAnimalTableItems(animalTableView);*/
-
-        //Set button action
-
-        /*critterTab.setAddBreedButtonAction(addBreedButton, breedTableView);*/
-
-        //ANIMAL PANE ------------------------------------------------------------------------
-
         AnimalController.construct(animalTableView, animalTableColBreed, animalTableColID, animalTableColName, animalTableColHasPen, animalTypeLabel);
         BreedController.construct(breedTableView, breedName, breedPenType, breedRequirements, addBreedButton);
+        AquariumController.construct(aquariumToolbar,addAquariumButton, aquariumPenTableView, aquariumPenID, aquariumTemp, aquariumContainedAnimals, aquariumHeight, aquariumWaterVolume, aquariumCurrentVolume, aquariumWaterType);
+        AquariumAnimalController.construct(aquariumAddNewAnimalToPenButton, aquariumAnimalTableView, aquariumAnimalName, aquariumAnimalBreed, aquariumAnimalSize, aquariumAnimalID);
 
         AnimalController.outline();
         BreedController.outline();
+        AquariumController.outline();
+        AquariumAnimalController.outline();
 
         BreedController.refresh();
         AnimalController.refresh();
+        AquariumController.refresh();
 
-        //PEN TAB --------------------------------------------------------------------------------------------------------------------------------------
-
-        //AQUARIUM PANE ------------------------------------------------------------------------
-
-        AquariumController aquariumTab = new AquariumController();
-
-        //Outline table data
-
-        aquariumTab.outlinePenTableData(
-                aquariumPenID, aquariumTemp, aquariumWaterVolume,
-                aquariumCurrentVolume, aquariumContainedAnimals,
-                aquariumHeight, aquariumWaterType
-        );
-        aquariumTab.outlineAnimalPenTableData(
-                aquariumAnimalID, aquariumAnimalName, aquariumAnimalBreed, aquariumAnimalSize
-        );
-
-        //Outline table row actions
-
-        aquariumTab.outlineTableRows(aquariumPenTableView, aquariumAnimalTableView, aquariumAnimalLabel);
-        aquariumTab.outlineAnimalPenTableRows(aquariumAnimalTableView, aquariumPenTableView);
-
-
-        //Load table items
-
-        aquariumTab.setTableItems(aquariumPenTableView);
-        aquariumTab.setAnimalTableItems(aquariumAnimalTableView);
-
-        //Set button action
-
-        aquariumTab.setAddAquariumButtonAction(addAquariumButton, aquariumPenTableView);
-
-
-
-
-
-
-
-
-        //AVIARY PANE ------------------------------------------------------------------------
-
-        //DRY PEN PANE ------------------------------------------------------------------------
-
-        //PETTING PANE ------------------------------------------------------------------------
-
-        //SEMI AQUATIC PANE ------------------------------------------------------------------------
-
-        //STAFF TAB --------------------------------------------------------------------------------------------------------------------------------------
 
     }
 }

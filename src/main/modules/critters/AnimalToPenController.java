@@ -13,6 +13,7 @@ import main.classes.pens.Aquarium;
 import main.classes.pens.Aviary;
 import main.classes.pens.Pen;
 import main.modules.critters.models.AnimalModel;
+import main.modules.pens.aquarium.AquariumAnimalController;
 import main.modules.pens.aquarium.AquariumController;
 import main.modules.pens.aquarium.AquariumModel;
 import main.modules.pens.aviary.AviaryModel;
@@ -24,7 +25,6 @@ public class AnimalToPenController {
     public static void addAnimalToPen (Animal animal) {
         switch (animal.getBreedPenType().toLowerCase()) {
             case "aquarium":
-                System.out.println(animal.toString());
                 animalToAquarium(animal);
                 break;
             case "aviary":
@@ -45,12 +45,190 @@ public class AnimalToPenController {
     }
 
     public static void removeAnimalFromPen (Animal animal) {
-
+        switch (animal.getBreedPenType().toLowerCase()) {
+            case "aquarium":
+                animalFromAquarium(animal);
+                break;
+            case "aviary":
+                animalFromAviary(animal);
+                break;
+            case "dry":
+                animalFromDry(animal);
+                break;
+            case "petting":
+                animalFromPetting(animal);
+                break;
+            case "semiaquatic":
+                animalFromSemiAquatic(animal);
+                break;
+            default:
+                animalFromDryOrPetting(animal);
+        }
     }
 
-    public static void removeAnimalFromPen (Animal animal, String penID) {
+    public static void animalFromAquarium (Animal animal) {
+        String currentPenID = animal.getCurrentPenID();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Removal");
+        alert.setHeaderText("Are you sure you wish to remove " +animal.getName()+ " from pen #" +currentPenID);
 
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            if (currentPenID != null) {
+                Aquarium pen = AquariumModel.getAquariumBy(currentPenID);
+                if (pen != null) {
+                    pen.removeAnimalFromPen(animal);
+                    AquariumModel.editAquarium(pen);
+
+                    animal.setCurrentPenID(null);
+                    AnimalModel.editAnimal(animal);
+
+                    AnimalController.refresh(animal.getBreed());
+                    AquariumAnimalController.refresh(pen);
+                    AquariumController.refresh();
+                }
+            }
+        } else {
+            System.out.println(animal.getName() + " will stay in this pen");
+        }
     }
+
+    public static void animalFromAviary (Animal animal) {}
+    public static void animalFromDry (Animal animal) {}
+    public static void animalFromPetting (Animal animal) {}
+    public static void animalFromSemiAquatic (Animal animal) {}
+    public static void animalFromDryOrPetting(Animal animal) {}
+
+
+    /*public static void animalFromAviary (Animal animal) {
+        String currentPenID = animal.getCurrentPenID();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Removal");
+        alert.setHeaderText("Are you sure you wish to remove " +animal.getName()+ " from pen #" +currentPenID);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            if (currentPenID != null) {
+                Aviary pen = AviaryModel.getAviaryBy(currentPenID);
+                if (pen != null) {
+                    pen.removeAnimalFromPen(animal);
+
+                    animal.setCurrentPenID(null);
+                    AnimalModel.editAnimal(animal);
+
+                    AnimalController.refresh(animal.getBreed());
+                    AquariumController.refresh();
+                    AquariumAnimalController.refresh(pen);
+                }
+            }
+        } else {
+            System.out.println(animal.getName() + " will stay in this pen");
+        }
+    }
+
+    public static void animalFromDry  (Animal animal) {
+        String currentPenID = animal.getCurrentPenID();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Removal");
+        alert.setHeaderText("Are you sure you wish to remove " +animal.getName()+ " from pen #" +currentPenID);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            if (currentPenID != null) {
+                Aquarium pen = AquariumModel.getAquariumBy(currentPenID);
+                if (pen != null) {
+                    pen.removeAnimalFromPen(animal);
+
+                    animal.setCurrentPenID(null);
+                    AnimalModel.editAnimal(animal);
+
+                    AnimalController.refresh(animal.getBreed());
+                    AquariumController.refresh();
+                    AquariumAnimalController.refresh(pen);
+                }
+            }
+        } else {
+            System.out.println(animal.getName() + " will stay in this pen");
+        }
+    }
+
+    public static void animalFromPetting(Animal animal) {
+        String currentPenID = animal.getCurrentPenID();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Removal");
+        alert.setHeaderText("Are you sure you wish to remove " +animal.getName()+ " from pen #" +currentPenID);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            if (currentPenID != null) {
+                Aquarium pen = AquariumModel.getAquariumBy(currentPenID);
+                if (pen != null) {
+                    pen.removeAnimalFromPen(animal);
+
+                    animal.setCurrentPenID(null);
+                    AnimalModel.editAnimal(animal);
+
+                    AnimalController.refresh(animal.getBreed());
+                    AquariumController.refresh();
+                    AquariumAnimalController.refresh(pen);
+                }
+            }
+        } else {
+            System.out.println(animal.getName() + " will stay in this pen");
+        }
+    }
+
+    public static void animalFromSemiAquatic (Animal animal) {
+        String currentPenID = animal.getCurrentPenID();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Removal");
+        alert.setHeaderText("Are you sure you wish to remove " +animal.getName()+ " from pen #" +currentPenID);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            if (currentPenID != null) {
+                Aquarium pen = AquariumModel.getAquariumBy(currentPenID);
+                if (pen != null) {
+                    pen.removeAnimalFromPen(animal);
+
+                    animal.setCurrentPenID(null);
+                    AnimalModel.editAnimal(animal);
+
+                    AnimalController.refresh(animal.getBreed());
+                    AquariumController.refresh();
+                    AquariumAnimalController.refresh(pen);
+                }
+            }
+        } else {
+            System.out.println(animal.getName() + " will stay in this pen");
+        }
+    }
+
+    public static void animalFromDryOrPetting (Animal animal) {
+        String currentPenID = animal.getCurrentPenID();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Removal");
+        alert.setHeaderText("Are you sure you wish to remove " +animal.getName()+ " from pen #" +currentPenID);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            if (currentPenID != null) {
+                Aquarium pen = AquariumModel.getAquariumBy(currentPenID);
+                if (pen != null) {
+                    pen.removeAnimalFromPen(animal);
+
+                    animal.setCurrentPenID(null);
+                    AnimalModel.editAnimal(animal);
+
+                    AnimalController.refresh(animal.getBreed());
+                    AquariumController.refresh();
+                    AquariumAnimalController.refresh(pen);
+                }
+            }
+        } else {
+            System.out.println(animal.getName() + " will stay in this pen");
+        }
+    }*/
 
     private static void animalToAquarium (Animal animal) {
         Dialog<Aquarium> dialog = new Dialog<>();
@@ -126,7 +304,7 @@ public class AnimalToPenController {
             AnimalController.refresh(animal.getBreed());
             BreedController.refresh();
 
-            //AquariumController.refresh();
+            AquariumController.refresh();
         }
     }
 

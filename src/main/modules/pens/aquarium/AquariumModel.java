@@ -28,7 +28,6 @@ public class AquariumModel extends PenModel{
             aquariums.add(deserialize(fileEntry));
         }
         allAquariums.addAll(aquariums);
-        System.out.println(allAquariums.toString());
     }
 
 
@@ -73,6 +72,8 @@ public class AquariumModel extends PenModel{
         setAllAquariums();
     }
 
+
+    //WHY DOES THIS PRODUCE TWO SEPERATE RESULTS WHEN RUNNING THE SAME METHOD?
     public static void editAquarium (Aquarium toEdit) {
         addAquarium(toEdit);
     }

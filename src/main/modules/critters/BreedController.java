@@ -277,7 +277,6 @@ public class BreedController {
 
         penTypeChoiceBox.setValue(penTypeChoiceBox.getSelectionModel().getSelectedItem());
 
-        System.out.println(penTypeChoiceBox.getSelectionModel().getSelectedItem());
         GridPane breedDialogGridPane = new GridPane();
         breedDialogGridPane.add(nameLabel, 1, 1);
         breedDialogGridPane.add(nameTextField, 2, 1);

@@ -28,6 +28,7 @@ import javafx.util.Callback;
 import main.classes.critters.Animal;
 import main.classes.critters.Breed;
 import main.classes.pens.Aquarium;
+import main.modules.critters.AnimalController;
 import main.modules.critters.models.AnimalModel;
 import main.modules.critters.models.BreedModel;
 
@@ -96,9 +97,17 @@ public class AquariumController {
             TableRow<Aquarium> penRow = new TableRow<>();
             penRow.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && (!penRow.isEmpty()) ) {
-                    currentPenID = penRow.getItem().getPenID();
-                    AquariumAnimalController.getAquariumAnimalLabel().setText("Aquarium #" + penRow.getItem().getPenID() + ": ");
-                    AquariumAnimalController.refresh(penRow.getItem());
+                    Aquarium pen = penRow.getItem();
+                    currentPenID = pen.getPenID();
+                    //AquariumAnimalController.getAquariumAnimalLabel().setText("Aquarium #" + penRow.getItem().getPenID() + ": ");
+                    if (pen.getContainedAnimals().isEmpty() || pen.getContainedAnimals() == null ) {
+                        Alert noAnimals = new Alert(Alert.AlertType.INFORMATION);
+                        noAnimals.setHeaderText("Caution");
+                        noAnimals.setContentText("There are no animals in pen #"+ pen.getPenID() + "!");
+                        noAnimals.showAndWait();
+                    } else {
+                        AquariumAnimalController.refresh(penRow.getItem());
+                    }
                 }
                 if (event.getButton() == MouseButton.SECONDARY  && (!penRow.isEmpty()) ) {
                     aquariumTableContextMenu(penRow);
@@ -121,7 +130,6 @@ public class AquariumController {
     }
 
     private static void aquariumTableContextMenu(TableRow<Aquarium> penRow) {
-
         Aquarium selectedPen = penRow.getItem();
         final ContextMenu contextMenu = new ContextMenu();
         final MenuItem addNewPenMenuItem = new MenuItem("Add New Aquarium");
@@ -239,73 +247,4 @@ public class AquariumController {
 
     }
 
-
-    //ANIMAL AND PEN STUFF
-
-    //OUTLINES
-
-    
-
-    public void outlineAnimalPenTableRows (TableView<Animal> penAnimalTableView, TableView<Aquarium> penTableView) {
-        penAnimalTableView.setRowFactory( tv -> {
-            TableRow<Animal> penRow = new TableRow<>();
-            penRow.setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.SECONDARY  && (!penRow.isEmpty()) ) {
-                    aquariumAnimalTableContextMenu(penRow, penTableView, penAnimalTableView);
-                }
-            });
-            return penRow ;
-        });
-    }
-
-    //CONTEXT MENUS
-
-    private void aquariumAnimalTableContextMenu(TableRow<Animal> animalTableRow, TableView<Aquarium> penTable, TableView<Animal> penAnimalTable) {
-
-        Animal selectedAnimal = animalTableRow.getItem();
-        final ContextMenu contextMenu = new ContextMenu();
-        final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen");
-        removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                removeAnimalFromPen(selectedAnimal, penTable, penAnimalTable);
-            }
-        });
-        contextMenu.getItems().add(removePenMenuItem);
-        // Set context menu on row, but use a binding to make it only show for non-empty rows:
-        animalTableRow.contextMenuProperty().bind(
-                Bindings.when(animalTableRow.emptyProperty())
-                        .then((ContextMenu)null)
-                        .otherwise(contextMenu)
-        );
-    }
-
-    //REMOVE ANIMAL FROM PEN
-
-    private void removeAnimalFromPen (Animal animalToRemove, TableView<Aquarium> aquariumTableView, TableView<Animal> animalTableView) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirm Removal");
-        alert.setHeaderText("Are you sure you wish to remove " +animalToRemove.getName()+ " from pen #" +currentPenID);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK){
-            if (currentPenID != null) {
-                Aquarium pen = AquariumModel.getAquariumBy(currentPenID);
-                if (pen != null) {
-                    pen.removeAnimalFromPen(animalToRemove);
-
-                    animalToRemove.setCurrentPenID(null);
-                    AnimalModel.editAnimal(animalToRemove);
-
-                    updateAnimalObservableTableData(pen);
-                    updateObservableTableData();
-
-                    refreshAnimalPenTable(animalTableView);
-                    refreshPenTable(aquariumTableView);
-                }
-            }
-        } else {
-            System.out.println(animalToRemove.getName() + " will stay in this pen");
-        }
-    }
 }

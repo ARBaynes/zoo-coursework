@@ -109,31 +109,31 @@ public class AnimalController {
         editAnimalMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                editAnimal(animalRow.getItem());
+                editAnimal(selectedAnimal);
             }
         });
         removeAnimalMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                removeAnimal(animalRow.getItem());
+                removeAnimal(selectedAnimal);
             }
         });
         addAnimaltoPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                AnimalToPenController.addAnimalToPen(animalRow.getItem());
+                AnimalToPenController.addAnimalToPen(selectedAnimal);
             }
         });
         removeAnimalfromPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                AnimalToPenController.removeAnimalFromPen(animalRow.getItem());
+                AnimalToPenController.removeAnimalFromPen(selectedAnimal);
             }
         });
         addAnimalMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                addAnimal(animalRow.getItem().getBreed());
+                addAnimal(selectedAnimal.getBreed());
             }
         });
         contextMenu.getItems().add(editAnimalMenuItem);

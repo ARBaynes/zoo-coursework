@@ -54,6 +54,7 @@ public class Aquarium extends Pen implements WaterTypes, Volume, Serializable{
     @Override
     public void addAnimalToPen (Animal animal) {
         getContainedAnimals().add(animal);
+
         AquariumModel.editAquarium(this);
         animal.setCurrentPenID(this.getPenID());
     }

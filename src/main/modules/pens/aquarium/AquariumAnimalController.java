@@ -1,17 +1,19 @@
 package main.modules.pens.aquarium;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.util.Callback;
 import main.classes.critters.Animal;
 import main.classes.pens.Aquarium;
+import main.modules.critters.AnimalToPenController;
 
 public class AquariumAnimalController {
 
@@ -50,6 +52,16 @@ public class AquariumAnimalController {
                 return new SimpleStringProperty(p.getValue().getBreedRequirementsToString());
             }
         });
+
+        aquariumAnimalTableView.setRowFactory( tv -> {
+            TableRow<Animal> penRow = new TableRow<>();
+            penRow.setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.SECONDARY  && (!penRow.isEmpty()) ) {
+                    aquariumAnimalTableContextMenu(penRow);
+                }
+            });
+            return penRow ;
+        });
     }
 
     public static void refresh (Aquarium aquarium) {
@@ -59,5 +71,23 @@ public class AquariumAnimalController {
 
     public static Label getAquariumAnimalLabel () {
         return aquariumAnimalLabel;
+    }
+
+    private static void aquariumAnimalTableContextMenu(TableRow<Animal> animalTableRow) {
+        Animal selectedAnimal = animalTableRow.getItem();
+        final ContextMenu contextMenu = new ContextMenu();
+        final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen");
+        removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AnimalToPenController.removeAnimalFromPen(selectedAnimal);
+            }
+        });
+        contextMenu.getItems().add(removePenMenuItem);
+        animalTableRow.contextMenuProperty().bind(
+                Bindings.when(animalTableRow.emptyProperty())
+                        .then((ContextMenu)null)
+                        .otherwise(contextMenu)
+        );
     }
 }
