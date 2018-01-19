@@ -24,13 +24,13 @@ import java.util.Optional;
 
 
 public class AnimalController {
-    protected static TableView<Animal> animalTable;
-    protected static TableColumn animalBreed;
-    protected static TableColumn animalID;
-    protected static TableColumn animalName;
-    protected static TableColumn animalHasPen;
-    protected static Label animalTypeLabel;
-    protected static ObservableList<Animal> animalTableItems = FXCollections.observableArrayList();
+    private static TableView<Animal> animalTable;
+    private static TableColumn animalBreed;
+    private static TableColumn animalID;
+    private static TableColumn animalName;
+    private static TableColumn animalHasPen;
+    private static Label animalTypeLabel;
+    private static ObservableList<Animal> animalTableItems = FXCollections.observableArrayList();
 
     public static Label getAnimalTypeLabel() {
         return animalTypeLabel;

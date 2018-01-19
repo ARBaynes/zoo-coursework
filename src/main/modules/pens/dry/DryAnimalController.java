@@ -1,4 +1,4 @@
-package main.modules.pens.aquarium;
+package main.modules.pens.dry;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,70 +12,70 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.util.Callback;
 import main.classes.critters.Animal;
-import main.classes.pens.Aquarium;
+import main.classes.pens.Dry;
 import main.modules.critters.AnimalToPenController;
 
-public class AquariumAnimalController {
+public class DryAnimalController {
 
-    protected static ObservableList<Animal> aquariumAnimalTableViewItems = FXCollections.observableArrayList();
+    protected static ObservableList<Animal> dryAnimalTableViewItems = FXCollections.observableArrayList();
 
-    protected static Label aquariumAnimalLabel;
-    protected static TableView aquariumAnimalTableView;
-    protected static TableColumn aquariumAnimalName;
-    protected static TableColumn aquariumAnimalBreed;
-    protected static TableColumn aquariumAnimalRequirements;
-    protected static TableColumn aquariumAnimalID;
+    protected static Label dryAnimalLabel;
+    protected static TableView dryAnimalTableView;
+    protected static TableColumn dryAnimalName;
+    protected static TableColumn dryAnimalBreed;
+    protected static TableColumn dryAnimalRequirements;
+    protected static TableColumn dryAnimalID;
 
     public static void construct (TableView tableView, TableColumn name, TableColumn breed,
                                   TableColumn requirements,TableColumn id) {
-        aquariumAnimalTableView = tableView;
-        aquariumAnimalName = name;
-        aquariumAnimalBreed = breed;
-        aquariumAnimalRequirements = requirements;
-        aquariumAnimalID = id;
+        dryAnimalTableView = tableView;
+        dryAnimalName = name;
+        dryAnimalBreed = breed;
+        dryAnimalRequirements = requirements;
+        dryAnimalID = id;
 
-        aquariumAnimalTableView.setItems(aquariumAnimalTableViewItems);
+        dryAnimalTableView.setItems(dryAnimalTableViewItems);
     }
 
     public static void outline () {
-        aquariumAnimalID.setCellValueFactory( new PropertyValueFactory<Animal, Integer>("ID"));
-        aquariumAnimalName.setCellValueFactory( new PropertyValueFactory<Animal, String>("name"));
-        aquariumAnimalBreed.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
+        dryAnimalID.setCellValueFactory( new PropertyValueFactory<Animal, Integer>("ID"));
+        dryAnimalName.setCellValueFactory( new PropertyValueFactory<Animal, String>("name"));
+        dryAnimalBreed.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
                 return new SimpleStringProperty(p.getValue().getBreedName());
             }
         });
-        aquariumAnimalRequirements.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
+        dryAnimalRequirements.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
                 return new SimpleStringProperty(p.getValue().getBreedRequirementsToString());
             }
         });
 
-        aquariumAnimalTableView.setRowFactory( tv -> {
+        dryAnimalTableView.setRowFactory( tv -> {
             TableRow<Animal> penRow = new TableRow<>();
             penRow.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.SECONDARY  && (!penRow.isEmpty()) ) {
-                    aquariumAnimalTableContextMenu(penRow);
+                    dryAnimalTableContextMenu(penRow);
                 }
             });
             return penRow ;
         });
     }
 
-    public static void refresh (Aquarium aquarium) {
-        aquariumAnimalTableViewItems.clear();
-        aquariumAnimalTableViewItems.addAll(aquarium.getContainedAnimals());
+    public static void refresh (Dry dry) {
+        dryAnimalTableViewItems.clear();
+        dryAnimalTableViewItems.addAll(dry.getContainedAnimals());
     }
 
     public static void refresh () {
-        aquariumAnimalTableViewItems.clear();
+        dryAnimalTableViewItems.clear();
     }
 
-    public static Label getAquariumAnimalLabel () {
-        return aquariumAnimalLabel;
+    public static Label getDryAnimalLabel () {
+        return dryAnimalLabel;
     }
 
-    private static void aquariumAnimalTableContextMenu(TableRow<Animal> animalTableRow) {
+    private static void dryAnimalTableContextMenu(TableRow<Animal> animalTableRow) {
         Animal selectedAnimal = animalTableRow.getItem();
         final ContextMenu contextMenu = new ContextMenu();
         final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen");

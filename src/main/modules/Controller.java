@@ -13,6 +13,15 @@ import main.modules.critters.AnimalController;
 import main.modules.critters.BreedController;
 import main.modules.pens.aquarium.AquariumAnimalController;
 import main.modules.pens.aquarium.AquariumController;
+import main.modules.pens.aviary.AviaryAnimalController;
+import main.modules.pens.aviary.AviaryController;
+import main.modules.pens.dry.DryAnimalController;
+import main.modules.pens.dry.DryController;
+import main.modules.pens.petting.PettingAnimalController;
+import main.modules.pens.petting.PettingController;
+import main.modules.pens.semiaquatic.SemiAquaticAnimalController;
+import main.modules.pens.semiaquatic.SemiAquaticController;
+import main.modules.staff.StaffController;
 
 import java.io.IOException;
 
@@ -49,14 +58,14 @@ public class Controller {
     public TableColumn aquariumWaterVolume;
     public TableColumn aquariumCurrentVolume;
     public TableColumn aquariumWaterType;
-    public TableColumn aquariumAnimalID;
+
 
     public Label aquariumAnimalLabel;
-    public Button aquariumAddNewAnimalToPenButton;
     public TableView aquariumAnimalTableView = new TableView<Animal>();
     public TableColumn aquariumAnimalName;
     public TableColumn aquariumAnimalBreed;
     public TableColumn aquariumAnimalSize;
+    public TableColumn aquariumAnimalID;
 
     //AVIARY JANK
     public ToolBar aviaryToolbar;
@@ -64,17 +73,17 @@ public class Controller {
     public TableView aviaryPenTableView = new TableView<Aviary>();
     public TableColumn aviaryPenID;
     public TableColumn aviaryTemp;
-    public TableColumn aviaryMaxArea;
-    public TableColumn aviaryCurrentArea;
+    public TableColumn aviaryMaxVolume;
+    public TableColumn aviaryCurrentVolume;
     public TableColumn aviaryContainedAnimals;
     public TableColumn aviaryHeight;
 
     public Label aviaryAnimalLabel;
-    public Button aviaryAddNewAnimalToPenButton;
     public TableView aviaryAnimalTableView = new TableView<Animal>();
     public TableColumn aviaryAnimalName;
     public TableColumn aviaryAnimalBreed;
     public TableColumn aviaryAnimalSize;
+    public TableColumn aviaryAnimalID;
 
     //DRY PEN JANK
     public ToolBar dryToolbar;
@@ -87,30 +96,31 @@ public class Controller {
     public TableColumn dryContainedAnimals;
 
     public Label dryAnimalLabel;
-    public Button dryAddNewAnimalToPenButton;
     public TableView dryAnimalTableView = new TableView<Animal>();
     public TableColumn dryAnimalName;
     public TableColumn dryAnimalBreed;
     public TableColumn dryAnimalSize;
+    public TableColumn dryAnimalID;
 
     //SEMI AQUATIC JANK
-    public ToolBar SemiAquaticToolbar;
+    public ToolBar semiAquaticToolbar;
     public Button addSemiAquaticButton;
-    public TableView SemiAquaticPenTableView = new TableView<SemiAquatic>();
-    public TableColumn SemiAquaticPenID;
-    public TableColumn SemiAquaticTemp;
-    public TableColumn SemiAquaticMaxArea;
-    public TableColumn SemiAquaticCurrentArea;
-    public TableColumn SemiAquaticContainedAnimals;
-    public TableColumn SemiAquaticWaterVolume;
-    public TableColumn SemiAquaticWaterType;
+    public TableView semiAquaticPenTableView = new TableView<SemiAquatic>();
+    public TableColumn semiAquaticPenID;
+    public TableColumn semiAquaticTemp;
+    public TableColumn semiAquaticMaxArea;
+    public TableColumn semiAquaticCurrentArea;
+    public TableColumn semiAquaticContainedAnimals;
+    public TableColumn semiAquaticMaxWaterVolume;
+    public TableColumn semiAquaticCurrentWaterVolume;
+    public TableColumn semiAquaticWaterType;
 
-    public Label SemiAquaticAnimalLabel;
-    public Button SemiAquaticAddNewAnimalToPenButton;
-    public TableView SemiAquaticAnimalTableView = new TableView<Animal>();
-    public TableColumn SemiAquaticAnimalName;
-    public TableColumn SemiAquaticAnimalBreed;
-    public TableColumn SemiAquaticAnimalSize;
+    public Label semiAquaticAnimalLabel;
+    public TableView semiAquaticAnimalTableView = new TableView<Animal>();
+    public TableColumn semiAquaticAnimalName;
+    public TableColumn semiAquaticAnimalBreed;
+    public TableColumn semiAquaticAnimalSize;
+    public TableColumn semiAquaticAnimalID;
 
     //PETTING JANK
     public ToolBar pettingToolbar;
@@ -123,38 +133,68 @@ public class Controller {
     public TableColumn pettingContainedAnimals;
 
     public Label pettingAnimalLabel;
-    public Button pettingAddNewAnimalToPenButton;
     public TableView pettingAnimalTableView = new TableView<Animal>();
     public TableColumn pettingAnimalName;
     public TableColumn pettingAnimalBreed;
     public TableColumn pettingAnimalSize;
+    public TableColumn pettingAnimalID;
 
     // -----------------------------------------
 
     //STAFF TAB ------------------------------
 
-    //TABLE ITEMS
-    ObservableList<Staff> staffTableViewItems = FXCollections.observableArrayList();
+    public TableView staffTableView = new TableView<Staff>();
+    public Button addNewStaffButton;
+    public TableColumn staffID;
+    public TableColumn staffName;
+    public TableColumn staffResponsibleFor;
+
 
     // -----------------------------------------
 
     @FXML
     public void initialize()  throws IOException {
 
+        StaffController.construct(staffTableView, addNewStaffButton, staffID, staffName, staffResponsibleFor);
         AnimalController.construct(animalTableView, animalTableColBreed, animalTableColID, animalTableColName, animalTableColHasPen, animalTypeLabel);
         BreedController.construct(breedTableView, breedName, breedPenType, breedRequirements, addBreedButton);
         AquariumController.construct(aquariumToolbar,addAquariumButton, aquariumPenTableView, aquariumPenID, aquariumTemp, aquariumContainedAnimals, aquariumHeight, aquariumWaterVolume, aquariumCurrentVolume, aquariumWaterType);
-        AquariumAnimalController.construct(aquariumAddNewAnimalToPenButton, aquariumAnimalTableView, aquariumAnimalName, aquariumAnimalBreed, aquariumAnimalSize, aquariumAnimalID);
+        AquariumAnimalController.construct(aquariumAnimalTableView, aquariumAnimalName, aquariumAnimalBreed, aquariumAnimalSize, aquariumAnimalID);
+        AviaryController.construct(aviaryToolbar, addAviaryButton, aviaryPenTableView, aviaryPenID, aviaryTemp, aviaryContainedAnimals, aviaryHeight, aviaryMaxVolume, aviaryCurrentVolume);
+        AviaryAnimalController.construct(aviaryAnimalTableView, aviaryAnimalName, aviaryAnimalBreed, aviaryAnimalSize, aviaryAnimalID);
+        DryController.construct(dryToolbar, addDryButton, dryPenTableView, dryPenID, dryTemp, dryContainedAnimals, dryMaxArea, dryCurrentArea);
+        DryAnimalController.construct(dryAnimalTableView, dryAnimalName, dryAnimalBreed, dryAnimalSize, dryAnimalID);
+        PettingController.construct(pettingToolbar, addPettingButton, pettingPenTableView, pettingPenID, pettingTemp, pettingContainedAnimals, pettingMaxArea, pettingCurrentArea);
+        PettingAnimalController.construct(pettingAnimalTableView, pettingAnimalName, pettingAnimalBreed, pettingAnimalSize, pettingAnimalID);
+        SemiAquaticController.construct(semiAquaticToolbar, addSemiAquaticButton, semiAquaticPenTableView, semiAquaticPenID, semiAquaticTemp, semiAquaticContainedAnimals,
+                semiAquaticMaxWaterVolume, semiAquaticCurrentWaterVolume, semiAquaticWaterType, semiAquaticMaxArea, semiAquaticCurrentArea);
+        SemiAquaticAnimalController.construct(semiAquaticAnimalTableView, semiAquaticAnimalName, semiAquaticAnimalBreed, semiAquaticAnimalSize, semiAquaticAnimalID);
 
+
+
+        StaffController.outline();
         AnimalController.outline();
         BreedController.outline();
         AquariumController.outline();
         AquariumAnimalController.outline();
+        AviaryController.outline();
+        AviaryAnimalController.outline();
+        DryController.outline();
+        DryAnimalController.outline();
+        PettingController.outline();
+        PettingAnimalController.outline();
+        SemiAquaticController.outline();
+        SemiAquaticAnimalController.outline();
 
+
+        StaffController.refresh();
         BreedController.refresh();
         AnimalController.refresh();
         AquariumController.refresh();
-
+        AviaryController.refresh();
+        DryController.refresh();
+        PettingController.refresh();
+        SemiAquaticController.refresh();
 
     }
 }

@@ -2,7 +2,9 @@ package main.modules.staff;
 
 import main.classes.staff.Staff;
 
+import java.awt.*;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -33,6 +35,18 @@ public class StaffModel {
         return allStaff;
     }
 
+    public static ArrayList<Staff> getAllStaffBy (String penType) {
+        ArrayList<Staff> staffByPens = new ArrayList<>();
+        for ( Staff staff : allStaff ) {
+            for (String staffPenType : staff.getPenTypes()) {
+                if (staffPenType.equals(penType)) {
+                    staffByPens.add(staff);
+                }
+            }
+        }
+        return staffByPens;
+    }
+
 
     //PUBLIC DATA MANIPULATION
 
@@ -41,9 +55,8 @@ public class StaffModel {
         setAllStaff();
     }
 
-    public static void editStaff (Staff toFind, Staff toReplaceWith) {
-        removeStaff(toFind);
-        addStaff(toReplaceWith);
+    public static void editStaff (Staff toEdit) {
+        addStaff(toEdit);
     }
 
     public static void removeStaff (Staff toFind) {

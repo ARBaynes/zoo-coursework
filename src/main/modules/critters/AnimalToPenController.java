@@ -47,6 +47,7 @@ public class AnimalToPenController {
     public static void removeAnimalFromPen (Animal animal) {
         switch (animal.getBreedPenType().toLowerCase()) {
             case "aquarium":
+                System.out.println("removeAnimalFromPen: animal, " + animal);
                 animalFromAquarium(animal);
                 break;
             case "aviary":
@@ -72,13 +73,15 @@ public class AnimalToPenController {
         alert.setTitle("Confirm Removal");
         alert.setHeaderText("Are you sure you wish to remove " +animal.getName()+ " from pen #" +currentPenID);
 
+        System.out.println("animalFromAquarium: animal, " + animal);
+        System.out.println("removeAnimalFromPen: currentPenID, " + currentPenID);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
             if (currentPenID != null) {
-                Aquarium pen = AquariumModel.getAquariumBy(currentPenID);
+                Aquarium pen = AquariumModel.getPenBy(currentPenID);
                 if (pen != null) {
                     pen.removeAnimalFromPen(animal);
-                    AquariumModel.editAquarium(pen);
+                    AquariumModel.editPen(pen);
 
                     animal.setCurrentPenID(null);
                     AnimalModel.editAnimal(animal);
@@ -237,7 +240,7 @@ public class AnimalToPenController {
         dialog.setResizable(true);
         Label desc = new Label("Aquariums: ");
         ObservableList<Aquarium> pens = FXCollections.observableArrayList();
-        ArrayList<Aquarium> aquariums = AquariumModel.getAllAquariumsWithSpaceRemaining(animal);
+        ArrayList<Aquarium> aquariums = AquariumModel.getAllPensWithSpaceRemaining(animal);
         for (Aquarium aquarium: aquariums) {
             pens.addAll(aquarium);
         }
@@ -299,7 +302,7 @@ public class AnimalToPenController {
             AnimalModel.editAnimal(animal);
 
             result.get().addAnimalToPen(animal);
-            AquariumModel.editAquarium(result.get());
+            AquariumModel.editPen(result.get());
 
             AnimalController.refresh(animal.getBreed());
             BreedController.refresh();
@@ -315,7 +318,7 @@ public class AnimalToPenController {
         dialog.setResizable(true);
         Label desc = new Label("Aviaries: ");
         ObservableList<Aviary> pens = FXCollections.observableArrayList();
-        ArrayList<Aviary> aviaries = AviaryModel.getAllAviariesWithSpaceRemaining(animal);
+        ArrayList<Aviary> aviaries = AviaryModel.getAllPensWithSpaceRemaining(animal);
         for (Aviary aviary: aviaries) {
             pens.addAll(aviary);
         }
@@ -377,7 +380,7 @@ public class AnimalToPenController {
             AnimalModel.editAnimal(animal);
 
             result.get().addAnimalToPen(animal);
-            AviaryModel.editAviary(result.get());
+            AviaryModel.editPen(result.get());
 
             AnimalController.refresh(animal.getBreed());
             BreedController.refresh();

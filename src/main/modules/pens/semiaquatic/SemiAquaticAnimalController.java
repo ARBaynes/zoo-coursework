@@ -1,4 +1,4 @@
-package main.modules.pens.aquarium;
+package main.modules.pens.semiaquatic;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,70 +12,70 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.util.Callback;
 import main.classes.critters.Animal;
-import main.classes.pens.Aquarium;
+import main.classes.pens.SemiAquatic;
 import main.modules.critters.AnimalToPenController;
 
-public class AquariumAnimalController {
+public class SemiAquaticAnimalController {
 
-    protected static ObservableList<Animal> aquariumAnimalTableViewItems = FXCollections.observableArrayList();
+    protected static ObservableList<Animal> semiAquaticAnimalTableViewItems = FXCollections.observableArrayList();
 
-    protected static Label aquariumAnimalLabel;
-    protected static TableView aquariumAnimalTableView;
-    protected static TableColumn aquariumAnimalName;
-    protected static TableColumn aquariumAnimalBreed;
-    protected static TableColumn aquariumAnimalRequirements;
-    protected static TableColumn aquariumAnimalID;
+    protected static Label semiAquaticAnimalLabel;
+    protected static TableView semiAquaticAnimalTableView;
+    protected static TableColumn semiAquaticAnimalName;
+    protected static TableColumn semiAquaticAnimalBreed;
+    protected static TableColumn semiAquaticAnimalRequirements;
+    protected static TableColumn semiAquaticAnimalID;
 
     public static void construct (TableView tableView, TableColumn name, TableColumn breed,
                                   TableColumn requirements,TableColumn id) {
-        aquariumAnimalTableView = tableView;
-        aquariumAnimalName = name;
-        aquariumAnimalBreed = breed;
-        aquariumAnimalRequirements = requirements;
-        aquariumAnimalID = id;
+        semiAquaticAnimalTableView = tableView;
+        semiAquaticAnimalName = name;
+        semiAquaticAnimalBreed = breed;
+        semiAquaticAnimalRequirements = requirements;
+        semiAquaticAnimalID = id;
 
-        aquariumAnimalTableView.setItems(aquariumAnimalTableViewItems);
+        semiAquaticAnimalTableView.setItems(semiAquaticAnimalTableViewItems);
     }
 
     public static void outline () {
-        aquariumAnimalID.setCellValueFactory( new PropertyValueFactory<Animal, Integer>("ID"));
-        aquariumAnimalName.setCellValueFactory( new PropertyValueFactory<Animal, String>("name"));
-        aquariumAnimalBreed.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
+        semiAquaticAnimalID.setCellValueFactory( new PropertyValueFactory<Animal, Integer>("ID"));
+        semiAquaticAnimalName.setCellValueFactory( new PropertyValueFactory<Animal, String>("name"));
+        semiAquaticAnimalBreed.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
                 return new SimpleStringProperty(p.getValue().getBreedName());
             }
         });
-        aquariumAnimalRequirements.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
+        semiAquaticAnimalRequirements.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
                 return new SimpleStringProperty(p.getValue().getBreedRequirementsToString());
             }
         });
 
-        aquariumAnimalTableView.setRowFactory( tv -> {
+        semiAquaticAnimalTableView.setRowFactory( tv -> {
             TableRow<Animal> penRow = new TableRow<>();
             penRow.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.SECONDARY  && (!penRow.isEmpty()) ) {
-                    aquariumAnimalTableContextMenu(penRow);
+                    semiAquaticAnimalTableContextMenu(penRow);
                 }
             });
             return penRow ;
         });
     }
 
-    public static void refresh (Aquarium aquarium) {
-        aquariumAnimalTableViewItems.clear();
-        aquariumAnimalTableViewItems.addAll(aquarium.getContainedAnimals());
+    public static void refresh (SemiAquatic semiAquatic) {
+        semiAquaticAnimalTableViewItems.clear();
+        semiAquaticAnimalTableViewItems.addAll(semiAquatic.getContainedAnimals());
     }
 
     public static void refresh () {
-        aquariumAnimalTableViewItems.clear();
+        semiAquaticAnimalTableViewItems.clear();
     }
 
-    public static Label getAquariumAnimalLabel () {
-        return aquariumAnimalLabel;
+    public static Label getSemiAquaticAnimalLabel () {
+        return semiAquaticAnimalLabel;
     }
 
-    private static void aquariumAnimalTableContextMenu(TableRow<Animal> animalTableRow) {
+    private static void semiAquaticAnimalTableContextMenu(TableRow<Animal> animalTableRow) {
         Animal selectedAnimal = animalTableRow.getItem();
         final ContextMenu contextMenu = new ContextMenu();
         final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen");

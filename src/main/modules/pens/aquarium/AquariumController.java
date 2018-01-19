@@ -1,36 +1,22 @@
 package main.modules.pens.aquarium;
 
-import javafx.animation.Animation;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxListCell;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import main.classes.critters.Animal;
-import main.classes.critters.Breed;
 import main.classes.pens.Aquarium;
+import main.classes.staff.Staff;
 import main.modules.critters.AnimalController;
-import main.modules.critters.models.AnimalModel;
-import main.modules.critters.models.BreedModel;
+import main.modules.staff.StaffModel;
 
 import java.lang.reflect.Array;
 import java.sql.SQLOutput;
@@ -126,7 +112,7 @@ public class AquariumController {
 
     public static void refresh () {
         aquariumTableViewItems.clear();
-        aquariumTableViewItems.addAll(AquariumModel.getAllAquariums());
+        aquariumTableViewItems.addAll(AquariumModel.getAllPens());
     }
 
     private static void aquariumTableContextMenu(TableRow<Aquarium> penRow) {
@@ -145,13 +131,13 @@ public class AquariumController {
         editPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                editAquariumDialog(penRow.getItem());
+                editAquarium(penRow.getItem());
             }
         });
         removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                removeAquariumDialog(penRow.getItem());
+                removeAquarium(penRow.getItem());
             }
         });
         contextMenu.getItems().add(addNewPenMenuItem);
@@ -181,7 +167,7 @@ public class AquariumController {
 
 
         Label waterTypeLabel = new Label("Water Type: ");
-        ChoiceBox<String> waterTypeChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList("Salt", "Fresh"));
+        ChoiceBox<String> waterTypeChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList("salt", "fresh"));
         GridPane waterTypePane = new GridPane();
         waterTypePane.add(waterTypeChoiceBox, 1, 1);
         waterTypePane.add(new Label(" Water"), 2, 1);
@@ -190,7 +176,11 @@ public class AquariumController {
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField();
         Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox<>();
+        ChoiceBox staffChoiceBox = new ChoiceBox();
+
+        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.getAllStaff());
+        staffChoiceBox.setItems(allStaff);
 
         GridPane aquariumDialogGridPane = new GridPane();
         aquariumDialogGridPane.add(lengthLabel, 1, 1);
@@ -220,12 +210,9 @@ public class AquariumController {
                             Double.parseDouble(widthTextField.getText()),
                             Double.parseDouble(heightTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
-                            waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()
+                            waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
+                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
-                    if (staffChoiceBox.getSelectionModel().getSelectedItem() != null) {
-                        //pen.setStaffResponsible(staffChoiceBox.getSelectionModel().getSelectedItem());
-                    }
-
                     return pen;
                 }
                 return null;
@@ -234,17 +221,104 @@ public class AquariumController {
 
         Optional<Aquarium> result = dialog.showAndWait();
         if (result.isPresent()) {
-            AquariumModel.addAquarium(result.get());
+            AquariumModel.addPen(result.get());
             refresh();
         }
     }
 
-    public static void editAquariumDialog(Aquarium aquarium) {
+    public static void editAquarium (Aquarium aquarium) {
+        Dialog<Aquarium> dialog = new Dialog<>();
+        dialog.setTitle("Edit Aquarium");
+        dialog.setHeaderText("Edit Aquarium #" + aquarium.getPenID());
+        dialog.setResizable(true);
 
+        Label lengthLabel= new Label("Length: ");
+        TextField lengthTextField = new TextField(aquarium.getLength().toString());
+        Label widthLabel = new Label("Width: ");
+        TextField widthTextField =  new TextField(aquarium.getWidth().toString());
+        Label heightLabel = new Label("Height: ");
+        TextField heightTextField =  new TextField(aquarium.getHeight().toString());
+
+
+        Label waterTypeLabel = new Label("Water Type: ");
+        ChoiceBox<String> waterTypeChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList("salt", "fresh"));
+        waterTypeChoiceBox.getSelectionModel().select(aquarium.getWaterType().toLowerCase());
+        GridPane waterTypePane = new GridPane();
+        waterTypePane.add(waterTypeChoiceBox, 1, 1);
+        waterTypePane.add(new Label(" Water"), 2, 1);
+
+
+        Label tempLabel = new Label("Temperature: ");
+        TextField tempTextField =  new TextField(aquarium.getTemperature().toString());
+        Label staffLabel = new Label("Staff Responsible: ");
+        ChoiceBox staffChoiceBox = new ChoiceBox();
+
+        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.getAllStaff());
+        staffChoiceBox.setItems(allStaff);
+        staffChoiceBox.getSelectionModel().select(aquarium.getStaffResponsible());
+
+        GridPane aquariumDialogGridPane = new GridPane();
+        aquariumDialogGridPane.add(lengthLabel, 1, 1);
+        aquariumDialogGridPane.add(lengthTextField, 2, 1);
+        aquariumDialogGridPane.add(widthLabel, 1, 2);
+        aquariumDialogGridPane.add(widthTextField, 2, 2);
+        aquariumDialogGridPane.add(heightLabel, 1, 3);
+        aquariumDialogGridPane.add(heightTextField, 2, 3);
+        aquariumDialogGridPane.add(waterTypeLabel, 1, 4);
+        aquariumDialogGridPane.add(waterTypePane, 2, 4);
+        aquariumDialogGridPane.add(tempLabel, 1, 5);
+        aquariumDialogGridPane.add(tempTextField, 2, 5);
+        aquariumDialogGridPane.add(staffLabel, 1, 6);
+        aquariumDialogGridPane.add(staffChoiceBox, 2, 6);
+
+        dialog.getDialogPane().setContent(aquariumDialogGridPane);
+
+        ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+
+        dialog.setResultConverter(new Callback<ButtonType, Aquarium>() {
+            @Override
+            public Aquarium call(ButtonType button) {
+                if (button == buttonTypeOk) {
+                    Aquarium pen = new Aquarium(
+                            Double.parseDouble(lengthTextField.getText()),
+                            Double.parseDouble(widthTextField.getText()),
+                            Double.parseDouble(heightTextField.getText()),
+                            Double.parseDouble(tempTextField.getText()),
+                            waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
+                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                    );
+                    pen.setPenID(aquarium.getPenID());
+                    return pen;
+                }
+                return null;
+            }
+        });
+
+        Optional<Aquarium> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            AquariumModel.editPen(result.get());
+            refresh();
+        }
     }
 
-    public static void removeAquariumDialog(Aquarium aquarium) {
+    public static void removeAquarium(Aquarium aquarium) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Deletion");
+        alert.setHeaderText("Are you sure you wish to delete " +aquarium.getPenID()+ "?");
+        alert.setContentText("You cannot undo this action, and all animals within this pen will be released!");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            aquarium.removeAllAnimalsFromPen();
+            AquariumModel.removePen(aquarium);
+            refresh();
+            AnimalController.refresh();
+            AquariumAnimalController.refresh();
 
+        } else {
+            System.out.println(aquarium.getPenID() + " will not be deleted");
+        }
     }
 
 }

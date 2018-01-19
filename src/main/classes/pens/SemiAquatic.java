@@ -1,12 +1,16 @@
 package main.classes.pens;
 
 import main.classes.critters.Animal;
+import main.classes.staff.Staff;
 import main.interfaces.Area;
 import main.interfaces.Volume;
 import main.interfaces.WaterTypes;
 import main.interfaces.WaterVolume;
+import main.modules.pens.semiaquatic.SemiAquaticModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class SemiAquatic extends Pen implements WaterVolume, Area, WaterTypes, Serializable {
     private String waterType;
@@ -14,13 +18,16 @@ public class SemiAquatic extends Pen implements WaterVolume, Area, WaterTypes, S
     private Double waterLength;
     private Double waterWidth;
 
-    public SemiAquatic (Double length, Double width, Double temperature, String waterType, Double waterDepth) {
+    public SemiAquatic (Double length, Double width, Double temperature, String waterType, Double waterDepth, Double waterLength, Double waterWidth, Staff staff) {
         setLength(length);
         setTemperature(temperature);
         setWidth(width);
         setWaterType(waterType);
         setWaterDepth(waterDepth);
+        setWaterLength(waterLength);
+        setWaterWidth(waterWidth);
         setPenType();
+        setStaffResponsible(staff);
     }
 
     @Override
@@ -29,23 +36,41 @@ public class SemiAquatic extends Pen implements WaterVolume, Area, WaterTypes, S
     }
 
     @Override
-    public void addAnimalToPen(Animal animal) {
+    public void addAnimalToPen (Animal animal) {
+        getContainedAnimals().add(animal);
 
+        SemiAquaticModel.editPen(this);
+        animal.setCurrentPenID(this.getPenID());
     }
 
     @Override
-    public void removeAnimalFromPen(Animal animal) {
-
+    public void removeAnimalFromPen (Animal animal) {
+        ArrayList<Animal> containedAnimals = getContainedAnimals();
+        for (Iterator<Animal> iterator = containedAnimals.iterator(); iterator.hasNext(); ) {
+            Animal value = iterator.next();
+            if (value.getID().equals(animal.getID())) {
+                iterator.remove();
+            }
+        }
+        SemiAquaticModel.editPen(this);
+        animal.setCurrentPenID(null);
     }
 
     @Override
-    public void editAnimalInPen(Animal animal) {
-
+    public void editAnimalInPen (Animal animal) {
+        for (int i = 0 ; i < getContainedAnimals().size(); i++) {
+            if (getContainedAnimals().get(i).getID() == animal.getID()) {
+                getContainedAnimals().remove(i);
+                getContainedAnimals().add(animal);
+            }
+        }
+        SemiAquaticModel.editPen(this);
     }
 
     @Override
-    public void clearPen() {
-
+    public void clearPen () {
+        removeAllAnimalsFromPen();
+        SemiAquaticModel.editPen(this);
     }
 
     //WATER VOLUME

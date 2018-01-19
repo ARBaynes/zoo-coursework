@@ -54,6 +54,8 @@ public abstract class Pen implements Serializable {
 
     public Integer getContainedAnimalNumber () { return this.containedAnimals.size(); }
 
+    public Staff getStaffResponsible () {return staffResponsible;}
+
     //CONTAINED ANIMAL MANIPULATION
 
     public abstract void addAnimalToPen (Animal animal) ;
@@ -63,6 +65,13 @@ public abstract class Pen implements Serializable {
     public abstract void editAnimalInPen (Animal animal) ;
 
     public abstract void clearPen ();
+
+    public void removeAllAnimalsFromPen () {
+        for (Animal containedAnimal : this.containedAnimals) {
+            containedAnimal.removeFromPen();
+        }
+        this.containedAnimals.clear();
+    }
 
     @Override
     public String toString() {

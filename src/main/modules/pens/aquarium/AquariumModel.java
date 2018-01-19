@@ -14,51 +14,51 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class AquariumModel extends PenModel{
-    protected static String filePath = "data/pen_data/aquarium_data/";
-    protected static ArrayList<Aquarium> allAquariums = new ArrayList<>();
+    private static String filePath = "data/pen_data/aquarium_data/";
+    private static ArrayList<Aquarium> allPens = new ArrayList<>();
 
 
     //SETTERS
 
-    public static void setAllAquariums() {
-        allAquariums.clear();
+    public static void setAllPens() {
+        allPens.clear();
         File folder = new File(filePath);
-        ArrayList<Aquarium> aquariums = new ArrayList<>();
+        ArrayList<Aquarium> pens = new ArrayList<>();
         for (File fileEntry : folder.listFiles()) {
-            aquariums.add(deserialize(fileEntry));
+            pens.add(deserialize(fileEntry));
         }
-        allAquariums.addAll(aquariums);
+        allPens.addAll(pens);
     }
 
 
     //GETTERS
 
-    public static ArrayList<Aquarium> getAllAquariums() {
-        if (allAquariums.isEmpty()) { setAllAquariums(); }
-        return allAquariums;
+    public static ArrayList<Aquarium> getAllPens() {
+        if (allPens.isEmpty()) { setAllPens(); }
+        return allPens;
     }
 
-    public static ArrayList<Aquarium> getAllAquariumsWithSpaceRemaining(Animal animalToFit) {
-        if (allAquariums.isEmpty()) { setAllAquariums(); }
+    public static ArrayList<Aquarium> getAllPensWithSpaceRemaining(Animal animalToFit) {
+        if (allPens.isEmpty()) { setAllPens(); }
         ArrayList<Aquarium> aquariums = new ArrayList<>();
         Double calculation = 0.0;
-        for (Aquarium aquarium : allAquariums) {
-            calculation += aquarium.getCurrentVolume();
+        for (Aquarium pen : allPens) {
+            calculation += pen.getCurrentVolume();
             for (Map.Entry<String,Double> requirements : animalToFit.getBreedRequirements().entrySet()) {
                  calculation -= requirements.getValue();
             }
             if (calculation >= 0) {
-                aquariums.add(aquarium);
+                aquariums.add(pen);
             }
         }
         return aquariums;
     }
 
-    public static Aquarium getAquariumBy(String aquariumID) {
-        if (allAquariums.isEmpty()) { setAllAquariums(); }
-        for (Aquarium aquarium : allAquariums) {
-            if (aquarium.getPenID().equals(aquariumID)) {
-                return aquarium;
+    public static Aquarium getPenBy(String aquariumID) {
+        if (allPens.isEmpty()) { setAllPens(); }
+        for (Aquarium pen : allPens) {
+            if (pen.getPenID().equals(aquariumID)) {
+                return pen;
             }
         }
         return null;
@@ -67,29 +67,17 @@ public class AquariumModel extends PenModel{
 
     //PUBLIC DATA MANIPULATION
 
-    public static void addAquarium (Aquarium pen) {
+    public static void addPen (Aquarium pen) {
         serialize(pen);
-        setAllAquariums();
+        setAllPens();
     }
 
 
-    //WHY DOES THIS PRODUCE TWO SEPERATE RESULTS WHEN RUNNING THE SAME METHOD?
-    public static void editAquarium (Aquarium toEdit) {
-        addAquarium(toEdit);
+    public static void editPen (Aquarium toEdit) {
+        addPen(toEdit);
     }
 
-    public static void removeAquarium (String IDtoFind) {
-        try {
-            Path pathToFile = Paths.get(filePath + IDtoFind + ".aquarium");
-            java.nio.file.Files.deleteIfExists(pathToFile);
-            System.out.println("File Deleted.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        setAllAquariums();
-    }
-
-    public static void removeAquarium (Aquarium toFind) {
+    public static void removePen (Aquarium toFind) {
         try {
             Path pathToFile = Paths.get(filePath + toFind.getPenID() + ".aquarium");
             java.nio.file.Files.deleteIfExists(pathToFile);
@@ -97,7 +85,7 @@ public class AquariumModel extends PenModel{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setAllAquariums();
+        setAllPens();
     }
 
     //PRIVATE DATA MANIPULATION

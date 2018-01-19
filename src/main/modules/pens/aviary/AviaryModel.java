@@ -3,73 +3,115 @@ package main.modules.pens.aviary;
 import main.classes.critters.Animal;
 import main.classes.pens.Aquarium;
 import main.classes.pens.Aviary;
+import main.modules.pens.PenModel;
 
-import java.io.File;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class AviaryModel {
-    protected static String filePath = "data/pen_data/aviary_data/";
-    protected static ArrayList<Aviary> allAviaries = new ArrayList<>();
+public class AviaryModel extends PenModel{
+    private static String filePath = "data/pen_data/aviary_data/";
+    private static ArrayList<Aviary> allPens = new ArrayList<>();
 
     //SETTERS
 
-    public static void setAllAviaries() {
-        allAviaries.clear();
+    public static void setAllPens() {
+        allPens.clear();
         File folder = new File(filePath);
-        ArrayList<Aviary> aviaries = new ArrayList<>();
+        ArrayList<Aviary> pens = new ArrayList<>();
         for (File fileEntry : folder.listFiles()) {
-            aviaries.add(deserialize(fileEntry));
+            pens.add(deserialize(fileEntry));
         }
-        allAviaries.addAll(aviaries);
+        allPens.addAll(pens);
     }
 
 
     //GETTERS
 
-    public static ArrayList<Aviary> getAllAviaries() {
-        return allAviaries;
+    public static ArrayList<Aviary> getAllPens() {
+        if (allPens.isEmpty()) {setAllPens();}
+        return allPens;
     }
 
-    public static ArrayList<Aviary> getAllAviariesWithSpaceRemaining(Animal animalToFit) {
-        if (allAviaries.isEmpty()) { setAllAviaries(); }
-        ArrayList<Aviary> aviaries = new ArrayList<>();
+    public static ArrayList<Aviary> getAllPensWithSpaceRemaining(Animal animalToFit) {
+        if (allPens.isEmpty()) { setAllPens(); }
+        ArrayList<Aviary> pens = new ArrayList<>();
         Double calculation = 0.0;
-        for (Aviary aviary : allAviaries) {
-            calculation += aviary.getCurrentVolume();
+        for (Aviary pen : allPens) {
+            calculation += pen.getCurrentVolume();
             for (Map.Entry<String,Double> requirements : animalToFit.getBreedRequirements().entrySet()) {
                 calculation -= requirements.getValue();
             }
             if (calculation >= 0) {
-                aviaries.add(aviary);
+                pens.add(pen);
             }
         }
-        return aviaries;
+        return pens;
     }
 
+    public static Aviary getPenBy(String penID) {
+        if (allPens.isEmpty()) { setAllPens(); }
+        for (Aviary pen : allPens) {
+            if (pen.getPenID().equals(penID)) {
+                return pen;
+            }
+        }
+        return null;
+    }
 
     //PUBLIC DATA MANIPULATION
 
-    public static void addAviary (Aviary aviary) {
-
+    public static void addPen (Aviary toAdd) {
+        serialize(toAdd);
+        setAllPens();
     }
 
-    public static void editAviary (Aviary toEdit) {
-
+    public static void editPen (Aviary toEdit) {
+        addPen(toEdit);
     }
 
-    public static void removeAviary (Aviary toFind) {
-
+    public static void removePen (Aviary toFind) {
+        try {
+            Path pathToFile = Paths.get(filePath + toFind.getPenID() + ".aviary");
+            java.nio.file.Files.deleteIfExists(pathToFile);
+            System.out.println("File Deleted.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setAllPens();
     }
 
     //PRIVATE DATA MANIPULATION
 
-    private static void serialize (Aviary aviary) {
-
+    private static void serialize (Aviary pen) {
+        if (pen.getPenID() == null) { pen.setPenID(createID(filePath, "AV")); }
+        try {
+            FileOutputStream fileOut =
+                    new FileOutputStream(filePath +pen.getPenID() +".aviary");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(pen);
+            out.close();
+            fileOut.close();
+            System.out.println("Serialized aviary pen data is saved.");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
     }
 
     private static Aviary deserialize (File toRead) {
-        return null;
+        Aviary pen=null ;
+        try
+        {
+            FileInputStream fileInputStream = new FileInputStream(toRead);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            pen = (Aviary) objectInputStream.readObject();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace(); }
+        return pen;
     }
 
     //GENERAL PURPOSE

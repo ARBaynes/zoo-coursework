@@ -1,23 +1,27 @@
 package main.classes.pens;
 
 import main.classes.critters.Animal;
+import main.classes.staff.Staff;
 import main.interfaces.Volume;
 import main.interfaces.WaterTypes;
 import main.modules.pens.aquarium.AquariumModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Aquarium extends Pen implements WaterTypes, Volume, Serializable{
     private Double height;
     private String waterType;
 
-    public Aquarium (Double length, Double width, Double temperature, Double height, String waterType) {
+    public Aquarium (Double length, Double width, Double temperature, Double height, String waterType, Staff responsibleStaff ) {
         setLength(length);
         setTemperature(temperature);
         setWidth(width);
         setWaterType(waterType);
         setHeight(height);
         setPenType();
+        setStaffResponsible(responsibleStaff);
     }
 
     @Override
@@ -41,7 +45,6 @@ public class Aquarium extends Pen implements WaterTypes, Volume, Serializable{
     public String getWaterType() { return waterType; }
 
 
-
     @Override
     public Double getCurrentVolume() {
         Double volume = getVolume();
@@ -55,14 +58,20 @@ public class Aquarium extends Pen implements WaterTypes, Volume, Serializable{
     public void addAnimalToPen (Animal animal) {
         getContainedAnimals().add(animal);
 
-        AquariumModel.editAquarium(this);
+        AquariumModel.editPen(this);
         animal.setCurrentPenID(this.getPenID());
     }
 
     @Override
     public void removeAnimalFromPen (Animal animal) {
-        getContainedAnimals().remove(animal);
-        AquariumModel.editAquarium(this);
+        ArrayList<Animal> containedAnimals = getContainedAnimals();
+        for (Iterator<Animal> iterator = containedAnimals.iterator(); iterator.hasNext(); ) {
+            Animal value = iterator.next();
+            if (value.getID().equals(animal.getID())) {
+                iterator.remove();
+            }
+        }
+        AquariumModel.editPen(this);
         animal.setCurrentPenID(null);
     }
 
@@ -74,15 +83,12 @@ public class Aquarium extends Pen implements WaterTypes, Volume, Serializable{
                 getContainedAnimals().add(animal);
             }
         }
-        AquariumModel.editAquarium(this);
+        AquariumModel.editPen(this);
     }
 
     @Override
     public void clearPen () {
-        for (Animal animal : getContainedAnimals()) {
-            animal.setCurrentPenID(null);
-        }
-        getContainedAnimals().clear();
-        AquariumModel.editAquarium(this);
+        removeAllAnimalsFromPen();
+        AquariumModel.editPen(this);
     }
 }

@@ -75,11 +75,10 @@ public class Animal implements Serializable{
 
     public void addToPen (String penID) {
         String typeID = penID.substring(0, 2);
-
         switch (typeID) {
             case "AQ":
-                if (AquariumModel.getAquariumBy(penID) != null) {
-                    AquariumModel.getAquariumBy(penID).addAnimalToPen(this);
+                if (AquariumModel.getPenBy(penID) != null) {
+                    AquariumModel.getPenBy(penID).addAnimalToPen(this);
                 }
                 break;
             case "AV":
@@ -93,7 +92,8 @@ public class Animal implements Serializable{
         }
     }
 
-    public void removeFromPen (String currentPenID) {
-
+    public void removeFromPen () {
+        currentPenID = null;
+        AnimalModel.editAnimal(this);
     }
 }

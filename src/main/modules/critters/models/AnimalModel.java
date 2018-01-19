@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class AnimalModel {
-    protected static String filePath = "data/animal_data/";
-    protected static ArrayList<Animal> allAnimals = new ArrayList<>();
+    private static String filePath = "data/animal_data/";
+    private static ArrayList<Animal> allAnimals = new ArrayList<>();
 
     //SETTERS
 

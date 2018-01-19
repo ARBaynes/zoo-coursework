@@ -1,14 +1,18 @@
 package main.classes.staff;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Staff implements Serializable{
     private String name;
-    private String preferredPenType = "";
+    private ArrayList<String> penTypes = new ArrayList<>() ;
     private Integer staffID;
 
-    public Staff (String name) {
+    public Staff (String name, ArrayList<String> responsibleFor) {
         setName(name);
+        for (String pen : responsibleFor) {
+            setPenTypes(pen);
+        }
     }
 
     //SETTERS
@@ -17,9 +21,7 @@ public class Staff implements Serializable{
         this.name = name;
     }
 
-    public void setPreferredPenType(String preferredPenType) {
-        this.preferredPenType = preferredPenType;
-    }
+    public void setPenTypes(String penType) { this.penTypes.add(penType); }
 
     public void setStaffID(Integer staffID) {
         this.staffID = staffID;
@@ -31,9 +33,7 @@ public class Staff implements Serializable{
         return name;
     }
 
-    public String getPreferredPenType() {
-        return preferredPenType;
-    }
+    public ArrayList<String> getPenTypes() { return penTypes; }
 
     public Integer getStaffID() {
         return staffID;
