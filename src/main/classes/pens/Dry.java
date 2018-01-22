@@ -11,12 +11,12 @@ import java.util.Iterator;
 
 public class Dry extends Pen implements Area, Serializable {
 
-    public Dry (Double length, Double width, Double temperature, Staff staff) {
+    public Dry (Double length, Double width, Double temperature, Integer staffID) {
         setLength(length);
         setTemperature(temperature);
         setWidth(width);
         setPenType();
-        setStaffResponsible(staff);
+        setKeeperID(staffID);
     }
 
     @Override

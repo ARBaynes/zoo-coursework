@@ -21,21 +21,22 @@ import main.modules.staff.StaffModel;
 import java.util.Optional;
 
 public class PettingController {
-    protected static ObservableList<Petting> pettingTableViewItems = FXCollections.observableArrayList();
-    protected static ToolBar pettingToolbar;
-    protected static Button addPettingButton;
-    protected static TableView<Petting> pettingPenTableView;
-    protected static TableColumn pettingPenID;
-    protected static TableColumn pettingTemp;
-    protected static TableColumn pettingContainedAnimals;
-    protected static TableColumn pettingMaxArea;
-    protected static TableColumn pettingCurrentArea;
+    private static ObservableList<Petting> pettingTableViewItems = FXCollections.observableArrayList();
+    private static ToolBar pettingToolbar;
+    private static Button addPettingButton;
+    private static TableView<Petting> pettingPenTableView;
+    private static TableColumn pettingPenID;
+    private static TableColumn pettingTemp;
+    private static TableColumn pettingContainedAnimals;
+    private static TableColumn pettingMaxArea;
+    private static TableColumn pettingCurrentArea;
+    private static TableColumn pettingKeeperID;
 
     private static String currentPenID;
 
 
     public static void construct (ToolBar toolBar, Button addButton, TableView<Petting> tableView, TableColumn id, TableColumn temp,
-                                  TableColumn containedAnimals, TableColumn maxArea, TableColumn currentArea) {
+                                  TableColumn containedAnimals, TableColumn maxArea, TableColumn currentArea, TableColumn keeperID) {
         pettingToolbar = toolBar;
         addPettingButton = addButton;
         pettingPenTableView = tableView;
@@ -44,6 +45,7 @@ public class PettingController {
         pettingContainedAnimals = containedAnimals;
         pettingMaxArea = maxArea;
         pettingCurrentArea = currentArea;
+        pettingKeeperID = keeperID;
 
         pettingPenTableView.setItems(pettingTableViewItems);
     }
@@ -64,6 +66,12 @@ public class PettingController {
         pettingContainedAnimals.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Petting, Integer>, ObservableValue<Integer>>() {
             public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Petting, Integer> p) {
                 return new SimpleIntegerProperty(p.getValue().getContainedAnimalNumber()).asObject();
+            }
+        });
+        pettingKeeperID.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Petting, Integer>, ObservableValue>() {
+            @Override
+            public ObservableValue call(TableColumn.CellDataFeatures<Petting, Integer> p) {
+                return new SimpleIntegerProperty(p.getValue().getKeeperID());
             }
         });
 
@@ -151,14 +159,13 @@ public class PettingController {
         TextField widthTextField =  new TextField();
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField();
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("petting")));
         staffChoiceBox.setItems(allStaff);
-
-
+        staffChoiceBox.getSelectionModel().selectFirst();
 
         GridPane penDialogGridPane = new GridPane();
         penDialogGridPane.add(lengthLabel, 1, 1);
@@ -183,7 +190,7 @@ public class PettingController {
                             Double.parseDouble(lengthTextField.getText()),
                             Double.parseDouble(widthTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     return pen;
                 }
@@ -211,13 +218,13 @@ public class PettingController {
 
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField(petting.getTemperature().toString());
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("petting")));
         staffChoiceBox.setItems(allStaff);
-        staffChoiceBox.getSelectionModel().select(petting.getStaffResponsible());
+        staffChoiceBox.getSelectionModel().select(petting.getKeeperID());
 
         GridPane aquariumDialogGridPane = new GridPane();
         aquariumDialogGridPane.add(lengthLabel, 1, 1);
@@ -242,7 +249,7 @@ public class PettingController {
                             Double.parseDouble(lengthTextField.getText()),
                             Double.parseDouble(widthTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     pen.setPenID(petting.getPenID());
                     return pen;

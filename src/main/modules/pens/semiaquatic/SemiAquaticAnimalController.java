@@ -23,7 +23,7 @@ public class SemiAquaticAnimalController {
     protected static TableView semiAquaticAnimalTableView;
     protected static TableColumn semiAquaticAnimalName;
     protected static TableColumn semiAquaticAnimalBreed;
-    protected static TableColumn semiAquaticAnimalRequirements;
+    protected static TableColumn semiAquaticAnimalSize;
     protected static TableColumn semiAquaticAnimalID;
 
     public static void construct (TableView tableView, TableColumn name, TableColumn breed,
@@ -31,7 +31,7 @@ public class SemiAquaticAnimalController {
         semiAquaticAnimalTableView = tableView;
         semiAquaticAnimalName = name;
         semiAquaticAnimalBreed = breed;
-        semiAquaticAnimalRequirements = requirements;
+        semiAquaticAnimalSize = requirements;
         semiAquaticAnimalID = id;
 
         semiAquaticAnimalTableView.setItems(semiAquaticAnimalTableViewItems);
@@ -45,7 +45,7 @@ public class SemiAquaticAnimalController {
                 return new SimpleStringProperty(p.getValue().getBreedName());
             }
         });
-        semiAquaticAnimalRequirements.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
+        semiAquaticAnimalSize.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
                 return new SimpleStringProperty(p.getValue().getBreedRequirementsToString());
             }

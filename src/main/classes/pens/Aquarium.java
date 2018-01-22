@@ -14,14 +14,14 @@ public class Aquarium extends Pen implements WaterTypes, Volume, Serializable{
     private Double height;
     private String waterType;
 
-    public Aquarium (Double length, Double width, Double temperature, Double height, String waterType, Staff responsibleStaff ) {
+    public Aquarium (Double length, Double width, Double temperature, Double height, String waterType, Integer staffID ) {
         setLength(length);
         setTemperature(temperature);
         setWidth(width);
         setWaterType(waterType);
         setHeight(height);
         setPenType();
-        setStaffResponsible(responsibleStaff);
+        setKeeperID(staffID);
     }
 
     @Override

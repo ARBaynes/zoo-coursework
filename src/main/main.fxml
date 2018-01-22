@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -13,6 +14,60 @@
     <children>
         <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="tab-bar" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
+            <Tab fx:id="mainTab" text="Main">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane layoutX="284.0" layoutY="228.0" prefHeight="696.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <bottom>
+                              <AnchorPane prefHeight="69.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <HBox fx:id="weatherBox" prefHeight="200.0" prefWidth="1000.0" style="-fx-background-color: #ff9966;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="-1.0" prefHeight="69.0" prefWidth="200.0" text="Weather:" textAlignment="CENTER" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="26.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="69.0" prefWidth="241.0">
+                                             <children>
+                                                <Label prefHeight="69.0" prefWidth="241.0" fx:id="weatherLabel" text="weather could not be found!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </bottom>
+                           <center>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <StackedBarChart fx:id="statsBarChart" layoutX="344.0" layoutY="39.0" prefHeight="578.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </StackedBarChart>
+                                 </children>
+                              </AnchorPane>
+                           </center>
+                           <top>
+                              <AnchorPane prefHeight="49.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />
+                           </top>
+                        </BorderPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
                 <Tab fx:id="animalTab" styleClass="tab-button" text="Animals">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -113,7 +168,7 @@
                                                               <items>
                                                                   <AnchorPane fx:id="aquariumPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                       <children>
-                                                                          <BorderPane prefHeight="594.0" prefWidth="679.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                          <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                               <center>
                                                                                   <TableView fx:id="aquariumPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
                                                                                       <columns>
@@ -124,6 +179,7 @@
                                                                                           <TableColumn fx:id="aquariumContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
                                                                                           <TableColumn fx:id="aquariumHeight" prefWidth="87.0" text="Height" />
                                                                                           <TableColumn fx:id="aquariumWaterType" prefWidth="100.0" text="Water Type" />
+                                                                  <TableColumn fx:id="aquariumKeeperID" prefWidth="75.0" text="Keeper ID" />
                                                                                       </columns>
                                                                                   </TableView>
                                                                               </center>
@@ -177,7 +233,7 @@
                                              <items>
                                                 <AnchorPane fx:id="aviaryPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <BorderPane prefHeight="594.0" prefWidth="679.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <center>
                                                             <TableView fx:id="aviaryPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
                                                                <columns>
@@ -187,6 +243,7 @@
                                                                   <TableColumn fx:id="aviaryCurrentVolume" prefWidth="126.0" text="Current Air Volume" />
                                                                   <TableColumn fx:id="aviaryContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
                                                                   <TableColumn fx:id="aviaryHeight" prefWidth="87.0" text="Height" />
+                                                                  <TableColumn fx:id="aviaryKeeperID" prefWidth="75.0" text="Keeper ID" />
                                                                </columns>
                                                             </TableView>
                                                          </center>
@@ -240,7 +297,7 @@
                                              <items>
                                                 <AnchorPane fx:id="dryAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <BorderPane prefHeight="594.0" prefWidth="679.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <center>
                                                             <TableView fx:id="dryPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
                                                                <columns>
@@ -249,6 +306,7 @@
                                                                   <TableColumn fx:id="dryMaxArea" prefWidth="126.0" text="Current Area" />
                                                                   <TableColumn fx:id="dryCurrentArea" prefWidth="126.0" text="Current Area" />
                                                                   <TableColumn fx:id="dryContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
+                                                                  <TableColumn fx:id="dryKeeperID" prefWidth="75.0" text="Keeper ID" />
                                                                </columns>
                                                             </TableView>
                                                          </center>
@@ -302,7 +360,7 @@
                                              <items>
                                                 <AnchorPane fx:id="pettingPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <BorderPane prefHeight="594.0" prefWidth="679.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <center>
                                                             <TableView fx:id="pettingPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
                                                                <columns>
@@ -311,6 +369,7 @@
                                                                   <TableColumn fx:id="pettingMaxArea" prefWidth="127.0" text="Maximum Area" />
                                                                   <TableColumn fx:id="pettingCurrentArea" prefWidth="126.0" text="Current Area" />
                                                                   <TableColumn fx:id="pettingContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
+                                                                  <TableColumn fx:id="pettingKeeperID" prefWidth="75.0" text="Keeper ID" />
                                                                </columns>
                                                             </TableView>
                                                          </center>
@@ -364,7 +423,7 @@
                                              <items>
                                                 <AnchorPane fx:id="semiAquaticPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <BorderPane prefHeight="594.0" prefWidth="679.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <center>
                                                             <TableView fx:id="semiAquaticPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
                                                                <columns>
@@ -376,6 +435,7 @@
                                                                   <TableColumn fx:id="semiAquaticCurrentArea" prefWidth="126.0" text="Current Area" />
                                                                   <TableColumn fx:id="semiAquaticContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
                                                                   <TableColumn fx:id="semiAquaticWaterType" prefWidth="100.0" text="Water Type" />
+                                                                  <TableColumn fx:id="semiAquaticKeeperID" prefWidth="75.0" text="Keeper ID" />
                                                                </columns>
                                                             </TableView>
                                                          </center>
@@ -398,7 +458,7 @@
                                                                   <TableColumn fx:id="semiAquaticAnimalID" prefWidth="119.0" text="Animal ID" />
                                                                   <TableColumn fx:id="semiAquaticAnimalName" prefWidth="119.0" text="Animal Name" />
                                                                   <TableColumn fx:id="semiAquaticAnimalBreed" minWidth="2.0" prefWidth="63.0" text="Breed" />
-                                                                  <TableColumn fx:id="SemiAquaticAnimalSize" prefWidth="167.0" text="Size Requirements" />
+                                                                  <TableColumn fx:id="semiAquaticAnimalSize" prefWidth="167.0" text="Size Requirements" />
                                                                </columns>
                                                             </TableView>
                                                          </center>
@@ -430,7 +490,4 @@
             </tabs>
         </TabPane>
     </children>
-    <stylesheets>
-        <URL value="@styles.css" />
-    </stylesheets>
 </AnchorPane>

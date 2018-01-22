@@ -12,13 +12,13 @@ import java.util.Iterator;
 public class Aviary extends Pen implements Volume, Serializable {
     private Double height;
 
-    public Aviary (Double length, Double width, Double temperature, Double height, Staff staff) {
+    public Aviary (Double length, Double width, Double temperature, Double height, Integer staffID) {
         setLength(length);
         setTemperature(temperature);
         setWidth(width);
         setHeight(height);
         setPenType();
-        setStaffResponsible(staff);
+        setKeeperID(staffID);
     }
 
     @Override

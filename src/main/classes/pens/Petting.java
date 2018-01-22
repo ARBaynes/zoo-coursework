@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Petting extends Pen implements Area, Serializable {
-    public Petting (Double length, Double width, Double temperature, Staff staff) {
+    public Petting (Double length, Double width, Double temperature, Integer staffID) {
         setLength(length);
         setTemperature(temperature);
         setWidth(width);
         setPenType();
-        setStaffResponsible(staff);
+        setKeeperID(staffID);
     }
 
     @Override

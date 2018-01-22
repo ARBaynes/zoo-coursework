@@ -8,6 +8,7 @@ import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StaffModel {
     protected static String filePath = "data/staff_data/";
@@ -35,6 +36,24 @@ public class StaffModel {
         return allStaff;
     }
 
+    public static ArrayList<Integer> getAllStaffIDs() {
+        if (allStaff.isEmpty()) { setAllStaff(); }
+        ArrayList<Integer> staffIDHashMap = new ArrayList<>();
+        for (Staff staff : allStaff) {
+            staffIDHashMap.add(staff.getStaffID());
+        }
+        return staffIDHashMap;
+    }
+
+    public static Staff getStaffByID (Integer ID) {
+        for ( Staff staff : allStaff ) {
+            if (staff.getStaffID().equals(ID)) {
+                return staff;
+            }
+        }
+        return null;
+    }
+
     public static ArrayList<Staff> getAllStaffBy (String penType) {
         ArrayList<Staff> staffByPens = new ArrayList<>();
         for ( Staff staff : allStaff ) {
@@ -45,6 +64,14 @@ public class StaffModel {
             }
         }
         return staffByPens;
+    }
+
+    public static ArrayList<Integer> extractStaffIDs (ArrayList<Staff> staffToCheck) {
+        ArrayList<Integer> integerArrayList = new ArrayList<>();
+        for ( Staff staff : staffToCheck ) {
+            integerArrayList.add(staff.getStaffID());
+        }
+        return integerArrayList;
     }
 
 

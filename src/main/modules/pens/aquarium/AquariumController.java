@@ -25,24 +25,25 @@ import java.util.HashMap;
 import java.util.Optional;
 
 public class AquariumController {
-    protected static ObservableList<Aquarium> aquariumTableViewItems = FXCollections.observableArrayList();
-    protected static ToolBar aquariumToolbar;
-    protected static Button addAquariumButton;
-    protected static TableView aquariumPenTableView;
-    protected static TableColumn aquariumPenID;
-    protected static TableColumn aquariumTemp;
-    protected static TableColumn aquariumContainedAnimals;
-    protected static TableColumn aquariumHeight;
-    protected static TableColumn aquariumWaterVolume;
-    protected static TableColumn aquariumCurrentVolume;
-    protected static TableColumn aquariumWaterType;
+    private static ObservableList<Aquarium> aquariumTableViewItems = FXCollections.observableArrayList();
+    private static ToolBar aquariumToolbar;
+    private static Button addAquariumButton;
+    private static TableView aquariumPenTableView;
+    private static TableColumn aquariumPenID;
+    private static TableColumn aquariumTemp;
+    private static TableColumn aquariumContainedAnimals;
+    private static TableColumn aquariumHeight;
+    private static TableColumn aquariumWaterVolume;
+    private static TableColumn aquariumCurrentVolume;
+    private static TableColumn aquariumWaterType;
+    private static TableColumn aquariumKeeperID;
 
     private static String currentPenID;
 
 
     public static void construct (ToolBar toolBar, Button addButton, TableView tableView, TableColumn id, TableColumn temp,
                                   TableColumn containedAnimals, TableColumn height, TableColumn waterVolume, TableColumn currentVolume,
-                                  TableColumn waterType) {
+                                  TableColumn waterType, TableColumn keeperID) {
         aquariumToolbar = toolBar;
         addAquariumButton = addButton;
         aquariumPenTableView = tableView;
@@ -53,6 +54,8 @@ public class AquariumController {
         aquariumWaterVolume = waterVolume;
         aquariumCurrentVolume = currentVolume;
         aquariumWaterType = waterType;
+        aquariumKeeperID = keeperID;
+
 
         aquariumPenTableView.setItems(aquariumTableViewItems);
     }
@@ -78,6 +81,13 @@ public class AquariumController {
         aquariumHeight.setCellValueFactory( new PropertyValueFactory<Aquarium, Double>("height"));
 
         aquariumWaterType.setCellValueFactory( new PropertyValueFactory<Aquarium, String>("waterType"));
+
+        aquariumKeeperID.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Aquarium, Integer>, ObservableValue>() {
+            @Override
+            public ObservableValue call(TableColumn.CellDataFeatures<Aquarium, Integer> p) {
+                return new SimpleIntegerProperty(p.getValue().getKeeperID());
+            }
+        });
 
         aquariumPenTableView.setRowFactory( tv -> {
             TableRow<Aquarium> penRow = new TableRow<>();
@@ -175,12 +185,13 @@ public class AquariumController {
 
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField();
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("aquarium")));
         staffChoiceBox.setItems(allStaff);
+        staffChoiceBox.getSelectionModel().selectFirst();
 
         GridPane aquariumDialogGridPane = new GridPane();
         aquariumDialogGridPane.add(lengthLabel, 1, 1);
@@ -211,7 +222,7 @@ public class AquariumController {
                             Double.parseDouble(heightTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
                             waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     return pen;
                 }
@@ -250,13 +261,13 @@ public class AquariumController {
 
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField(aquarium.getTemperature().toString());
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("aquarium")));
         staffChoiceBox.setItems(allStaff);
-        staffChoiceBox.getSelectionModel().select(aquarium.getStaffResponsible());
+        staffChoiceBox.getSelectionModel().select(aquarium.getKeeperID());
 
         GridPane aquariumDialogGridPane = new GridPane();
         aquariumDialogGridPane.add(lengthLabel, 1, 1);
@@ -287,7 +298,7 @@ public class AquariumController {
                             Double.parseDouble(heightTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
                             waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     pen.setPenID(aquarium.getPenID());
                     return pen;

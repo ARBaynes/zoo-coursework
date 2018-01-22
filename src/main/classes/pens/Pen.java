@@ -13,7 +13,7 @@ public abstract class Pen implements Serializable {
     private Double width;
     private Double temperature;
     private ArrayList<Animal> containedAnimals = new ArrayList<>();
-    private Staff staffResponsible;
+    private Integer keeperID;
     public  String penType;
 
     //SETTERS
@@ -32,7 +32,7 @@ public abstract class Pen implements Serializable {
         this.temperature = temperature;
     }
 
-    public void setStaffResponsible(Staff staffResponsible) { this.staffResponsible = staffResponsible; }
+    public void setKeeperID(Integer keeperID) { this.keeperID = keeperID; }
 
     public abstract void setPenType();
 
@@ -44,8 +44,6 @@ public abstract class Pen implements Serializable {
 
     public Double getTemperature() { return temperature; }
 
-    public Staff staffResponsible() { return staffResponsible; }
-
     public ArrayList<Animal> getContainedAnimals() { return containedAnimals; }
 
     public String getPenType() { return penType; }
@@ -54,7 +52,9 @@ public abstract class Pen implements Serializable {
 
     public Integer getContainedAnimalNumber () { return this.containedAnimals.size(); }
 
-    public Staff getStaffResponsible () {return staffResponsible;}
+    public Integer getKeeperID () {
+        return keeperID;
+    }
 
     //CONTAINED ANIMAL MANIPULATION
 

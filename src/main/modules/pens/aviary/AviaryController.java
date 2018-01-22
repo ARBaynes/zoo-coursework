@@ -21,22 +21,23 @@ import main.modules.staff.StaffModel;
 import java.util.Optional;
 
 public class AviaryController {
-    protected static ObservableList<Aviary> aviaryTableViewItems = FXCollections.observableArrayList();
-    protected static ToolBar aviaryToolbar;
-    protected static Button addAviaryButton;
-    protected static TableView<Aviary> aviaryPenTableView;
-    protected static TableColumn aviaryPenID;
-    protected static TableColumn aviaryTemp;
-    protected static TableColumn aviaryContainedAnimals;
-    protected static TableColumn aviaryHeight;
-    protected static TableColumn aviaryMaxVolume;
-    protected static TableColumn aviaryCurrentVolume;
+    private static ObservableList<Aviary> aviaryTableViewItems = FXCollections.observableArrayList();
+    private static ToolBar aviaryToolbar;
+    private static Button addAviaryButton;
+    private static TableView<Aviary> aviaryPenTableView;
+    private static TableColumn aviaryPenID;
+    private static TableColumn aviaryTemp;
+    private static TableColumn aviaryContainedAnimals;
+    private static TableColumn aviaryHeight;
+    private static TableColumn aviaryMaxVolume;
+    private static TableColumn aviaryCurrentVolume;
+    private static TableColumn aviaryKeeperID;
 
     private static String currentPenID;
 
 
     public static void construct (ToolBar toolBar, Button addButton, TableView<Aviary> tableView, TableColumn id, TableColumn temp,
-                                  TableColumn containedAnimals, TableColumn height, TableColumn maxVolume, TableColumn currentVolume) {
+                                  TableColumn containedAnimals, TableColumn height, TableColumn maxVolume, TableColumn currentVolume, TableColumn keeperID) {
         aviaryToolbar = toolBar;
         addAviaryButton = addButton;
         aviaryPenTableView = tableView;
@@ -46,6 +47,7 @@ public class AviaryController {
         aviaryHeight = height;
         aviaryMaxVolume = maxVolume;
         aviaryCurrentVolume = currentVolume;
+        aviaryKeeperID = keeperID;
 
         aviaryPenTableView.setItems(aviaryTableViewItems);
     }
@@ -66,6 +68,12 @@ public class AviaryController {
         aviaryContainedAnimals.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Aviary, Integer>, ObservableValue<Integer>>() {
             public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Aviary, Integer> p) {
                 return new SimpleIntegerProperty(p.getValue().getContainedAnimalNumber()).asObject();
+            }
+        });
+        aviaryKeeperID.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Aviary, Integer>, ObservableValue>() {
+            @Override
+            public ObservableValue call(TableColumn.CellDataFeatures<Aviary, Integer> p) {
+                return new SimpleIntegerProperty(p.getValue().getKeeperID());
             }
         });
         aviaryHeight.setCellValueFactory( new PropertyValueFactory<Aviary, Double>("height"));
@@ -157,13 +165,13 @@ public class AviaryController {
         TextField heightTextField =  new TextField();
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField();
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("aviary")));
         staffChoiceBox.setItems(allStaff);
-
+        staffChoiceBox.getSelectionModel().selectFirst();
 
 
         GridPane penDialogGridPane = new GridPane();
@@ -192,7 +200,7 @@ public class AviaryController {
                             Double.parseDouble(widthTextField.getText()),
                             Double.parseDouble(heightTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     return pen;
                 }
@@ -222,13 +230,13 @@ public class AviaryController {
 
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField(aviary.getTemperature().toString());
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("aviary")));
         staffChoiceBox.setItems(allStaff);
-        staffChoiceBox.getSelectionModel().select(aviary.getStaffResponsible());
+        staffChoiceBox.getSelectionModel().select(aviary.getKeeperID());
 
         GridPane aquariumDialogGridPane = new GridPane();
         aquariumDialogGridPane.add(lengthLabel, 1, 1);
@@ -256,7 +264,7 @@ public class AviaryController {
                             Double.parseDouble(widthTextField.getText()),
                             Double.parseDouble(heightTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     pen.setPenID(aviary.getPenID());
                     return pen;

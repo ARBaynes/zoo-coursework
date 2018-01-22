@@ -9,6 +9,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
@@ -18,28 +23,30 @@ import main.classes.staff.Staff;
 import main.modules.critters.AnimalController;
 import main.modules.staff.StaffModel;
 
+import java.awt.*;
 import java.util.Optional;
 
 public class SemiAquaticController {
-    protected static ObservableList<SemiAquatic> semiAquaticTableViewItems = FXCollections.observableArrayList();
-    protected static ToolBar semiAquaticToolbar;
-    protected static Button addSemiAquaticButton;
-    protected static TableView<SemiAquatic> semiAquaticPenTableView;
-    protected static TableColumn semiAquaticPenID;
-    protected static TableColumn semiAquaticTemp;
-    protected static TableColumn semiAquaticContainedAnimals;
-    protected static TableColumn semiAquaticWaterVolume;
-    protected static TableColumn semiAquaticCurrentVolume;
-    protected static TableColumn semiAquaticMaxArea;
-    protected static TableColumn semiAquaticCurrentArea;
-    protected static TableColumn semiAquaticWaterType;
+    private static ObservableList<SemiAquatic> semiAquaticTableViewItems = FXCollections.observableArrayList();
+    private static ToolBar semiAquaticToolbar;
+    private static Button addSemiAquaticButton;
+    private static TableView<SemiAquatic> semiAquaticPenTableView;
+    private static TableColumn semiAquaticPenID;
+    private static TableColumn semiAquaticTemp;
+    private static TableColumn semiAquaticContainedAnimals;
+    private static TableColumn semiAquaticWaterVolume;
+    private static TableColumn semiAquaticCurrentVolume;
+    private static TableColumn semiAquaticMaxArea;
+    private static TableColumn semiAquaticCurrentArea;
+    private static TableColumn semiAquaticWaterType;
+    private static TableColumn semiAquaticKeeperID;
 
     private static String currentPenID;
 
 
     public static void construct (ToolBar toolBar, Button addButton, TableView<SemiAquatic> tableView, TableColumn id, TableColumn temp,
                                   TableColumn containedAnimals, TableColumn waterVolume, TableColumn currentVolume,
-                                  TableColumn waterType, TableColumn maxArea, TableColumn currentArea) {
+                                  TableColumn waterType, TableColumn maxArea, TableColumn currentArea, TableColumn keeperID) {
         addSemiAquaticButton = addButton;
         semiAquaticToolbar = toolBar;
         semiAquaticPenTableView = tableView;
@@ -51,6 +58,7 @@ public class SemiAquaticController {
         semiAquaticWaterType = waterType;
         semiAquaticCurrentArea = currentArea;
         semiAquaticMaxArea = maxArea;
+        semiAquaticKeeperID = keeperID;
 
         semiAquaticPenTableView.setItems(semiAquaticTableViewItems);
     }
@@ -81,6 +89,12 @@ public class SemiAquaticController {
         semiAquaticContainedAnimals.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<SemiAquatic, Integer>, ObservableValue<Integer>>() {
             public ObservableValue<Integer> call(TableColumn.CellDataFeatures<SemiAquatic, Integer> p) {
                 return new SimpleIntegerProperty(p.getValue().getContainedAnimalNumber()).asObject();
+            }
+        });
+        semiAquaticKeeperID.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SemiAquatic, Integer>, ObservableValue>() {
+            @Override
+            public ObservableValue call(TableColumn.CellDataFeatures<SemiAquatic, Integer> p) {
+                return new SimpleIntegerProperty(p.getValue().getKeeperID());
             }
         });
 
@@ -185,12 +199,13 @@ public class SemiAquaticController {
 
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField();
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("semiaquatic")));
         staffChoiceBox.setItems(allStaff);
+        staffChoiceBox.getSelectionModel().selectFirst();
 
         GridPane penDialogGridPane = new GridPane();
         penDialogGridPane.add(lengthLabel, 1, 1);
@@ -227,7 +242,7 @@ public class SemiAquaticController {
                             Double.parseDouble(waterDepthTextField.getText()),
                             Double.parseDouble(waterLengthTextField.getText()),
                             Double.parseDouble(waterWidthTextField.getText()),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     return pen;
                 }
@@ -271,13 +286,13 @@ public class SemiAquaticController {
 
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField(semiAquatic.getTemperature().toString());
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("semiaquatic")));
         staffChoiceBox.setItems(allStaff);
-        staffChoiceBox.getSelectionModel().select(semiAquatic.getStaffResponsible());
+        staffChoiceBox.getSelectionModel().select(semiAquatic.getKeeperID());
 
         GridPane penDialogGridPane = new GridPane();
         penDialogGridPane.add(lengthLabel, 1, 1);
@@ -314,7 +329,7 @@ public class SemiAquaticController {
                             Double.parseDouble(waterDepthTextField.getText()),
                             Double.parseDouble(waterLengthTextField.getText()),
                             Double.parseDouble(waterWidthTextField.getText()),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     pen.setPenID(semiAquatic.getPenID());
                     return pen;

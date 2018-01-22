@@ -21,21 +21,22 @@ import main.modules.staff.StaffModel;
 import java.util.Optional;
 
 public class DryController {
-    protected static ObservableList<Dry> dryTableViewItems = FXCollections.observableArrayList();
-    protected static ToolBar dryToolbar;
-    protected static Button addDryButton;
-    protected static TableView<Dry> dryPenTableView;
-    protected static TableColumn dryPenID;
-    protected static TableColumn dryTemp;
-    protected static TableColumn dryContainedAnimals;
-    protected static TableColumn dryMaxArea;
-    protected static TableColumn dryCurrentArea;
+    private static ObservableList<Dry> dryTableViewItems = FXCollections.observableArrayList();
+    private static ToolBar dryToolbar;
+    private static Button addDryButton;
+    private static TableView<Dry> dryPenTableView;
+    private static TableColumn dryPenID;
+    private static TableColumn dryTemp;
+    private static TableColumn dryContainedAnimals;
+    private static TableColumn dryMaxArea;
+    private static TableColumn dryCurrentArea;
+    private static TableColumn dryKeeperID;
 
     private static String currentPenID;
 
 
     public static void construct (ToolBar toolBar, Button addButton, TableView<Dry> tableView, TableColumn id, TableColumn temp,
-                                  TableColumn containedAnimals, TableColumn maxArea, TableColumn currentArea) {
+                                  TableColumn containedAnimals, TableColumn maxArea, TableColumn currentArea, TableColumn keeperID) {
         dryToolbar = toolBar;
         addDryButton = addButton;
         dryPenTableView = tableView;
@@ -44,6 +45,7 @@ public class DryController {
         dryContainedAnimals = containedAnimals;
         dryMaxArea = maxArea;
         dryCurrentArea = currentArea;
+        dryKeeperID = keeperID;
 
         dryPenTableView.setItems(dryTableViewItems);
     }
@@ -64,6 +66,12 @@ public class DryController {
         dryContainedAnimals.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Dry, Integer>, ObservableValue<Integer>>() {
             public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Dry, Integer> p) {
                 return new SimpleIntegerProperty(p.getValue().getContainedAnimalNumber()).asObject();
+            }
+        });
+        dryKeeperID.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Dry, Integer>, ObservableValue>() {
+            @Override
+            public ObservableValue call(TableColumn.CellDataFeatures<Dry, Integer> p) {
+                return new SimpleIntegerProperty(p.getValue().getKeeperID());
             }
         });
 
@@ -152,14 +160,13 @@ public class DryController {
         TextField widthTextField =  new TextField();
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField();
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("dry")));
         staffChoiceBox.setItems(allStaff);
-
-
+        staffChoiceBox.getSelectionModel().selectFirst();
 
         GridPane penDialogGridPane = new GridPane();
         penDialogGridPane.add(lengthLabel, 1, 1);
@@ -184,7 +191,7 @@ public class DryController {
                             Double.parseDouble(lengthTextField.getText()),
                             Double.parseDouble(widthTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     return pen;
                 }
@@ -212,13 +219,13 @@ public class DryController {
 
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField(dry.getTemperature().toString());
-        Label staffLabel = new Label("Staff Responsible: ");
-        ChoiceBox staffChoiceBox = new ChoiceBox();
+        Label staffLabel = new Label("Staff Responsible: #");
+        ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
-        ObservableList<Staff> allStaff = FXCollections.observableArrayList();
-        allStaff.addAll(StaffModel.getAllStaff());
+        ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+        allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("dry")));
         staffChoiceBox.setItems(allStaff);
-        staffChoiceBox.getSelectionModel().select(dry.getStaffResponsible());
+        staffChoiceBox.getSelectionModel().select(dry.getKeeperID());
 
         GridPane aquariumDialogGridPane = new GridPane();
         aquariumDialogGridPane.add(lengthLabel, 1, 1);
@@ -243,7 +250,7 @@ public class DryController {
                             Double.parseDouble(lengthTextField.getText()),
                             Double.parseDouble(widthTextField.getText()),
                             Double.parseDouble(tempTextField.getText()),
-                            (Staff) staffChoiceBox.getSelectionModel().getSelectedItem()
+                            staffChoiceBox.getSelectionModel().getSelectedItem()
                     );
                     pen.setPenID(dry.getPenID());
                     return pen;

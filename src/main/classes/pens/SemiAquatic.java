@@ -18,7 +18,7 @@ public class SemiAquatic extends Pen implements WaterVolume, Area, WaterTypes, S
     private Double waterLength;
     private Double waterWidth;
 
-    public SemiAquatic (Double length, Double width, Double temperature, String waterType, Double waterDepth, Double waterLength, Double waterWidth, Staff staff) {
+    public SemiAquatic (Double length, Double width, Double temperature, String waterType, Double waterDepth, Double waterLength, Double waterWidth, Integer staffID) {
         setLength(length);
         setTemperature(temperature);
         setWidth(width);
@@ -27,7 +27,7 @@ public class SemiAquatic extends Pen implements WaterVolume, Area, WaterTypes, S
         setWaterLength(waterLength);
         setWaterWidth(waterWidth);
         setPenType();
-        setStaffResponsible(staff);
+        setKeeperID(staffID);
     }
 
     @Override
