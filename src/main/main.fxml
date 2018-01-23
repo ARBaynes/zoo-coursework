@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.chart.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
@@ -35,7 +36,7 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="69.0" prefWidth="241.0">
                                              <children>
-                                                <Label prefHeight="69.0" prefWidth="241.0" fx:id="weatherLabel" text="weather could not be found!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Label fx:id="weatherLabel" prefHeight="69.0" prefWidth="241.0" text="weather could not be found!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
@@ -50,19 +51,58 @@
                            <center>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <StackedBarChart fx:id="statsBarChart" layoutX="344.0" layoutY="39.0" prefHeight="578.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <xAxis>
-                                        <CategoryAxis side="BOTTOM" />
-                                      </xAxis>
-                                      <yAxis>
-                                        <NumberAxis side="LEFT" />
-                                      </yAxis>
-                                    </StackedBarChart>
+                                    <HBox fx:id="mainHBox" prefHeight="578.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane prefHeight="578.0" prefWidth="340.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TableView fx:id="animalTableMain" prefHeight="578.0" prefWidth="340.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                      <TableColumn fx:id="animalIDColMain" text="Animal ID" />
+                                                    <TableColumn fx:id="animalNameColMain" prefWidth="117.0" text="Animal Name" />
+                                                    <TableColumn fx:id="animalBreedColMain" prefWidth="94.0" text="Animal Breed" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TableView fx:id="staffTableMain" prefHeight="578.0" prefWidth="289.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="staffIDColMain" prefWidth="75.0" text="Staff ID" />
+                                                    <TableColumn fx:id="staffNameColMain" prefWidth="75.0" text="Staff Name" />
+                                                      <TableColumn fx:id="staffResponsibilitiesColMain" prefWidth="138.0" text="Staff Responsibilities" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TableView fx:id="penTableMain" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="578.0" prefWidth="372.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="penIDColMain" prefWidth="125.0" text="Pen ID" />
+                                                    <TableColumn fx:id="penTypeColMain" prefWidth="86.0" text="Pen Type" />
+                                                      <TableColumn fx:id="penContainedAnimalsColMain" prefWidth="119.0" text="Contained Animals" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </AnchorPane>
                            </center>
                            <top>
-                              <AnchorPane prefHeight="49.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />
+                              <AnchorPane prefHeight="68.0" prefWidth="1000.0" style="-fx-background-color: #31c1bc;" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="1000.0" text="Annabel Baynes' Zoo Application Coursework" textFill="#e9e9ee" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="System Bold" size="26.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="40.0" />
+                                       </padding>
+                                    </Label>
+                                 </children></AnchorPane>
                            </top>
                         </BorderPane>
                      </children></AnchorPane>

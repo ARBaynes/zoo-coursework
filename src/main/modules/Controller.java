@@ -1,9 +1,6 @@
 package main.modules;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -13,6 +10,7 @@ import main.classes.pens.*;
 import main.classes.staff.Staff;
 import main.modules.critters.AnimalController;
 import main.modules.critters.BreedController;
+import main.modules.main.MainController;
 import main.modules.pens.aquarium.AquariumAnimalController;
 import main.modules.pens.aquarium.AquariumController;
 import main.modules.pens.aviary.AviaryAnimalController;
@@ -24,8 +22,6 @@ import main.modules.pens.petting.PettingController;
 import main.modules.pens.semiaquatic.SemiAquaticAnimalController;
 import main.modules.pens.semiaquatic.SemiAquaticController;
 import main.modules.staff.StaffController;
-
-import java.io.IOException;
 
 public class Controller {
 
@@ -155,32 +151,94 @@ public class Controller {
     public TableColumn staffID;
     public TableColumn staffName;
     public TableColumn staffResponsibleFor;
-    public HBox weatherBox;
-    public StackedBarChart statsBarChart;
 
+
+
+    // -----------------------------------------
+
+    //MAIN TAB ------------------------------
+
+    //WEATHER
+    public HBox weatherBox;
+    public Label weatherLabel;
+
+    //ANIMALS
+    public TableView animalTableMain = new TableView<Animal>();
+    public TableColumn animalIDColMain;
+    public TableColumn animalNameColMain;
+    public TableColumn animalBreedColMain;
+
+
+    //STAFF
+    public TableView staffTableMain = new TableView<Staff>();
+    public TableColumn staffIDColMain;
+    public TableColumn staffNameColMain;
+    public TableColumn staffResponsibilitiesColMain;
+
+
+    //PENS
+    public TableView penTableMain = new TableView<Pen>();
+    public TableColumn penIDColMain;
+    public TableColumn penTypeColMain;
+    public TableColumn penContainedAnimalsColMain;
 
     // -----------------------------------------
 
     @FXML
     public void initialize() {
 
-        StaffController.construct(staffTableView, addNewStaffButton, staffID, staffName, staffResponsibleFor);
-        AnimalController.construct(animalTableView, animalTableColBreed, animalTableColID, animalTableColName, animalTableColHasPen, animalTypeLabel);
-        BreedController.construct(breedTableView, breedName, breedPenType, breedRequirements, addBreedButton);
-        AquariumController.construct(aquariumToolbar,addAquariumButton, aquariumPenTableView, aquariumPenID, aquariumTemp, aquariumContainedAnimals, aquariumHeight, aquariumWaterVolume, aquariumCurrentVolume, aquariumWaterType, aquariumKeeperID);
-        AquariumAnimalController.construct(aquariumAnimalTableView, aquariumAnimalName, aquariumAnimalBreed, aquariumAnimalSize, aquariumAnimalID);
-        AviaryController.construct(aviaryToolbar, addAviaryButton, aviaryPenTableView, aviaryPenID, aviaryTemp, aviaryContainedAnimals, aviaryHeight, aviaryMaxVolume, aviaryCurrentVolume, aviaryKeeperID);
-        AviaryAnimalController.construct(aviaryAnimalTableView, aviaryAnimalName, aviaryAnimalBreed, aviaryAnimalSize, aviaryAnimalID);
-        DryController.construct(dryToolbar, addDryButton, dryPenTableView, dryPenID, dryTemp, dryContainedAnimals, dryMaxArea, dryCurrentArea, dryKeeperID);
-        DryAnimalController.construct(dryAnimalTableView, dryAnimalName, dryAnimalBreed, dryAnimalSize, dryAnimalID);
-        PettingController.construct(pettingToolbar, addPettingButton, pettingPenTableView, pettingPenID, pettingTemp, pettingContainedAnimals, pettingMaxArea, pettingCurrentArea, pettingKeeperID);
-        PettingAnimalController.construct(pettingAnimalTableView, pettingAnimalName, pettingAnimalBreed, pettingAnimalSize, pettingAnimalID);
-        SemiAquaticController.construct(semiAquaticToolbar, addSemiAquaticButton, semiAquaticPenTableView, semiAquaticPenID, semiAquaticTemp, semiAquaticContainedAnimals,
-                semiAquaticMaxWaterVolume, semiAquaticCurrentWaterVolume, semiAquaticWaterType, semiAquaticMaxArea, semiAquaticCurrentArea, semiAquaticKeeperID);
-        SemiAquaticAnimalController.construct(semiAquaticAnimalTableView, semiAquaticAnimalName, semiAquaticAnimalBreed, semiAquaticAnimalSize, semiAquaticAnimalID);
+        MainController.construct(
+                animalTableMain, animalIDColMain, animalNameColMain, animalBreedColMain,
+                staffTableMain, staffIDColMain, staffNameColMain, staffResponsibilitiesColMain,
+                penTableMain, penIDColMain, penTypeColMain, penContainedAnimalsColMain
+        );
+        StaffController.construct(
+                staffTableView, addNewStaffButton, staffID, staffName, staffResponsibleFor
+        );
+        AnimalController.construct(
+                animalTableView, animalTableColBreed, animalTableColID, animalTableColName, animalTableColHasPen, animalTypeLabel
+        );
+        BreedController.construct(
+                breedTableView, breedName, breedPenType, breedRequirements, addBreedButton
+        );
+        AquariumController.construct(
+                aquariumToolbar,addAquariumButton, aquariumPenTableView, aquariumPenID, aquariumTemp, aquariumContainedAnimals, aquariumHeight,
+                aquariumWaterVolume, aquariumCurrentVolume, aquariumWaterType, aquariumKeeperID
+        );
+        AquariumAnimalController.construct(
+                aquariumAnimalTableView, aquariumAnimalName, aquariumAnimalBreed, aquariumAnimalSize, aquariumAnimalID
+        );
+        AviaryController.construct(
+                aviaryToolbar, addAviaryButton, aviaryPenTableView, aviaryPenID, aviaryTemp, aviaryContainedAnimals, aviaryHeight,
+                aviaryMaxVolume, aviaryCurrentVolume, aviaryKeeperID
+        );
+        AviaryAnimalController.construct(
+                aviaryAnimalTableView, aviaryAnimalName, aviaryAnimalBreed, aviaryAnimalSize, aviaryAnimalID
+        );
+        DryController.construct(
+                dryToolbar, addDryButton, dryPenTableView, dryPenID, dryTemp, dryContainedAnimals, dryMaxArea, dryCurrentArea, dryKeeperID
+        );
+        DryAnimalController.construct(
+                dryAnimalTableView, dryAnimalName, dryAnimalBreed, dryAnimalSize, dryAnimalID
+        );
+        PettingController.construct(
+                pettingToolbar, addPettingButton, pettingPenTableView, pettingPenID, pettingTemp, pettingContainedAnimals, pettingMaxArea,
+                pettingCurrentArea, pettingKeeperID
+        );
+        PettingAnimalController.construct(
+                pettingAnimalTableView, pettingAnimalName, pettingAnimalBreed, pettingAnimalSize, pettingAnimalID
+        );
+        SemiAquaticController.construct(
+                semiAquaticToolbar, addSemiAquaticButton, semiAquaticPenTableView, semiAquaticPenID, semiAquaticTemp, semiAquaticContainedAnimals,
+                semiAquaticMaxWaterVolume, semiAquaticCurrentWaterVolume, semiAquaticWaterType, semiAquaticMaxArea, semiAquaticCurrentArea, semiAquaticKeeperID
+        );
+        SemiAquaticAnimalController.construct(
+                semiAquaticAnimalTableView, semiAquaticAnimalName, semiAquaticAnimalBreed, semiAquaticAnimalSize, semiAquaticAnimalID
+        );
 
 
 
+        MainController.outline();
         StaffController.outline();
         AnimalController.outline();
         BreedController.outline();
@@ -196,6 +254,7 @@ public class Controller {
         SemiAquaticAnimalController.outline();
 
 
+        MainController.refresh();
         StaffController.refresh();
         BreedController.refresh();
         AnimalController.refresh();

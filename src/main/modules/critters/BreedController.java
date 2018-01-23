@@ -18,6 +18,7 @@ import main.classes.critters.Breed;
 import main.modules.critters.models.AnimalModel;
 import main.modules.critters.models.BreedModel;
 import main.modules.pens.PenModel;
+import main.modules.pens.aquarium.AquariumModel;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -144,22 +145,43 @@ public class BreedController {
         GridPane requirementsGridPane = new GridPane();
         requirementsGridPane.add(new Label ("Select a pen type to add requirements."), 1, 1 );
 
+        Label volRequirementsLabel = new Label(" m. cubed");
+        Label areaRequirementsLabel = new Label(" m. squared");
+
+        requirementsGridPane.add(volumeRequirementsTextField, 1,2);
+        requirementsGridPane.add(volRequirementsLabel, 2, 2);
+        requirementsGridPane.add(areaRequirementsTextField, 1,3);
+        requirementsGridPane.add(areaRequirementsLabel, 2, 3);
+
+        volumeRequirementsTextField.setVisible(false);
+        volRequirementsLabel.setVisible(false);
+        areaRequirementsTextField.setVisible(false);
+        areaRequirementsLabel.setVisible(false);
+
+
         penTypeChoiceBox.getSelectionModel().selectedItemProperty().addListener(
                 (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
                     String selectedpen = penTypeChoiceBox.getSelectionModel().getSelectedItem();
-                    requirementsGridPane.getChildren().clear();
                     switch (selectedpen) {
-                        case "semiaquatic" :
-                            requirementsGridPane.add(areaRequirementsTextField, 1, 1);
-                            requirementsGridPane.add(new Label(" m. squared"), 2, 1);
-                        case "aviary" :
-                        case "aquarium" :
-                            requirementsGridPane.add(volumeRequirementsTextField, 1, 2);
-                            requirementsGridPane.add(new Label(" m. cubed"), 2, 2);
+                        case "semiaquatic":
+                            volumeRequirementsTextField.setVisible(true);
+                            volRequirementsLabel.setVisible(true);
+                            areaRequirementsTextField.setVisible(true);
+                            areaRequirementsLabel.setVisible(true);
+                            break;
+                        case "aviary":
+                        case "aquarium":
+                            volumeRequirementsTextField.setVisible(true);
+                            volRequirementsLabel.setVisible(true);
+                            areaRequirementsTextField.setVisible(false);
+                            areaRequirementsLabel.setVisible(false);
                             break;
                         default:
-                            requirementsGridPane.add(areaRequirementsTextField, 1, 1);
-                            requirementsGridPane.add(new Label(" m. squared"), 2, 1);
+                            volumeRequirementsTextField.setVisible(false);
+                            volRequirementsLabel.setVisible(false);
+                            areaRequirementsTextField.setVisible(true);
+                            areaRequirementsLabel.setVisible(true);
+                            break;
                     }
                 });
 
@@ -181,7 +203,7 @@ public class BreedController {
             public Breed call(ButtonType button) {
                 if (button == buttonTypeOk) {
                     ObservableList<Node> requirementNodes = requirementsGridPane.getChildren();
-                    Breed breed = null;
+                    Breed breed;
                     if (requirementNodes.contains(areaRequirementsTextField) && requirementNodes.contains(volumeRequirementsTextField)) {
                         //SEMIAQUATIC
                         breed = new Breed(nameTextField.getText(),
@@ -245,30 +267,48 @@ public class BreedController {
         GridPane requirementsGridPane = new GridPane();
         requirementsGridPane.add(new Label ("Select a pen type to add requirements."), 1, 1 );
 
+        Label volRequirementsLabel = new Label(" m. cubed");
+        Label areaRequirementsLabel = new Label(" m. squared");
+
+        requirementsGridPane.add(volumeRequirementsTextField, 1,2);
+        requirementsGridPane.add(volRequirementsLabel, 2, 2);
+        requirementsGridPane.add(areaRequirementsTextField, 1,3);
+        requirementsGridPane.add(areaRequirementsLabel, 2, 3);
 
         penTypeChoiceBox.getSelectionModel().selectedItemProperty().addListener(
                 (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
                     String selectedpen = penTypeChoiceBox.getSelectionModel().getSelectedItem();
-                    requirementsGridPane.getChildren().clear();
                     switch (selectedpen) {
                         case "semiaquatic":
-                            volumeRequirementsTextField.setText(currentBreed.getRequirements().get("water").toString());
-                            areaRequirementsTextField.setText(currentBreed.getRequirements().get("land").toString());
-                            requirementsGridPane.add(areaRequirementsTextField, 1, 1);
-                            requirementsGridPane.add(new Label(" m. squared"), 2, 1);
-                            requirementsGridPane.add(volumeRequirementsTextField, 1, 2);
-                            requirementsGridPane.add(new Label(" m. cubed"), 2, 2);
+                            volumeRequirementsTextField.setVisible(true);
+                            volRequirementsLabel.setVisible(true);
+                            areaRequirementsTextField.setVisible(true);
+                            areaRequirementsLabel.setVisible(true);
+                            if (currentBreed.getRequirements().get("water") != null) {
+                                volumeRequirementsTextField.setText(currentBreed.getRequirements().get("water").toString());
+                            }
+                            if (currentBreed.getRequirements().get("land") != null) {
+                                areaRequirementsTextField.setText(currentBreed.getRequirements().get("land").toString());
+                            }
                             break;
                         case "aviary":
                         case "aquarium":
-                            volumeRequirementsTextField.setText(currentBreed.getRequirements().get("volume").toString());
-                            requirementsGridPane.add(volumeRequirementsTextField, 1, 2);
-                            requirementsGridPane.add(new Label(" m. cubed"), 2, 2);
+                            volumeRequirementsTextField.setVisible(true);
+                            volRequirementsLabel.setVisible(true);
+                            areaRequirementsTextField.setVisible(false);
+                            areaRequirementsLabel.setVisible(false);
+                            if (currentBreed.getRequirements().get("volume") != null) {
+                                volumeRequirementsTextField.setText(currentBreed.getRequirements().get("volume").toString());
+                            }
                             break;
                         default:
-                            areaRequirementsTextField.setText(currentBreed.getRequirements().get("area").toString());
-                            requirementsGridPane.add(areaRequirementsTextField, 1, 1);
-                            requirementsGridPane.add(new Label(" m. squared"), 2, 1);
+                            volumeRequirementsTextField.setVisible(false);
+                            volRequirementsLabel.setVisible(false);
+                            areaRequirementsTextField.setVisible(true);
+                            areaRequirementsLabel.setVisible(true);
+                            if (currentBreed.getRequirements().get("area") != null) {
+                                areaRequirementsTextField.setText(currentBreed.getRequirements().get("area").toString());
+                            }
                             break;
                     }
                 });
@@ -293,9 +333,10 @@ public class BreedController {
         dialog.setResultConverter(new Callback<ButtonType, Breed>() {
             @Override
             public Breed call(ButtonType button) {
+
                 if (button == buttonTypeOk) {
                     ObservableList<Node> requirementNodes = requirementsGridPane.getChildren();
-                    Breed breed = null;
+                    Breed breed;
                     if (requirementNodes.contains(areaRequirementsTextField) && requirementNodes.contains(volumeRequirementsTextField)) {
                         //SEMIAQUATIC
                         breed = new Breed(nameTextField.getText(),
@@ -319,7 +360,10 @@ public class BreedController {
                                 Double.parseDouble(areaRequirementsTextField.getText()),
                                 "area"
                         );
-                        System.out.println("ALL OTHER TYPES: " + breed.toString());
+
+                    }
+                    if (!breedCanFit(breed)) {
+                        return null;
                     }
                     return breed;
                 }
@@ -356,5 +400,20 @@ public class BreedController {
         }
     }
 
-
+    private static boolean breedCanFit (Breed breed) {
+        switch (breed.getPenType()) {
+            case "aquarium":
+                break;
+            case "aviary":
+                break;
+            case "dry":
+                break;
+            case "petting":
+                break;
+            case "semiaquatic":
+                break;
+            default:
+        }
+        return true;
+    }
 }

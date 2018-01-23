@@ -29,6 +29,7 @@ import main.modules.pens.semiaquatic.SemiAquaticModel;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 
 public class AnimalToPenController {
     public static void addAnimalToPen (Animal animal) {
@@ -50,6 +51,28 @@ public class AnimalToPenController {
                 break;
             default:
                 animalToDryOrPetting(animal);
+        }
+    }
+
+    public static void autoAddAnimalToPen (Animal animal) {
+        switch (animal.getBreedPenType().toLowerCase()) {
+            case "aquarium":
+                autoAddAnimalToAquarium(animal);
+                break;
+            case "aviary":
+                autoAddAnimalToAviary(animal);
+                break;
+            case "dry":
+                autoAddAnimalToDry(animal);
+                break;
+            case "petting":
+                autoAddAnimalToPetting(animal);
+                break;
+            case "semiaquatic":
+                autoAddAnimalToSemiAquatic(animal);
+                break;
+            default:
+                autoAddAnimalToDryOrPetting(animal);
         }
     }
 
@@ -700,6 +723,167 @@ public class AnimalToPenController {
             BreedController.refresh();
         }
     }
+
+    private static void autoAddAnimalToAquarium (Animal animal) {
+        ArrayList<Aquarium> allSuitablePens = AquariumModel.getAllPensWithSpaceRemaining(animal);
+        if (allSuitablePens.isEmpty()) {
+            noPensAlert(animal).showAndWait();
+            return;
+        }
+        Aquarium firstPenFree = allSuitablePens.get(0);
+        animal.setCurrentPenID(firstPenFree.getPenID());
+        AnimalModel.editAnimal(animal);
+
+        firstPenFree.addAnimalToPen(animal);
+        AquariumModel.editPen(firstPenFree);
+
+        AnimalController.refresh(animal.getBreed());
+        BreedController.refresh();
+
+        AquariumController.refresh();
+        assignedToPenAlert(animal, firstPenFree.getPenID()).showAndWait();
+    }
+
+    private static void autoAddAnimalToAviary (Animal animal) {
+        ArrayList<Aviary> allSuitablePens = AviaryModel.getAllPensWithSpaceRemaining(animal);
+        if (allSuitablePens.isEmpty()) {
+            noPensAlert(animal).showAndWait();
+            return;
+        }
+        Aviary firstPenFree = allSuitablePens.get(0);
+        animal.setCurrentPenID(firstPenFree.getPenID());
+        AnimalModel.editAnimal(animal);
+
+        firstPenFree.addAnimalToPen(animal);
+        AviaryModel.editPen(firstPenFree);
+
+        AnimalController.refresh(animal.getBreed());
+        BreedController.refresh();
+
+        AviaryController.refresh();
+        assignedToPenAlert(animal, firstPenFree.getPenID()).showAndWait();
+    }
+    private static void autoAddAnimalToDry (Animal animal) {
+        ArrayList<Dry> allSuitablePens = DryModel.getAllPensWithSpaceRemaining(animal);
+        if (allSuitablePens.isEmpty()) {
+            noPensAlert(animal).showAndWait();
+            return;
+        }
+        Dry firstPenFree = allSuitablePens.get(0);
+        animal.setCurrentPenID(firstPenFree.getPenID());
+        AnimalModel.editAnimal(animal);
+
+        firstPenFree.addAnimalToPen(animal);
+        DryModel.editPen(firstPenFree);
+
+        AnimalController.refresh(animal.getBreed());
+        BreedController.refresh();
+
+        DryController.refresh();
+        assignedToPenAlert(animal, firstPenFree.getPenID()).showAndWait();
+    }
+    private static void autoAddAnimalToPetting (Animal animal) {
+        ArrayList<Petting> allSuitablePens = PettingModel.getAllPensWithSpaceRemaining(animal);
+        if (allSuitablePens.isEmpty()) {
+            noPensAlert(animal).showAndWait();
+            return;
+        }
+        Petting firstPenFree = allSuitablePens.get(0);
+        animal.setCurrentPenID(firstPenFree.getPenID());
+        AnimalModel.editAnimal(animal);
+
+        firstPenFree.addAnimalToPen(animal);
+        PettingModel.editPen(firstPenFree);
+
+        AnimalController.refresh(animal.getBreed());
+        BreedController.refresh();
+
+        PettingController.refresh();
+        assignedToPenAlert(animal, firstPenFree.getPenID()).showAndWait();
+    }
+    private static void autoAddAnimalToSemiAquatic (Animal animal) {
+        ArrayList<SemiAquatic> allSuitablePens = SemiAquaticModel.getAllPensWithSpaceRemaining(animal);
+        if (allSuitablePens.isEmpty()) {
+            noPensAlert(animal).showAndWait();
+            return;
+        }
+        SemiAquatic firstPenFree = allSuitablePens.get(0);
+        animal.setCurrentPenID(firstPenFree.getPenID());
+        AnimalModel.editAnimal(animal);
+
+        firstPenFree.addAnimalToPen(animal);
+        SemiAquaticModel.editPen(firstPenFree);
+
+        AnimalController.refresh(animal.getBreed());
+        BreedController.refresh();
+
+        SemiAquaticController.refresh();
+        assignedToPenAlert(animal, firstPenFree.getPenID()).showAndWait();
+    }
+    private static void autoAddAnimalToDryOrPetting (Animal animal) {
+        ArrayList<Dry> allSuitableDryPens = DryModel.getAllPensWithSpaceRemaining(animal);
+        ArrayList<Petting> allSuitablePettingPens = PettingModel.getAllPensWithSpaceRemaining(animal);
+        if (allSuitableDryPens.isEmpty() && allSuitablePettingPens.isEmpty()) {
+            noPensAlert(animal).showAndWait();
+            return;
+        }
+        if (!allSuitablePettingPens.isEmpty() && allSuitableDryPens.isEmpty()) {
+            autoAddAnimalToPetting(animal);
+        }
+        if (allSuitablePettingPens.isEmpty()&& !allSuitableDryPens.isEmpty() ) {
+            autoAddAnimalToDry(animal);
+        }
+        Random rand = new Random();
+        switch (rand.nextInt(1)) {
+            case 0:
+                Dry firstDryPenFree = allSuitableDryPens.get(0);
+                animal.setCurrentPenID(firstDryPenFree.getPenID());
+                AnimalModel.editAnimal(animal);
+
+                firstDryPenFree.addAnimalToPen(animal);
+                DryModel.editPen(firstDryPenFree);
+
+                AnimalController.refresh(animal.getBreed());
+                BreedController.refresh();
+
+                DryController.refresh();
+                assignedToPenAlert(animal, firstDryPenFree.getPenID()).showAndWait();
+                break;
+            case 1:
+                Petting firstPettingPenFree = allSuitablePettingPens.get(0);
+                animal.setCurrentPenID(firstPettingPenFree.getPenID());
+                AnimalModel.editAnimal(animal);
+
+                firstPettingPenFree.addAnimalToPen(animal);
+                PettingModel.editPen(firstPettingPenFree);
+
+                AnimalController.refresh(animal.getBreed());
+                BreedController.refresh();
+
+                PettingController.refresh();
+                assignedToPenAlert(animal, firstPettingPenFree.getPenID()).showAndWait();
+                break;
+
+            default:
+                System.out.println("If you've reached this then I've messed up somewhere");
+        }
+
+    }
+
+    private static Alert noPensAlert (Animal animal) {
+        Alert noPensAlert = new Alert(Alert.AlertType.ERROR);
+        noPensAlert.setHeaderText("Error");
+        noPensAlert.setContentText("No Free "+ animal.getBreedPenType() + " Available, " + animal.getName() + " cannot be automatically assigned a pen!");
+        return noPensAlert;
+    }
+
+    private static Alert assignedToPenAlert (Animal animal, String penID) {
+        Alert assignedToPenAlert = new Alert(Alert.AlertType.INFORMATION);
+        assignedToPenAlert.setHeaderText("Successfully Assigned");
+        assignedToPenAlert.setContentText(animal.getName() + " successfully assigned to pen #" + penID + "!");
+        return assignedToPenAlert;
+    }
+
 
     public static void refresh (ObservableList<Animal> animalList, Pen pen) {
         animalList.clear();

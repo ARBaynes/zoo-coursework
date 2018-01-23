@@ -3,6 +3,7 @@ package main.modules.pens.petting;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +19,9 @@ import main.classes.staff.Staff;
 import main.modules.critters.AnimalController;
 import main.modules.staff.StaffModel;
 
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 
 public class PettingController {
     private static ObservableList<Petting> pettingTableViewItems = FXCollections.observableArrayList();
@@ -167,6 +170,22 @@ public class PettingController {
         staffChoiceBox.setItems(allStaff);
         staffChoiceBox.getSelectionModel().selectFirst();
 
+        Label autoAssignLabel = new Label("Automatically assign a staff member to this pen");
+        CheckBox autoAssignCheckBox = new CheckBox();
+        autoAssignLabel.setLabelFor(autoAssignCheckBox);
+
+        autoAssignCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (autoAssignCheckBox.isSelected()) {
+                    staffLabel.setVisible(false);
+                    staffChoiceBox.setVisible(false);
+                } else {
+                    staffLabel.setVisible(true);
+                    staffChoiceBox.setVisible(true);
+                }
+            }
+        });
         GridPane penDialogGridPane = new GridPane();
         penDialogGridPane.add(lengthLabel, 1, 1);
         penDialogGridPane.add(lengthTextField, 2, 1);
@@ -174,8 +193,10 @@ public class PettingController {
         penDialogGridPane.add(widthTextField, 2, 2);
         penDialogGridPane.add(tempLabel, 1, 3);
         penDialogGridPane.add(tempTextField, 2, 3);
-        penDialogGridPane.add(staffLabel, 1, 4);
-        penDialogGridPane.add(staffChoiceBox, 2, 4);
+        penDialogGridPane.add(autoAssignLabel, 1, 8);
+        penDialogGridPane.add(autoAssignCheckBox, 2, 8);
+        penDialogGridPane.add(staffLabel, 1, 9);
+        penDialogGridPane.add(staffChoiceBox, 2, 9);
 
         dialog.getDialogPane().setContent(penDialogGridPane);
 
@@ -186,12 +207,23 @@ public class PettingController {
             @Override
             public Petting call(ButtonType button) {
                 if (button == buttonTypeOk) {
-                    Petting pen = new Petting(
-                            Double.parseDouble(lengthTextField.getText()),
-                            Double.parseDouble(widthTextField.getText()),
-                            Double.parseDouble(tempTextField.getText()),
-                            staffChoiceBox.getSelectionModel().getSelectedItem()
-                    );
+                    Petting pen;
+                    if (autoAssignCheckBox.isSelected()) {
+                        ArrayList<Staff> allStaff = StaffModel.getAllStaffBy("petting");
+                        Random randy = new Random();
+                        pen = new Petting( Double.parseDouble(lengthTextField.getText()),
+                                Double.parseDouble(widthTextField.getText()),
+                                Double.parseDouble(tempTextField.getText()),
+                                allStaff.get(randy.nextInt(allStaff.size())).getStaffID()
+                        );
+                    } else {
+                        pen = new Petting(
+                                Double.parseDouble(lengthTextField.getText()),
+                                Double.parseDouble(widthTextField.getText()),
+                                Double.parseDouble(tempTextField.getText()),
+                                staffChoiceBox.getSelectionModel().getSelectedItem()
+                        );
+                    }
                     return pen;
                 }
                 return null;

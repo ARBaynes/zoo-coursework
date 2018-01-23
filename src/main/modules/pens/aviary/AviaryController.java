@@ -3,11 +3,14 @@ package main.modules.pens.aviary;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
@@ -18,7 +21,9 @@ import main.classes.staff.Staff;
 import main.modules.critters.AnimalController;
 import main.modules.staff.StaffModel;
 
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 
 public class AviaryController {
     private static ObservableList<Aviary> aviaryTableViewItems = FXCollections.observableArrayList();
@@ -173,6 +178,22 @@ public class AviaryController {
         staffChoiceBox.setItems(allStaff);
         staffChoiceBox.getSelectionModel().selectFirst();
 
+        Label autoAssignLabel = new Label("Automatically assign a staff member to this pen");
+        CheckBox autoAssignCheckBox = new CheckBox();
+        autoAssignLabel.setLabelFor(autoAssignCheckBox);
+
+        autoAssignCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (autoAssignCheckBox.isSelected()) {
+                    staffLabel.setVisible(false);
+                    staffChoiceBox.setVisible(false);
+                } else {
+                    staffLabel.setVisible(true);
+                    staffChoiceBox.setVisible(true);
+                }
+            }
+        });
 
         GridPane penDialogGridPane = new GridPane();
         penDialogGridPane.add(lengthLabel, 1, 1);
@@ -183,8 +204,10 @@ public class AviaryController {
         penDialogGridPane.add(heightTextField, 2, 3);
         penDialogGridPane.add(tempLabel, 1, 4);
         penDialogGridPane.add(tempTextField, 2, 4);
-        penDialogGridPane.add(staffLabel, 1, 5);
-        penDialogGridPane.add(staffChoiceBox, 2, 5);
+        penDialogGridPane.add(autoAssignLabel, 1, 5);
+        penDialogGridPane.add(autoAssignCheckBox, 2, 5);
+        penDialogGridPane.add(staffLabel, 1, 6);
+        penDialogGridPane.add(staffChoiceBox, 2, 6);
 
         dialog.getDialogPane().setContent(penDialogGridPane);
 
@@ -195,13 +218,26 @@ public class AviaryController {
             @Override
             public Aviary call(ButtonType button) {
                 if (button == buttonTypeOk) {
-                    Aviary pen = new Aviary(
-                            Double.parseDouble(lengthTextField.getText()),
-                            Double.parseDouble(widthTextField.getText()),
-                            Double.parseDouble(heightTextField.getText()),
-                            Double.parseDouble(tempTextField.getText()),
-                            staffChoiceBox.getSelectionModel().getSelectedItem()
-                    );
+                    Aviary pen;
+                    if (autoAssignCheckBox.isSelected()) {
+                        ArrayList<Staff> allStaff = StaffModel.getAllStaffBy("aviary");
+                        Random randy = new Random();
+                        pen = new Aviary(
+                                Double.parseDouble(lengthTextField.getText()),
+                                Double.parseDouble(widthTextField.getText()),
+                                Double.parseDouble(heightTextField.getText()),
+                                Double.parseDouble(tempTextField.getText()),
+                                allStaff.get(randy.nextInt(allStaff.size())).getStaffID()
+                        );
+                    } else {
+                        pen = new Aviary(
+                                Double.parseDouble(lengthTextField.getText()),
+                                Double.parseDouble(widthTextField.getText()),
+                                Double.parseDouble(heightTextField.getText()),
+                                Double.parseDouble(tempTextField.getText()),
+                                staffChoiceBox.getSelectionModel().getSelectedItem()
+                        );
+                    }
                     return pen;
                 }
                 return null;

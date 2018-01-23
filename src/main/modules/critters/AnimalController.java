@@ -171,12 +171,14 @@ public class AnimalController {
             breedChoiceBox.getSelectionModel().select(breed.getName());
         }
 
+        CheckBox autoAssignCheckBox = new CheckBox("Auto assign this Animal to a pen");
 
         GridPane animalDialogGridPane = new GridPane();
         animalDialogGridPane.add(nameLabel, 1, 1);
         animalDialogGridPane.add(nameTextField, 2, 1);
         animalDialogGridPane.add(breedLabel, 1, 2);
         animalDialogGridPane.add(breedChoiceBox, 2, 2);
+        animalDialogGridPane.add(autoAssignCheckBox, 1, 3);
         dialog.getDialogPane().setContent(animalDialogGridPane);
 
         ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
@@ -197,8 +199,12 @@ public class AnimalController {
 
         Optional<Animal> result = dialog.showAndWait();
         if (result.isPresent()) {
-            AnimalModel.addAnimal(result.get());
-            refresh(result.get().getBreed());
+            Animal animal = result.get();
+            AnimalModel.addAnimal(animal);
+            refresh(animal.getBreed());
+            if (autoAssignCheckBox.isSelected()) {
+                AnimalToPenController.autoAddAnimalToPen(animal);
+            }
         }
     }
 

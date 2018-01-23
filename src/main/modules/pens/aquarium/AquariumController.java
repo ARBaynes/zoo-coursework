@@ -3,6 +3,7 @@ package main.modules.pens.aquarium;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,7 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Random;
 
 public class AquariumController {
     private static ObservableList<Aquarium> aquariumTableViewItems = FXCollections.observableArrayList();
@@ -185,29 +187,54 @@ public class AquariumController {
 
         Label tempLabel = new Label("Temperature: ");
         TextField tempTextField =  new TextField();
+
+
+
         Label staffLabel = new Label("Staff Responsible: #");
         ChoiceBox<Integer> staffChoiceBox = new ChoiceBox<>();
 
         ObservableList<Integer> allStaff = FXCollections.observableArrayList();
+
         allStaff.addAll(StaffModel.extractStaffIDs(StaffModel.getAllStaffBy("aquarium")));
         staffChoiceBox.setItems(allStaff);
         staffChoiceBox.getSelectionModel().selectFirst();
 
-        GridPane aquariumDialogGridPane = new GridPane();
-        aquariumDialogGridPane.add(lengthLabel, 1, 1);
-        aquariumDialogGridPane.add(lengthTextField, 2, 1);
-        aquariumDialogGridPane.add(widthLabel, 1, 2);
-        aquariumDialogGridPane.add(widthTextField, 2, 2);
-        aquariumDialogGridPane.add(heightLabel, 1, 3);
-        aquariumDialogGridPane.add(heightTextField, 2, 3);
-        aquariumDialogGridPane.add(waterTypeLabel, 1, 4);
-        aquariumDialogGridPane.add(waterTypePane, 2, 4);
-        aquariumDialogGridPane.add(tempLabel, 1, 5);
-        aquariumDialogGridPane.add(tempTextField, 2, 5);
-        aquariumDialogGridPane.add(staffLabel, 1, 6);
-        aquariumDialogGridPane.add(staffChoiceBox, 2, 6);
+        Label autoAssignLabel = new Label("Automatically assign a staff member to this pen");
+        CheckBox autoAssignCheckBox = new CheckBox();
 
-        dialog.getDialogPane().setContent(aquariumDialogGridPane);
+        autoAssignLabel.setLabelFor(autoAssignCheckBox);
+
+        autoAssignCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (autoAssignCheckBox.isSelected()) {
+                    staffLabel.setVisible(false);
+                    staffChoiceBox.setVisible(false);
+                } else {
+                    staffLabel.setVisible(true);
+                    staffChoiceBox.setVisible(true);
+                }
+            }
+        });
+
+
+        GridPane penDialogGridPane = new GridPane();
+        penDialogGridPane.add(lengthLabel, 1, 1);
+        penDialogGridPane.add(lengthTextField, 2, 1);
+        penDialogGridPane.add(widthLabel, 1, 2);
+        penDialogGridPane.add(widthTextField, 2, 2);
+        penDialogGridPane.add(heightLabel, 1, 3);
+        penDialogGridPane.add(heightTextField, 2, 3);
+        penDialogGridPane.add(waterTypeLabel, 1, 4);
+        penDialogGridPane.add(waterTypePane, 2, 4);
+        penDialogGridPane.add(tempLabel, 1, 5);
+        penDialogGridPane.add(tempTextField, 2, 5);
+        penDialogGridPane.add(autoAssignLabel, 1, 6);
+        penDialogGridPane.add(autoAssignCheckBox, 2, 6);
+        penDialogGridPane.add(staffLabel, 1, 7);
+        penDialogGridPane.add(staffChoiceBox, 2, 7);
+
+        dialog.getDialogPane().setContent(penDialogGridPane);
 
         ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
@@ -216,14 +243,28 @@ public class AquariumController {
             @Override
             public Aquarium call(ButtonType button) {
                 if (button == buttonTypeOk) {
-                    Aquarium pen = new Aquarium(
-                            Double.parseDouble(lengthTextField.getText()),
-                            Double.parseDouble(widthTextField.getText()),
-                            Double.parseDouble(heightTextField.getText()),
-                            Double.parseDouble(tempTextField.getText()),
-                            waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                            staffChoiceBox.getSelectionModel().getSelectedItem()
-                    );
+                    Aquarium pen;
+                    if (autoAssignCheckBox.isSelected()) {
+                        ArrayList<Staff> allStaff = StaffModel.getAllStaffBy("aquarium");
+                        Random randy = new Random();
+                        pen = new Aquarium( Double.parseDouble(lengthTextField.getText()),
+                                Double.parseDouble(widthTextField.getText()),
+                                Double.parseDouble(heightTextField.getText()),
+                                Double.parseDouble(tempTextField.getText()),
+                                waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
+                                allStaff.get(randy.nextInt(allStaff.size())).getStaffID()
+                        );
+                    } else {
+                        pen = new Aquarium(
+                                Double.parseDouble(lengthTextField.getText()),
+                                Double.parseDouble(widthTextField.getText()),
+                                Double.parseDouble(heightTextField.getText()),
+                                Double.parseDouble(tempTextField.getText()),
+                                waterTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
+                                staffChoiceBox.getSelectionModel().getSelectedItem()
+                        );
+                    }
+
                     return pen;
                 }
                 return null;

@@ -1,8 +1,6 @@
-package main.modules.weather;
+package main.modules.main.weather;
 
 import org.json.simple.*;
-
-import java.net.HttpURLConnection;
 
 public class WeatherModel {
     private static JSONArray currentWeather;
