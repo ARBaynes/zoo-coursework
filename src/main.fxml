@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+    <children>
+        <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="tab-bar" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+            <Tab fx:id="mainTab" text="Main">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane layoutX="284.0" layoutY="228.0" prefHeight="696.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <bottom>
+                              <AnchorPane prefHeight="69.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <HBox fx:id="weatherBox" prefHeight="200.0" prefWidth="1000.0" style="-fx-background-color: #ff9966;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="-1.0" prefHeight="69.0" prefWidth="200.0" text="Weather:" textAlignment="CENTER" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="26.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="69.0" prefWidth="241.0">
+                                             <children>
+                                                <Label fx:id="weatherLabel" prefHeight="69.0" prefWidth="241.0" text="weather could not be found!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </bottom>
+                           <center>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <HBox fx:id="mainHBox" prefHeight="578.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane prefHeight="578.0" prefWidth="340.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TableView fx:id="animalTableMain" prefHeight="578.0" prefWidth="340.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                      <TableColumn fx:id="animalIDColMain" text="Animal ID" />
+                                                    <TableColumn fx:id="animalNameColMain" prefWidth="117.0" text="Animal Name" />
+                                                    <TableColumn fx:id="animalBreedColMain" prefWidth="94.0" text="Animal Breed" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TableView fx:id="staffTableMain" prefHeight="578.0" prefWidth="289.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="staffIDColMain" prefWidth="75.0" text="Staff ID" />
+                                                    <TableColumn fx:id="staffNameColMain" prefWidth="75.0" text="Staff Name" />
+                                                      <TableColumn fx:id="staffResponsibilitiesColMain" prefWidth="138.0" text="Staff Responsibilities" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TableView fx:id="penTableMain" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="578.0" prefWidth="372.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="penIDColMain" prefWidth="125.0" text="Pen ID" />
+                                                    <TableColumn fx:id="penTypeColMain" prefWidth="86.0" text="Pen Type" />
+                                                      <TableColumn fx:id="penContainedAnimalsColMain" prefWidth="119.0" text="Contained Animals" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </center>
+                           <top>
+                              <AnchorPane prefHeight="68.0" prefWidth="1000.0" style="-fx-background-color: #31c1bc;" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="1000.0" text="Annabel Baynes' Zoo Application Coursework" textFill="#e9e9ee" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="System Bold" size="26.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="40.0" />
+                                       </padding>
+                                    </Label>
+                                 </children></AnchorPane>
+                           </top>
+                        </BorderPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+                <Tab fx:id="animalTab" styleClass="tab-button" text="Animals">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.7004008016032064" prefHeight="692.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <items>
+                                        <AnchorPane fx:id="breedParentAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                            <children>
+                                    <BorderPane prefHeight="694.0" prefWidth="696.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <center>
+                                                      <TableView fx:id="breedTableView" prefHeight="158.0" prefWidth="55.0" BorderPane.alignment="CENTER">
+                                                          <columns>
+                                                              <TableColumn fx:id="breedName" prefWidth="150.0" text="Breed Name" />
+                                                              <TableColumn fx:id="breedPenType" prefWidth="150.0" text="Pen Type" />
+                                                              <TableColumn fx:id="breedRequirements" prefWidth="150.0" text="Requirements" />
+                                                          </columns>
+                                                      </TableView>
+                                       </center>
+                                       <top>
+                                          <ToolBar fx:id="breedToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <items>
+                                                <Button fx:id="addBreedButton" mnemonicParsing="false" text="Add New Breed" />
+                                             </items>
+                                          </ToolBar>
+                                       </top>
+                                    </BorderPane>
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                            <children>
+                                                <BorderPane prefHeight="690.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <center>
+                                                        <TableView fx:id="animalTableView" prefHeight="690.0" prefWidth="402.0" BorderPane.alignment="CENTER">
+                                                            <columns>
+                                                                <TableColumn fx:id="animalTableColID" prefWidth="113.0" text="ID" />
+                                                                <TableColumn fx:id="animalTableColName" prefWidth="87.0" text="Name" />
+                                                                <TableColumn fx:id="animalTableColBreed" prefWidth="113.0" text="Breed" />
+                                                                <TableColumn fx:id="animalTableColHasPen" prefWidth="75.0" text="Has Pen?" />
+                                                            </columns>
+                                                        </TableView>
+                                                    </center>
+                                                    <top>
+                                                        <Label fx:id="animalTypeLabel" text="Double-Click a Breed to Show Animals" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                                            <font>
+                                                                <Font name="System Bold" size="15.0" />
+                                                            </font>
+                                                            <padding>
+                                                                <Insets bottom="5.0" top="5.0" />
+                                                            </padding>
+                                                        </Label>
+                                                    </top>
+                                                </BorderPane>
+                                            </children>
+                                        </AnchorPane>
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            <Tab fx:id="staffTab" styleClass="tab-button" text="Staff">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane prefHeight="694.0" prefWidth="696.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                              <TableView fx:id="staffTableView" prefHeight="158.0" prefWidth="55.0" BorderPane.alignment="CENTER">
+                                 <columns>
+                                    <TableColumn fx:id="staffID" prefWidth="150.0" text="Staff ID" />
+                                    <TableColumn fx:id="staffName" prefWidth="150.0" text="Name" />
+                                    <TableColumn fx:id="staffResponsibleFor" prefWidth="150.0" text="Responsible For" />
+                                 </columns>
+                              </TableView>
+                           </center>
+                           <top>
+                              <ToolBar fx:id="staffToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <items>
+                                    <Button fx:id="addNewStaffButton" mnemonicParsing="false" text="Add New Staff" />
+                                 </items>
+                              </ToolBar>
+                           </top>
+                        </BorderPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+                <Tab fx:id="penTab" styleClass="tab-button" text="Pens">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Accordion prefHeight="692.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <panes>
+                                        <TitledPane fx:id="aquariumPane" animated="false" text="Aquariums">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                          <SplitPane dividerPositions="0.5108517608517609" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                              <items>
+                                                                  <AnchorPane fx:id="aquariumPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                      <children>
+                                                                          <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                              <center>
+                                                                                  <TableView fx:id="aquariumPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
+                                                                                      <columns>
+                                                                                          <TableColumn fx:id="aquariumPenID" prefWidth="68.99999856948853" text="Pen ID" />
+                                                                                          <TableColumn fx:id="aquariumTemp" prefWidth="104.00000762939453" text="Temperature" />
+                                                                                          <TableColumn fx:id="aquariumWaterVolume" prefWidth="127.0" text="Maximum Volume" />
+                                                                                          <TableColumn fx:id="aquariumCurrentVolume" prefWidth="126.0" text="Current Volume" />
+                                                                                          <TableColumn fx:id="aquariumContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
+                                                                                          <TableColumn fx:id="aquariumHeight" prefWidth="87.0" text="Height" />
+                                                                                          <TableColumn fx:id="aquariumWaterType" prefWidth="100.0" text="Water Type" />
+                                                                  <TableColumn fx:id="aquariumKeeperID" prefWidth="75.0" text="Keeper ID" />
+                                                                                      </columns>
+                                                                                  </TableView>
+                                                                              </center>
+                                                                              <top>
+                                                                                  <ToolBar fx:id="aquariumToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                                                      <items>
+                                                                                          <Button fx:id="addAquariumButton" defaultButton="true" mnemonicParsing="false" text="Add New Aquarium" />
+                                                                                      </items>
+                                                                                  </ToolBar>
+                                                                              </top>
+                                                                          </BorderPane>
+                                                                      </children>
+                                                                  </AnchorPane>
+                                                                  <AnchorPane fx:id="aquariumAnimalAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                      <children>
+                                                                          <BorderPane prefHeight="690.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                              <top>
+                                                                                  <Label fx:id="aquariumAnimalLabel" text="Double-Click a Pen to Show Contents" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                                                                      <font>
+                                                                                          <Font name="System Bold" size="15.0" />
+                                                                                      </font>
+                                                                                      <padding>
+                                                                                          <Insets bottom="5.0" top="5.0" />
+                                                                                      </padding>
+                                                                                  </Label>
+                                                                              </top>
+                                                                              <center>
+                                                                                  <TableView fx:id="aquariumAnimalTableView" prefHeight="594.0" prefWidth="394.0" BorderPane.alignment="CENTER">
+                                                                                      <columns>
+                                                                  <TableColumn fx:id="aquariumAnimalID" prefWidth="119.0" text="Animal ID" />
+                                                                                          <TableColumn fx:id="aquariumAnimalName" prefWidth="119.0" text="Animal Name" />
+                                                                                          <TableColumn fx:id="aquariumAnimalBreed" minWidth="2.0" prefWidth="63.0" text="Breed" />
+                                                                                          <TableColumn fx:id="aquariumAnimalSize" prefWidth="167.0" text="Size Requirements" />
+                                                                                      </columns>
+                                                                                  </TableView>
+                                                                              </center>
+                                                                          </BorderPane>
+                                                                      </children>
+                                                                  </AnchorPane>
+                                                              </items>
+                                                          </SplitPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                              <TitledPane fx:id="aviaryPane" animated="false" text="Aviaries">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.5108517608517609" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <items>
+                                                <AnchorPane fx:id="aviaryPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <center>
+                                                            <TableView fx:id="aviaryPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
+                                                               <columns>
+                                                                  <TableColumn fx:id="aviaryPenID" prefWidth="68.99999856948853" text="Pen ID" />
+                                                                  <TableColumn fx:id="aviaryTemp" prefWidth="104.00000762939453" text="Temperature" />
+                                                                  <TableColumn fx:id="aviaryMaxVolume" prefWidth="127.0" text="Maximum Air Volume" />
+                                                                  <TableColumn fx:id="aviaryCurrentVolume" prefWidth="126.0" text="Current Air Volume" />
+                                                                  <TableColumn fx:id="aviaryContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
+                                                                  <TableColumn fx:id="aviaryHeight" prefWidth="87.0" text="Height" />
+                                                                  <TableColumn fx:id="aviaryKeeperID" prefWidth="75.0" text="Keeper ID" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </center>
+                                                         <top>
+                                                            <ToolBar fx:id="aviaryToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                               <items>
+                                                                  <Button fx:id="addAviaryButton" defaultButton="true" mnemonicParsing="false" text="Add New Aviary" />
+                                                               </items>
+                                                            </ToolBar>
+                                                         </top>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="aviaryAnimalAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <BorderPane prefHeight="690.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <center>
+                                                            <TableView fx:id="aviaryAnimalTableView" prefHeight="594.0" prefWidth="394.0" BorderPane.alignment="CENTER">
+                                                               <columns>
+                                                                  <TableColumn fx:id="aviaryAnimalID" prefWidth="119.0" text="Animal ID" />
+                                                                  <TableColumn fx:id="aviaryAnimalName" prefWidth="119.0" text="Animal Name" />
+                                                                  <TableColumn fx:id="aviaryAnimalBreed" minWidth="2.0" prefWidth="63.0" text="Breed" />
+                                                                  <TableColumn fx:id="aviaryAnimalSize" prefWidth="167.0" text="Size Requirements" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </center>
+                                                         <top>
+                                                            <Label fx:id="aviaryAnimalLabel" text="Double-Click a Pen to Show Contents" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets bottom="5.0" top="5.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </top>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane fx:id="dryPane" animated="false" text="Dry Pens">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.5108517608517609" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <items>
+                                                <AnchorPane fx:id="dryAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <center>
+                                                            <TableView fx:id="dryPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
+                                                               <columns>
+                                                                  <TableColumn fx:id="dryPenID" prefWidth="68.99999856948853" text="Pen ID" />
+                                                                  <TableColumn fx:id="dryTemp" prefWidth="104.00000762939453" text="Temperature" />
+                                                                  <TableColumn fx:id="dryMaxArea" prefWidth="126.0" text="Current Area" />
+                                                                  <TableColumn fx:id="dryCurrentArea" prefWidth="126.0" text="Current Area" />
+                                                                  <TableColumn fx:id="dryContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
+                                                                  <TableColumn fx:id="dryKeeperID" prefWidth="75.0" text="Keeper ID" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </center>
+                                                         <top>
+                                                            <ToolBar fx:id="dryToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                               <items>
+                                                                  <Button fx:id="addDryButton" defaultButton="true" mnemonicParsing="false" text="Add New Dry Pen" />
+                                                               </items>
+                                                            </ToolBar>
+                                                         </top>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="dryAnimalAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <BorderPane prefHeight="690.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <center>
+                                                            <TableView fx:id="dryAnimalTableView" prefHeight="594.0" prefWidth="394.0" BorderPane.alignment="CENTER">
+                                                               <columns>
+                                                                  <TableColumn fx:id="dryAnimalID" prefWidth="119.0" text="Animal ID" />
+                                                                  <TableColumn fx:id="dryAnimalName" prefWidth="119.0" text="Animal Name" />
+                                                                  <TableColumn fx:id="dryAnimalBreed" minWidth="2.0" prefWidth="63.0" text="Breed" />
+                                                                  <TableColumn fx:id="dryAnimalSize" prefWidth="167.0" text="Size Requirements" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </center>
+                                                         <top>
+                                                            <Label fx:id="dryAnimalLabel" text="Double-Click a Pen to Show Contents" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets bottom="5.0" top="5.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </top>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane fx:id="pettingPane" animated="false" text="Petting Pens">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.5108517608517609" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <items>
+                                                <AnchorPane fx:id="pettingPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <center>
+                                                            <TableView fx:id="pettingPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
+                                                               <columns>
+                                                                  <TableColumn fx:id="pettingPenID" prefWidth="68.99999856948853" text="Pen ID" />
+                                                                  <TableColumn fx:id="pettingTemp" prefWidth="104.00000762939453" text="Temperature" />
+                                                                  <TableColumn fx:id="pettingMaxArea" prefWidth="127.0" text="Maximum Area" />
+                                                                  <TableColumn fx:id="pettingCurrentArea" prefWidth="126.0" text="Current Area" />
+                                                                  <TableColumn fx:id="pettingContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
+                                                                  <TableColumn fx:id="pettingKeeperID" prefWidth="75.0" text="Keeper ID" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </center>
+                                                         <top>
+                                                            <ToolBar fx:id="pettingToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                               <items>
+                                                                  <Button fx:id="addPettingButton" defaultButton="true" mnemonicParsing="false" text="Add New Petting Pen" />
+                                                               </items>
+                                                            </ToolBar>
+                                                         </top>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="pettingAnimalAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <BorderPane prefHeight="690.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <center>
+                                                            <TableView fx:id="pettingAnimalTableView" prefHeight="594.0" prefWidth="394.0" BorderPane.alignment="CENTER">
+                                                               <columns>
+                                                                  <TableColumn fx:id="pettingAnimalID" prefWidth="119.0" text="Animal ID" />
+                                                                  <TableColumn fx:id="pettingAnimalName" prefWidth="119.0" text="Animal Name" />
+                                                                  <TableColumn fx:id="pettingAnimalBreed" minWidth="2.0" prefWidth="63.0" text="Breed" />
+                                                                  <TableColumn fx:id="pettingAnimalSize" prefWidth="167.0" text="Size Requirements" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </center>
+                                                         <top>
+                                                            <Label fx:id="pettingAnimalLabel" text="Double-Click a Pen to Show Contents" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets bottom="5.0" top="5.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </top>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane fx:id="semiAquaticPen" animated="false" text="SemiAquatic Pens">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.5108517608517609" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <items>
+                                                <AnchorPane fx:id="semiAquaticPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <BorderPane prefHeight="549.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <center>
+                                                            <TableView fx:id="semiAquaticPenTableView" prefHeight="594.0" prefWidth="765.0" BorderPane.alignment="CENTER">
+                                                               <columns>
+                                                                  <TableColumn fx:id="semiAquaticPenID" prefWidth="68.99999856948853" text="Pen ID" />
+                                                                  <TableColumn fx:id="semiAquaticTemp" prefWidth="104.00000762939453" text="Temperature" />
+                                                                  <TableColumn fx:id="semiAquaticMaxWaterVolume" prefWidth="127.0" text="Maximum Water Volume" />
+                                                                  <TableColumn fx:id="semiAquaticCurrentWaterVolume" prefWidth="126.0" text="Current Water Volume" />
+                                                                  <TableColumn fx:id="semiAquaticMaxArea" prefWidth="127.0" text="Maximum Area" />
+                                                                  <TableColumn fx:id="semiAquaticCurrentArea" prefWidth="126.0" text="Current Area" />
+                                                                  <TableColumn fx:id="semiAquaticContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
+                                                                  <TableColumn fx:id="semiAquaticWaterType" prefWidth="100.0" text="Water Type" />
+                                                                  <TableColumn fx:id="semiAquaticKeeperID" prefWidth="75.0" text="Keeper ID" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </center>
+                                                         <top>
+                                                            <ToolBar fx:id="semiAquaticToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                               <items>
+                                                                  <Button fx:id="addSemiAquaticButton" defaultButton="true" mnemonicParsing="false" text="Add New SemiAquatic Pen" />
+                                                               </items>
+                                                            </ToolBar>
+                                                         </top>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane fx:id="semiAquaticAnimalAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <BorderPane prefHeight="690.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <center>
+                                                            <TableView fx:id="semiAquaticAnimalTableView" prefHeight="594.0" prefWidth="394.0" BorderPane.alignment="CENTER">
+                                                               <columns>
+                                                                  <TableColumn fx:id="semiAquaticAnimalID" prefWidth="119.0" text="Animal ID" />
+                                                                  <TableColumn fx:id="semiAquaticAnimalName" prefWidth="119.0" text="Animal Name" />
+                                                                  <TableColumn fx:id="semiAquaticAnimalBreed" minWidth="2.0" prefWidth="63.0" text="Breed" />
+                                                                  <TableColumn fx:id="semiAquaticAnimalSize" prefWidth="167.0" text="Size Requirements" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </center>
+                                                         <top>
+                                                            <Label fx:id="semiAquaticAnimalLabel" text="Double-Click a Pen to Show Contents" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets bottom="5.0" top="5.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </top>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
+                                             </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                                    </panes>
+                                </Accordion>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
