@@ -73,4 +73,16 @@ public class Petting extends Pen implements Area, Serializable {
         }
         return area;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!obj.getClass().equals(this.getClass())) { return false; }
+        Petting a = (Petting) obj;
+        return a.getPenID().equals(this.getPenID()) &&
+                a.getLength().equals(this.getLength()) &&
+                a.getWidth().equals(this.getWidth()) &&
+                a.getTemperature().equals(this.getTemperature()) &&
+                a.getKeeperID().equals(this.getKeeperID()) &&
+                a.getContainedAnimals().equals(this.getContainedAnimals());
+    }
 }

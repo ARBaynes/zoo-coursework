@@ -80,4 +80,17 @@ public class Aviary extends Pen implements Volume, Serializable {
         }
         return volume;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!obj.getClass().equals(this.getClass())) { return false; }
+        Aviary a = (Aviary) obj;
+        return a.getPenID().equals(this.getPenID()) &&
+                a.getHeight().equals(this.getHeight()) &&
+                a.getLength().equals(this.getLength()) &&
+                a.getWidth().equals(this.getWidth()) &&
+                a.getTemperature().equals(this.getTemperature()) &&
+                a.getKeeperID().equals(this.getKeeperID()) &&
+                a.getContainedAnimals().equals(this.getContainedAnimals());
+    }
 }

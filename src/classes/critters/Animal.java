@@ -69,27 +69,17 @@ public class Animal implements Serializable{
         return null;
     }
 
-    public void addToPen (String penID) {
-        String typeID = penID.substring(0, 2);
-        switch (typeID) {
-            case "AQ":
-                if (AquariumModel.getPenBy(penID) != null) {
-                    AquariumModel.getPenBy(penID).addAnimalToPen(this);
-                }
-                break;
-            case "AV":
-                break;
-            case "DR":
-                break;
-            case "PT":
-                break;
-            case "SA":
-                break;
-        }
-    }
-
     public void removeFromPen () {
         currentPenID = null;
         AnimalModel.editAnimal(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!obj.getClass().equals(this.getClass())) { return false; }
+        Animal a = (Animal) obj;
+        return a.getID().equals(this.getID()) &&
+                a.getName().equals(this.getName()) &&
+                a.getBreed().equals(this.getBreed());
     }
 }

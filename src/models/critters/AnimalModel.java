@@ -62,7 +62,7 @@ public class AnimalModel {
     public static  Animal getAnAnimalWhere (Integer ID) {
         if (allAnimals.isEmpty()) { setAllAnimals(); }
         for (Animal animal : allAnimals) {
-            if (animal.getID() == ID) {
+            if (animal.getID().equals(ID) ) {
                 return animal;
             }
         }
@@ -135,14 +135,5 @@ public class AnimalModel {
         File folder = new File(filePath);
         Integer ID = folder.listFiles().length + 1;
         return ID;
-    }
-
-    public static Comparator<Animal> animalComparator () {
-        return new Comparator<Animal>() {
-            @Override
-            public int compare(Animal animal1, Animal animal2) {
-                return animal1.getID().compareTo(animal2.getID());
-            }
-        };
     }
 }

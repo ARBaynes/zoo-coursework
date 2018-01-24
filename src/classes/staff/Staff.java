@@ -38,4 +38,13 @@ public class Staff implements Serializable{
     public Integer getStaffID() {
         return staffID;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!obj.getClass().equals(this.getClass())) { return false; }
+        Staff a = (Staff) obj;
+        return a.getStaffID().equals(this.getStaffID()) &&
+                a.getName().equals(this.getName()) &&
+                a.getPenTypes().equals(this.getPenTypes());
+    }
 }

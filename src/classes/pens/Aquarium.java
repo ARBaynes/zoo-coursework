@@ -90,4 +90,18 @@ public class Aquarium extends Pen implements WaterTypes, Volume, Serializable{
         removeAllAnimalsFromPen();
         AquariumModel.editPen(this);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!obj.getClass().equals(this.getClass())) { return false; }
+        Aquarium a = (Aquarium) obj;
+        return a.getPenID().equals(this.getPenID()) &&
+                a.getHeight().equals(this.getHeight()) &&
+                a.getLength().equals(this.getLength()) &&
+                a.getWidth().equals(this.getWidth()) &&
+                a.getTemperature().equals(this.getTemperature()) &&
+                a.getKeeperID().equals(this.getKeeperID()) &&
+                a.getContainedAnimals().equals(this.getContainedAnimals()) &&
+                a.getWaterType().equals(this.getWaterType());
+    }
 }
