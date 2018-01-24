@@ -1,5 +1,7 @@
 package controllers;
 
+import classes.main.Weather;
+import controllers.main.WeatherController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +24,7 @@ import controllers.pens.petting.PettingController;
 import controllers.pens.semiaquatic.SemiAquaticAnimalController;
 import controllers.pens.semiaquatic.SemiAquaticController;
 import controllers.staff.StaffController;
+import models.main.WeatherModel;
 
 public class Controller {
 
@@ -160,6 +163,7 @@ public class Controller {
 
     //WEATHER
     public HBox weatherBox;
+    public Button refreshWeatherButton;
     public Label weatherLabel;
 
     //ANIMALS
@@ -187,10 +191,15 @@ public class Controller {
     @FXML
     public void initialize() {
 
+
+
         MainController.construct(
                 animalTableMain, animalIDColMain, animalNameColMain, animalBreedColMain,
                 staffTableMain, staffIDColMain, staffNameColMain, staffResponsibilitiesColMain,
                 penTableMain, penIDColMain, penTypeColMain, penContainedAnimalsColMain
+        );
+        WeatherController.construct(
+                weatherLabel, refreshWeatherButton
         );
         StaffController.construct(
                 staffTableView, addNewStaffButton, staffID, staffName, staffResponsibleFor
@@ -239,6 +248,7 @@ public class Controller {
 
 
         MainController.outline();
+        WeatherController.outline();
         StaffController.outline();
         AnimalController.outline();
         BreedController.outline();

@@ -1,3 +1,5 @@
+package models.critters;
+
 import classes.critters.Animal;
 import classes.critters.Breed;
 import models.critters.AnimalModel;
@@ -14,19 +16,12 @@ public class AnimalModelTest {
     private Breed testBreed;
 
     public AnimalModelTest () {
-        this.testBreed = new Breed("Shark", "aquarium", 40.5, "volume");
-
+        this.testBreed = new Breed("Friendly Shark", "aquarium", 40.5, "volume");
         Animal animal =  new Animal("Bruce", testBreed);
         animal.setID(0);
         this.testAnimal = animal;
     }
 
-
-
-    /*@Before
-    public void testData () {
-
-    }*/
 
     @Before
     public void addTestAnimal () {
@@ -43,45 +38,49 @@ public class AnimalModelTest {
 
 
     @Test
-    public void getAllAnimalsNotNull () {
+    public void allAnimalsNotNull () {
         Assert.assertNotNull(AnimalModel.getAllAnimals());
     }
 
     @Test
-    public void getAllAnimalsByBreedNotNull () {
+    public void allAnimalsByBreedNotNull () {
         Assert.assertNotNull(AnimalModel.getAllAnimalsWhere(testBreed));
     }
 
     @Test
-    public void getAllAnimalsByPenTypeNotNull () {
-        Assert.assertNotNull(AnimalModel.getAllAnimalsWhere("aquarium"));
+    public void allAnimalsByPenTypeNotNull () {
+        Assert.assertNotNull(AnimalModel.getAllAnimalsWhere(testAnimal.getBreedPenType()));
     }
 
     @Test
-    public void getAnimalByIDNotNull () {
+    public void animalByIDNotNull () {
         Assert.assertNotNull(AnimalModel.getAnAnimalWhere(0));
+    }
+
+    @Test
+    public void animalIDCreatorNotNull () {
+        Assert.assertNotNull(AnimalModel.createAnimalID());
     }
 
     // ASSERT-CONTAINS TESTS
 
     @Test
-    public void getAllAnimalsByBreedContains () {
+    public void allAnimalsByBreedContainsTestAnimal () {
         ArrayList<Animal> animalList = AnimalModel.getAllAnimalsWhere(testBreed);
         Assert.assertTrue(animalList.contains(testAnimal));
     }
 
     @Test
-    public void getAllAnimalsByPenTypeContains () {
-        ArrayList<Animal> animalList = AnimalModel.getAllAnimalsWhere("aquarium");
+    public void allAnimalsByPenTypeContainsTestAnimal () {
+        ArrayList<Animal> animalList = AnimalModel.getAllAnimalsWhere(testAnimal.getBreedPenType());
         Assert.assertTrue(animalList.contains(testAnimal));
     }
 
 
     // ASSERT-EQUALS TESTS
 
-
     @Test
-    public void getAnimalByIDEquals () {
+    public void animalByIDReturnsTestAnimal () {
         Assert.assertEquals(testAnimal, AnimalModel.getAnAnimalWhere(0));
     }
 

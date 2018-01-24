@@ -101,7 +101,7 @@ public class BreedModel {
     }
 
     private static Breed deserialize (File toRead) {
-        Breed breed = null;
+        Breed breed;
         try {
             FileInputStream fileIn = new FileInputStream(toRead);
             ObjectInputStream in = new ObjectInputStream(fileIn);

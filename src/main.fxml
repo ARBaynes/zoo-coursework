@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -19,7 +23,28 @@
                                  <children>
                                     <HBox fx:id="weatherBox" prefHeight="200.0" prefWidth="1000.0" style="-fx-background-color: #ff9966;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                          <AnchorPane prefHeight="78.0" prefWidth="80.0">
+                                             <children>
+                                                <Button fx:id="refreshWeatherButton" alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="12.0" mnemonicParsing="false" prefHeight="178.0" prefWidth="186.0" style="-fx-background-color: #2a2a2a; -fx-border-width: 5; -fx-background-radius: 20; -fx-border-radius: 15;" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="50.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@refresh.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor></Button>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="69.0" prefWidth="146.0">
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" layoutY="-1.0" prefHeight="69.0" prefWidth="200.0" text="Weather:" textAlignment="CENTER" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
                                                    <font>
@@ -28,7 +53,7 @@
                                                 </Label>
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane prefHeight="69.0" prefWidth="241.0">
+                                          <AnchorPane prefHeight="69.0" prefWidth="535.0">
                                              <children>
                                                 <Label fx:id="weatherLabel" prefHeight="69.0" prefWidth="241.0" text="weather could not be found!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
