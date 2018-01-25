@@ -10,6 +10,8 @@ import models.main.WeatherModel;
 
 public class WeatherController {
 
+    private static Thread thread = new Thread(new Weather());
+    private static Weather weather = new Weather();
     private static Label weatherLabel;
     private static Button refreshButton;
 
@@ -33,17 +35,13 @@ public class WeatherController {
     }
 
     public static void refreshWeatherData () {
-        WeatherModel.getWeather();
+        thread.run();
         System.out.println("Weather refreshed.");
     }
 
     private static void loadWeatherToScreen () {
-        weatherLabel.setText(Weather.getDescription() + Weather.getTemp());
+        weatherLabel.setText(weather.getDescription() + weather.getTemp());
         System.out.println("Weather displayed.");
     }
-
-
-
-
 
 }
