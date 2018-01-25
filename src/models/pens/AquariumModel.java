@@ -1,11 +1,14 @@
 package models.pens;
 
 import classes.critters.Animal;
+import classes.critters.Breed;
 import classes.pens.Aquarium;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 public class AquariumModel extends PenModel{
@@ -33,7 +36,54 @@ public class AquariumModel extends PenModel{
         return allPens;
     }
 
-    public static ArrayList<Aquarium> getAllPensWithSpaceRemaining(Animal animalToFit) {
+    public static ArrayList<Aquarium> getAllAppropriatePens (Animal animal) {
+        if (allPens.isEmpty()) { setAllPens(); }
+        Double currentSpace = 0.0;
+        ArrayList<Aquarium> appropriatePens = new ArrayList<>();
+        for (Aquarium pen : allPens) {
+            if (noDislikeToFit(pen,animal) && noDislikedInPen(pen, animal) && spaceRemaining(pen, animal, currentSpace)) {
+                appropriatePens.add(pen);
+            }
+        }
+        return appropriatePens;
+    }
+
+    private static boolean spaceRemaining (Aquarium pen, Animal toFit, Double currentSpace) {
+        currentSpace += pen.getCurrentVolume();
+        for (Map.Entry<String,Double> requirements : toFit.getBreedRequirements().entrySet()) {
+            currentSpace -= requirements.getValue();
+        }
+        return currentSpace >= 0;
+    }
+
+    private static boolean noDislikedInPen (Aquarium pen, Animal toFit) {
+        ArrayList<Breed> cannotLiveWith = toFit.getBreed().getCannotLiveWith();
+        Iterator<Breed> breedIterator = pen.getContainedBreeds().iterator();
+        boolean penIsAppropriate;
+        penIsAppropriate = true;
+        while (breedIterator.hasNext() && penIsAppropriate) {
+            if (cannotLiveWith.contains(breedIterator.next())) {
+                penIsAppropriate = false;
+            }
+        }
+        return penIsAppropriate;
+    }
+
+    private static boolean noDislikeToFit (Aquarium pen, Animal toFit) {
+        Iterator<Breed> breedIterator = pen.getContainedBreeds().iterator();
+        boolean penIsAppropriate;
+        penIsAppropriate = true;
+        while (breedIterator.hasNext() && penIsAppropriate) {
+            if (breedIterator.next().getCannotLiveWith().contains(toFit.getBreed())) {
+                penIsAppropriate = false;
+            }
+        }
+        return penIsAppropriate;
+    }
+
+
+
+    /*public static ArrayList<Aquarium> getAllPensWithSpaceRemaining(Animal animalToFit) {
         if (allPens.isEmpty()) { setAllPens(); }
         ArrayList<Aquarium> aquariums = new ArrayList<>();
         Double calculation = 0.0;
@@ -48,6 +98,28 @@ public class AquariumModel extends PenModel{
         }
         return aquariums;
     }
+
+    public static ArrayList<Aquarium> getAllPensWithNoDisliked (Animal animalToPutIn) {
+        if (allPens.isEmpty()) { setAllPens(); }
+        ArrayList<Breed> cannotLiveWith = animalToPutIn.getBreed().getCannotLiveWith();
+        ArrayList<Aquarium> appropriatePens = new ArrayList<>();
+        Boolean penIsAppropriate;
+        Iterator<Breed> breedIterator;
+
+        for (Aquarium pen : allPens) {
+            penIsAppropriate = true;
+            breedIterator = pen.getContainedBreeds().iterator();
+            while (breedIterator.hasNext() && penIsAppropriate) {
+                if (cannotLiveWith.contains(breedIterator.next())) {
+                    penIsAppropriate = false;
+                }
+            }
+            if (penIsAppropriate) {
+                appropriatePens.add(pen);
+            }
+        }
+        return appropriatePens;
+    }*/
 
     public static Aquarium getPenBy(String aquariumID) {
         if (allPens.isEmpty()) { setAllPens(); }

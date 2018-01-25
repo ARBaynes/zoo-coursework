@@ -23,19 +23,30 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class BreedController {
-    protected static ObservableList<Breed> breedTableViewItems = FXCollections.observableArrayList();
-    protected static TableView<Breed> breedTableView;
-    protected static TableColumn breedName;
-    protected static TableColumn breedPenType;
-    protected static TableColumn breedRequirements;
-    protected static Button addBreedButton;
+    private static ObservableList<Breed> breedTableViewItems = FXCollections.observableArrayList();
 
-    public static void construct (TableView<Breed> tableView, TableColumn name, TableColumn penType, TableColumn requirements, Button addButton) {
+    private static TableView<Breed> breedTableView;
+    private static TableColumn breedName;
+    private static TableColumn breedPenType;
+    private static TableColumn breedRequirements;
+    private static TableColumn breedDislikes;
+    private static Button addBreedButton;
+
+    private static ObservableList<Breed> breedDislikesTableViewItems = FXCollections.observableArrayList();
+    private static TableView<Breed> breedDislikesTableView = new TableView<>();
+    private static TableColumn breedDislikesNames = new TableColumn("Name");
+
+    public static void construct (TableView<Breed> tableView, TableColumn name, TableColumn penType, TableColumn requirements, TableColumn dislikes, Button addButton) {
         breedTableView = tableView;
         breedName = name;
         breedPenType = penType;
         breedRequirements = requirements;
+        breedDislikes = dislikes;
         addBreedButton = addButton;
+
+        breedDislikesTableView.getColumns().add(breedDislikesNames);
+        breedDislikesTableView.setItems(breedDislikesTableViewItems);
+        breedDislikesTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         breedTableView.setItems(breedTableViewItems);
     }
@@ -48,6 +59,18 @@ public class BreedController {
                 return new SimpleStringProperty(p.getValue().requirementsToString());
             }
         });
+
+        breedDislikes.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Breed, String>, ObservableValue<String>>() {
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Breed, String> p) {
+                if (!p.getValue().getCannotLiveWith().isEmpty()) {
+                    return new SimpleStringProperty(p.getValue().getCannotLiveWithToString());
+                } else {
+                    return new SimpleStringProperty("No Dislikes");
+                }
+            }
+        });
+
+        breedDislikesNames.setCellValueFactory( new PropertyValueFactory<Breed, String>("name"));
 
         breedTableView.setRowFactory( tv -> {
             TableRow<Breed> breedRow = new TableRow<>();
@@ -83,6 +106,7 @@ public class BreedController {
         final MenuItem editBreedMenuItem = new MenuItem("Edit " + selectedBreed.getName());
         final MenuItem removeBreedMenuItem = new MenuItem("Remove " + selectedBreed.getName());
         final MenuItem addAnimalMenuItem = new MenuItem("Add New " + selectedBreed.getName() + " Animal");
+        final MenuItem configureBreedDislikes = new MenuItem("Configure " + selectedBreed.getName() + "'s Dislikes");
         addBreedMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -107,11 +131,20 @@ public class BreedController {
                 AnimalController.addAnimal(selectedBreed);
             }
         });
-        contextMenu.getItems().add(addBreedMenuItem);
+        configureBreedDislikes.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                configureBreedDislikes(selectedBreed);
+            }
+        });
+        contextMenu.getItems().add(addAnimalMenuItem);
+        contextMenu.getItems().add(new SeparatorMenuItem());
         contextMenu.getItems().add(editBreedMenuItem);
         contextMenu.getItems().add(removeBreedMenuItem);
+        contextMenu.getItems().add(configureBreedDislikes);
         contextMenu.getItems().add(new SeparatorMenuItem());
-        contextMenu.getItems().add(addAnimalMenuItem);
+        contextMenu.getItems().add(addBreedMenuItem);
+
         row.contextMenuProperty().bind(
                 Bindings.when(row.emptyProperty())
                         .then((ContextMenu)null)
@@ -380,7 +413,7 @@ public class BreedController {
 
         Optional<Breed> result = dialog.showAndWait();
         if (result.isPresent()) {
-            BreedModel.editBreed(currentBreed, result.get());
+            BreedModel.editBreed(result.get());
             refresh();
             MainController.refresh();
         }
@@ -407,6 +440,55 @@ public class BreedController {
         } else {
             System.out.println(chosenBreed.getName() + " will not be deleted");
         }
+    }
+
+
+    private static void configureBreedDislikes (Breed currentBreed) {
+        breedDislikesTableView.getSelectionModel().clearSelection();
+        Dialog<ArrayList<Breed>> dialog = new Dialog<>();
+        dialog.setTitle("Breed Dislikes");
+        dialog.setHeaderText(currentBreed.getName() + "'s Dislikes: ");
+        dialog.setResizable(true);
+        GridPane breedDialogGridPane = new GridPane();
+
+        refreshBreedDislikes(currentBreed);
+        if (!currentBreed.getCannotLiveWith().isEmpty()) {
+            for (Breed dislikes : currentBreed.getCannotLiveWith()) {
+                breedDislikesTableView.getSelectionModel().select(dislikes);
+            }
+        }
+
+        breedDialogGridPane.add(new Label(""), 1,1);
+        breedDialogGridPane.add(breedDislikesTableView, 1, 2);
+
+        dialog.getDialogPane().setContent(breedDialogGridPane);
+
+        ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+
+        dialog.setResultConverter(new Callback<ButtonType, ArrayList<Breed>>() {
+            @Override
+            public ArrayList<Breed> call(ButtonType button) {
+                if (button == buttonTypeOk) {
+                    return new ArrayList<Breed>(breedDislikesTableView.getSelectionModel().getSelectedItems());
+                }
+                return null;
+            }
+        });
+
+        Optional<ArrayList<Breed>> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            ArrayList<Breed> dislikedBreeds = result.get();
+            currentBreed.setCannotLiveWith(dislikedBreeds);
+            BreedModel.editBreed(currentBreed);
+            refresh();
+            MainController.refresh();
+        }
+    }
+
+    private static void refreshBreedDislikes (Breed currentBreed) {
+        breedDislikesTableViewItems.clear();
+        breedDislikesTableViewItems.addAll(BreedModel.getAllBreedsExcept(currentBreed));
     }
 
 }

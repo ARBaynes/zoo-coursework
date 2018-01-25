@@ -45,7 +45,7 @@ public class PenModelTest {
 
     @Test
     public void allPensBySpaceRemainingNotNull () {
-        Assert.assertNotNull(AquariumModel.getAllPensWithSpaceRemaining(testSmallAnimal));
+        Assert.assertNotNull(AquariumModel.getAllAppropriatePens(testSmallAnimal));
     }
 
     @Test
@@ -62,12 +62,12 @@ public class PenModelTest {
 
     @Test
     public void allPensBySpaceRemainingContainsTestPen () {
-        Assert.assertTrue(AquariumModel.getAllPensWithSpaceRemaining(testSmallAnimal).contains(testPen));
+        Assert.assertTrue(AquariumModel.getAllAppropriatePens(testSmallAnimal).contains(testPen));
     }
 
     @Test
     public void allPensBySpaceRemainingDoesNotContainTestPen () {
-        Assert.assertFalse(AquariumModel.getAllPensWithSpaceRemaining(testBigAnimal).contains(testPen));
+        Assert.assertFalse(AquariumModel.getAllAppropriatePens(testBigAnimal).contains(testPen));
     }
 
 }

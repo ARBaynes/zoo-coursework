@@ -5,6 +5,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -56,6 +57,7 @@ public class AnimalController {
                 return new SimpleStringProperty(p.getValue().getBreedName());
             }
         });
+
         animalHasPen.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
                 if (p.getValue().hasPen()) {
@@ -66,6 +68,7 @@ public class AnimalController {
 
             }
         });
+
         animalTable.setRowFactory( tv -> {
             TableRow<Animal> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -153,6 +156,8 @@ public class AnimalController {
                         .otherwise(contextMenu)
         );
     }
+
+
 
     public static void addAnimal (Breed breed) {
         Dialog<Animal> dialog = new Dialog<>();

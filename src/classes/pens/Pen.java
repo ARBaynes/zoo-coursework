@@ -1,6 +1,7 @@
 package classes.pens;
 
 import classes.critters.Animal;
+import classes.critters.Breed;
 import classes.staff.Staff;
 
 import java.io.Serializable;
@@ -51,6 +52,16 @@ public abstract class Pen implements Serializable {
     public String getPenID() { return penID; }
 
     public Integer getContainedAnimalNumber () { return this.containedAnimals.size(); }
+
+    public ArrayList<Breed> getContainedBreeds () {
+        ArrayList<Breed> breeds = new ArrayList<>();
+        for (Animal animal : this.containedAnimals){
+            if (!breeds.contains(animal.getBreed())){
+                breeds.add(animal.getBreed());
+            }
+        }
+        return breeds;
+    }
 
     public Integer getKeeperID () {
         return keeperID;

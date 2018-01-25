@@ -1,6 +1,7 @@
 package classes.critters;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ public class Breed implements Serializable {
     private String name;
     private String penType;
     private HashMap<String, Double> requirements = new HashMap<>();
+    private ArrayList<Breed> cannotLiveWith = new ArrayList<>();
 
     public Breed (String name, String penType, Double requirements, String areaOrVolume) {
         this.setName(name);
@@ -20,7 +22,6 @@ public class Breed implements Serializable {
         this.setPenType(penType);
         this.setRequirements(landRequirements, waterRequirements);
     }
-
     //SETTERS
 
     public void setPenType(String penType) {
@@ -35,6 +36,29 @@ public class Breed implements Serializable {
         getRequirements().put("water", waterRequirements);
         setRequirements("land", landRequirements);
     }
+
+    public void setName(String name) { this.name = name; }
+
+    public void setCannotLiveWith(ArrayList<Breed> cannotLiveWith) {
+        this.cannotLiveWith = cannotLiveWith;
+    }
+
+    //GETTERS
+
+    public String getPenType() {
+        return penType;
+    }
+
+    public HashMap<String, Double> getRequirements() {
+        return requirements;
+    }
+
+    public String getName() { return name; }
+
+    public ArrayList<Breed> getCannotLiveWith() { return cannotLiveWith; }
+
+
+    //OTHER
 
     public String requirementsToString () {
         StringBuilder stringBuilder = new StringBuilder();
@@ -51,21 +75,13 @@ public class Breed implements Serializable {
         return stringBuilder.toString();
     }
 
-    public void setName(String name) { this.name = name; }
-
-    //GETTERS
-
-    public String getPenType() {
-        return penType;
+    public String getCannotLiveWithToString () {
+        StringBuilder cannotLiveWithStringBuilder = new StringBuilder();
+        for (Breed breed: cannotLiveWith ) {
+            cannotLiveWithStringBuilder.append(breed.getName()).append(" ");
+        }
+        return cannotLiveWithStringBuilder.toString();
     }
-
-    public HashMap<String, Double> getRequirements() {
-        return requirements;
-    }
-
-    public String getName() { return name; }
-
-    //OTHER
 
     @Override
     public String toString() {

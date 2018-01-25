@@ -4,6 +4,7 @@ import classes.critters.Animal;
 import classes.critters.Breed;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -39,6 +40,17 @@ public class BreedModel {
         return names;
     }
 
+    public static ArrayList<Breed> getAllBreedsExcept (Breed exceptionBreed) {
+        ArrayList<Breed> allBreedsExcept = new ArrayList<>();
+        if (allBreeds.isEmpty()) { setAllBreeds(); }
+        for (Breed breed : allBreeds) {
+            if (!breed.equals(exceptionBreed)) {
+                allBreedsExcept.add(breed);
+            }
+        }
+        return allBreedsExcept;
+    }
+
     public static Breed getABreedWhere (String name) {
         if (allBreeds.isEmpty()) { setAllBreeds(); }
         for (Breed breed : allBreeds) {
@@ -68,9 +80,8 @@ public class BreedModel {
         setAllBreeds();
     }
 
-    public static void editBreed (Breed toFind, Breed toReplaceWith) {
-        removeBreed(toFind);
-        addBreed(toReplaceWith);
+    public static void editBreed (Breed toEdit) {
+        addBreed(toEdit);
     }
 
     public static void removeBreed (Breed toFind) {

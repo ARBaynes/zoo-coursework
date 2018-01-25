@@ -4,6 +4,7 @@ import models.critters.AnimalModel;
 import models.pens.AquariumModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Animal implements Serializable{
@@ -36,6 +37,8 @@ public class Animal implements Serializable{
         this.breed = breed;
     }
 
+
+
     //GETTERS
 
     public Integer getID() { return ID; }
@@ -45,6 +48,7 @@ public class Animal implements Serializable{
     public Breed getBreed() { return breed; }
 
     public String getCurrentPenID() { return currentPenID; }
+
 
     //BREED GETTERS
 

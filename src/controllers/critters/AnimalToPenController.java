@@ -255,7 +255,7 @@ public class AnimalToPenController {
         dialog.setResizable(true);
         Label desc = new Label("Aquariums: ");
         ObservableList<Aquarium> pens = FXCollections.observableArrayList();
-        ArrayList<Aquarium> aquariums = AquariumModel.getAllPensWithSpaceRemaining(animal);
+        ArrayList<Aquarium> aquariums = AquariumModel.getAllAppropriatePens(animal);
         for (Aquarium aquarium: aquariums) {
             pens.addAll(aquarium);
         }
@@ -737,7 +737,7 @@ public class AnimalToPenController {
     }
 
     private static void autoAddAnimalToAquarium (Animal animal) {
-        ArrayList<Aquarium> allSuitablePens = AquariumModel.getAllPensWithSpaceRemaining(animal);
+        ArrayList<Aquarium> allSuitablePens = AquariumModel.getAllAppropriatePens(animal);
         if (allSuitablePens.isEmpty()) {
             noPensAlert(animal).showAndWait();
             return;
@@ -903,8 +903,27 @@ public class AnimalToPenController {
         return assignedToPenAlert;
     }
 
-
     public static void refresh (ObservableList<Animal> animalList, Pen pen) {
+        animalList.clear();
+        animalList.addAll(pen.getContainedAnimals());
+    }
+    public static void refresh (ObservableList<Animal> animalList, Aquarium pen) {
+        animalList.clear();
+        animalList.addAll(pen.getContainedAnimals());
+    }
+    public static void refresh (ObservableList<Animal> animalList, Aviary pen) {
+        animalList.clear();
+        animalList.addAll(pen.getContainedAnimals());
+    }
+    public static void refresh (ObservableList<Animal> animalList, Dry pen) {
+        animalList.clear();
+        animalList.addAll(pen.getContainedAnimals());
+    }
+    public static void refresh (ObservableList<Animal> animalList, Petting pen) {
+        animalList.clear();
+        animalList.addAll(pen.getContainedAnimals());
+    }
+    public static void refresh (ObservableList<Animal> animalList, SemiAquatic pen) {
         animalList.clear();
         animalList.addAll(pen.getContainedAnimals());
     }

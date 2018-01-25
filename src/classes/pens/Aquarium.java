@@ -91,6 +91,11 @@ public class Aquarium extends Pen implements WaterTypes, Volume, Serializable{
         AquariumModel.editPen(this);
     }
 
+    /*
+    * TODO
+    * Work out why the code here is failing.
+    * */
+
     @Override
     public boolean equals(Object obj) {
         if (!obj.getClass().equals(this.getClass())) { return false; }

@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public abstract class PenModel {
-    protected static String createID (String filePath, String identifier) {
+    static String createID(String filePath, String identifier) {
         Integer ID = 0;
         File folder = new File(filePath);
         if (folder.exists()) {

@@ -1,12 +1,14 @@
 package models.pens;
 
 import classes.critters.Animal;
+import classes.critters.Breed;
 import classes.pens.Aviary;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 public class AviaryModel extends PenModel{
@@ -47,6 +49,28 @@ public class AviaryModel extends PenModel{
             }
         }
         return pens;
+    }
+
+    public static ArrayList<Aviary> getAllPensWithNoDisliked (Animal animalToPutIn) {
+        if (allPens.isEmpty()) { setAllPens(); }
+        ArrayList<Breed> cannotLiveWith = animalToPutIn.getBreed().getCannotLiveWith();
+        ArrayList<Aviary> appropriatePens = new ArrayList<>();
+        Boolean penIsAppropriate;
+        Iterator<Breed> breedIterator;
+
+        for (Aviary pen : allPens) {
+            penIsAppropriate = true;
+            breedIterator = pen.getContainedBreeds().iterator();
+            while (breedIterator.hasNext() && penIsAppropriate) {
+                if (cannotLiveWith.contains(breedIterator.next())) {
+                    penIsAppropriate = false;
+                }
+            }
+            if (penIsAppropriate) {
+                appropriatePens.add(pen);
+            }
+        }
+        return appropriatePens;
     }
 
     public static Aviary getPenBy(String penID) {

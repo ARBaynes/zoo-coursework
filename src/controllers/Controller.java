@@ -1,6 +1,5 @@
 package controllers;
 
-import classes.main.Weather;
 import controllers.main.WeatherController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -24,7 +23,6 @@ import controllers.pens.petting.PettingController;
 import controllers.pens.semiaquatic.SemiAquaticAnimalController;
 import controllers.pens.semiaquatic.SemiAquaticController;
 import controllers.staff.StaffController;
-import models.main.WeatherModel;
 
 public class Controller {
 
@@ -36,6 +34,7 @@ public class Controller {
     public TableColumn breedName;
     public TableColumn breedPenType;
     public TableColumn breedRequirements;
+    public TableColumn breedDislikes;
     public TableColumn animalTableColID;
     public TableColumn animalTableColName;
     public TableColumn animalTableColHasPen;
@@ -205,10 +204,10 @@ public class Controller {
                 staffTableView, addNewStaffButton, staffID, staffName, staffResponsibleFor
         );
         AnimalController.construct(
-                animalTableView, animalTableColBreed, animalTableColID, animalTableColName, animalTableColHasPen, animalTypeLabel
+                animalTableView, animalTableColBreed, animalTableColID, animalTableColName,  animalTableColHasPen, animalTypeLabel
         );
         BreedController.construct(
-                breedTableView, breedName, breedPenType, breedRequirements, addBreedButton
+                breedTableView, breedName, breedPenType, breedRequirements, breedDislikes, addBreedButton
         );
         AquariumController.construct(
                 aquariumToolbar,addAquariumButton, aquariumPenTableView, aquariumPenID, aquariumTemp, aquariumContainedAnimals, aquariumHeight,
