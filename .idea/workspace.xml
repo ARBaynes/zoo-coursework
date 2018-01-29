@@ -20,7 +20,6 @@
       <change beforePath="$PROJECT_DIR$/src/models/main/WeatherJSON.java" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/models/main/WeatherModel.java" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/models/pens/AquariumModel.java" afterPath="$PROJECT_DIR$/src/models/pens/AquariumModel.java" />
-      <change beforePath="$PROJECT_DIR$/src/models/pens/AviaryModel.java" afterPath="$PROJECT_DIR$/src/models/pens/AviaryModel.java" />
       <change beforePath="$PROJECT_DIR$/src/models/pens/PenModel.java" afterPath="$PROJECT_DIR$/src/models/pens/PenModel.java" />
       <change beforePath="$PROJECT_DIR$/target/classes/classes/critters/Animal.class" afterPath="$PROJECT_DIR$/target/classes/classes/critters/Animal.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/classes/critters/Breed.class" afterPath="$PROJECT_DIR$/target/classes/classes/critters/Breed.class" />
@@ -1707,3 +1706,4 @@
     </states>
   </component>
 </project>
+      <change beforePath="$PROJECT_DIR$/src/models/pens/AviaryModel.java" afterPath="$PROJECT_DIR$/src/models/pens/AviaryModel.java" />
