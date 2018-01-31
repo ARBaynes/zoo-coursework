@@ -177,6 +177,11 @@ public class SemiAquaticController {
     }
 
     public static void addSemiAquatic () {
+        if (StaffModel.getAllStaffBy("semiaquatic").isEmpty() || StaffModel.getAllStaffBy("semiaquatic") == null) {
+            noKeepersAlert().showAndWait();
+            return;
+        }
+
         Dialog<SemiAquatic> dialog = new Dialog<>();
         dialog.setTitle("Add SemiAquatic Pen");
         dialog.setHeaderText("Add a new SemiAquatic pen: ");
@@ -296,6 +301,11 @@ public class SemiAquaticController {
     }
 
     public static void editSemiAquatic (SemiAquatic semiAquatic) {
+        if (StaffModel.getAllStaffBy("semiaquatic").isEmpty() || StaffModel.getAllStaffBy("semiaquatic") == null) {
+            noKeepersAlert(semiAquatic).showAndWait();
+            return;
+        }
+
         Dialog<SemiAquatic> dialog = new Dialog<>();
         dialog.setTitle("Edit SemiAquatic Pen");
         dialog.setHeaderText("Edit SemiAquatic Pen #" + semiAquatic.getPenID());
@@ -400,6 +410,20 @@ public class SemiAquaticController {
         } else {
             System.out.println(semiAquatic.getPenID() + " will not be deleted");
         }
+    }
+
+    private static Alert noKeepersAlert (SemiAquatic pen) {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After Pen #" + pen.getPenID() + ". " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
+    }
+
+    private static Alert noKeepersAlert () {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After a SemiAquatic Pen. " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
     }
 
 }

@@ -233,7 +233,7 @@ public class BreedController {
         dialog.setResultConverter(new Callback<ButtonType, Breed>() {
             @Override
             public Breed call(ButtonType button) {
-                if (button == buttonTypeOk) {
+                if (button == buttonTypeOk && !penTypeChoiceBox.getSelectionModel().getSelectedItem().isEmpty()) {
                     Breed breed;
                     switch (penTypeChoiceBox.getSelectionModel().getSelectedItem()) {
                         case "aquarium":

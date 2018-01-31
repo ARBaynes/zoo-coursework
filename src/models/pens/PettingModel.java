@@ -1,6 +1,7 @@
 package models.pens;
 
 import classes.critters.Animal;
+import classes.critters.Breed;
 import classes.pens.Petting;
 
 import java.io.*;
@@ -33,20 +34,45 @@ public class PettingModel extends PenModel{
         return allPens;
     }
 
-    public static ArrayList<Petting> getAllPensWithSpaceRemaining(Animal animalToFit) {
+    public static ArrayList<Petting> getAllAppropriatePens (Animal animal) {
         if (allPens.isEmpty()) { setAllPens(); }
-        ArrayList<Petting> pens = new ArrayList<>();
-        Double calculation = 0.0;
+        Double currentSpace = 0.0;
+        ArrayList<Petting> appropriatePens = new ArrayList<>();
         for (Petting pen : allPens) {
-            calculation += pen.getCurrentArea();
-            for (Map.Entry<String,Double> requirements : animalToFit.getBreedRequirements().entrySet()) {
-                calculation -= requirements.getValue();
-            }
-            if (calculation >= 0) {
-                pens.add(pen);
+            if ( animalsInPenDoNotDislikeAnimalToFit(pen, animal) && animalHasNoDislikesInPen(pen, animal) && spaceRemaining(pen, animal, currentSpace)) {
+                appropriatePens.add(pen);
             }
         }
-        return pens;
+        return appropriatePens;
+    }
+
+    private static boolean spaceRemaining (Petting pen, Animal toFit, Double currentSpace) {
+        currentSpace += pen.getCurrentArea();
+        for (Map.Entry<String,Double> requirements : toFit.getBreedRequirements().entrySet()) {
+            currentSpace -= requirements.getValue();
+        }
+        return currentSpace >= 0;
+    }
+
+    private static boolean animalHasNoDislikesInPen (Petting pen, Animal toFit) {
+        for (Breed dislike : toFit.getBreedDislikes()) {
+            System.out.println(dislike);
+            if (pen.getContainedBreedNames().contains(dislike.getName())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean animalsInPenDoNotDislikeAnimalToFit (Petting pen, Animal toFit) {
+        for (Animal containedAnimal : pen.getContainedAnimals()) {
+            for (Breed dislikedBreed : containedAnimal.getBreedDislikes()) {
+                if (dislikedBreed.getName().equals(toFit.getBreedName())) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static Petting getPenBy(String penID) {

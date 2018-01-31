@@ -42,6 +42,7 @@ public class Controller {
     public Button addBreedButton;
     public ToolBar breedToolbar;
     public TableColumn animalTableColBreed;
+    public Button animalTableRefreshButton;
 
     // -----------------------------------------
 
@@ -185,6 +186,7 @@ public class Controller {
     public TableColumn penTypeColMain;
     public TableColumn penContainedAnimalsColMain;
 
+
     // -----------------------------------------
 
     @FXML
@@ -204,7 +206,7 @@ public class Controller {
                 staffTableView, addNewStaffButton, staffID, staffName, staffResponsibleFor
         );
         AnimalController.construct(
-                animalTableView, animalTableColBreed, animalTableColID, animalTableColName,  animalTableColHasPen, animalTypeLabel
+                animalTableView, animalTableColBreed, animalTableColID, animalTableColName,  animalTableColHasPen, animalTypeLabel, animalTableRefreshButton
         );
         BreedController.construct(
                 breedTableView, breedName, breedPenType, breedRequirements, breedDislikes, addBreedButton

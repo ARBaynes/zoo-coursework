@@ -1,6 +1,7 @@
 package models.pens;
 
 import classes.critters.Animal;
+import classes.critters.Breed;
 import classes.pens.SemiAquatic;
 
 import java.io.*;
@@ -33,26 +34,51 @@ public class SemiAquaticModel extends PenModel{
         return allPens;
     }
 
-    public static ArrayList<SemiAquatic> getAllPensWithSpaceRemaining(Animal animalToFit) {
+    public static ArrayList<SemiAquatic> getAllAppropriatePens (Animal animal) {
         if (allPens.isEmpty()) { setAllPens(); }
-        ArrayList<SemiAquatic> pens = new ArrayList<>();
-        Double landCalculation = 0.0;
-        Double waterCalculation = 0.0;
+        Double landSpace = 0.0;
+        Double waterSpace = 0.0;
+        ArrayList<SemiAquatic> appropriatePens = new ArrayList<>();
         for (SemiAquatic pen : allPens) {
-            landCalculation += pen.getCurrentArea();
-            waterCalculation += pen.getCurrentWaterVolume();
-            for (Map.Entry<String,Double> requirements : animalToFit.getBreedRequirements().entrySet()) {
-                if (requirements.getKey().equals("land")) {
-                    landCalculation -= requirements.getValue();
-                } else if (requirements.getKey().equals("water")) {
-                    waterCalculation -= requirements.getValue();
-                }
-            }
-            if (waterCalculation >= 0 && landCalculation >= 0) {
-                pens.add(pen);
+            if ( animalsInPenDoNotDislikeAnimalToFit(pen, animal) && animalHasNoDislikesInPen(pen, animal) && spaceRemaining(pen, animal, landSpace, waterSpace)) {
+                appropriatePens.add(pen);
             }
         }
-        return pens;
+        return appropriatePens;
+    }
+
+    private static boolean spaceRemaining (SemiAquatic pen, Animal toFit, Double landSpace, Double waterSpace) {
+        landSpace += pen.getCurrentArea();
+        waterSpace += pen.getCurrentWaterVolume();
+        for (Map.Entry<String,Double> requirements : toFit.getBreedRequirements().entrySet()) {
+            if (requirements.getKey().equals("land")) {
+                landSpace -= requirements.getValue();
+            } else if (requirements.getKey().equals("water")) {
+                waterSpace -= requirements.getValue();
+            }
+        }
+        return landSpace >= 0 && waterSpace >= 0;
+    }
+
+    private static boolean animalHasNoDislikesInPen (SemiAquatic pen, Animal toFit) {
+        for (Breed dislike : toFit.getBreedDislikes()) {
+            System.out.println(dislike);
+            if (pen.getContainedBreedNames().contains(dislike.getName())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean animalsInPenDoNotDislikeAnimalToFit (SemiAquatic pen, Animal toFit) {
+        for (Animal containedAnimal : pen.getContainedAnimals()) {
+            for (Breed dislikedBreed : containedAnimal.getBreedDislikes()) {
+                if (dislikedBreed.getName().equals(toFit.getBreedName())) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static SemiAquatic getPenBy(String penID) {

@@ -35,42 +35,45 @@ public class AviaryModel extends PenModel{
         return allPens;
     }
 
-    public static ArrayList<Aviary> getAllPensWithSpaceRemaining(Animal animalToFit) {
+    public static ArrayList<Aviary> getAllAppropriatePens (Animal animal) {
         if (allPens.isEmpty()) { setAllPens(); }
-        ArrayList<Aviary> pens = new ArrayList<>();
-        Double calculation = 0.0;
-        for (Aviary pen : allPens) {
-            calculation += pen.getCurrentVolume();
-            for (Map.Entry<String,Double> requirements : animalToFit.getBreedRequirements().entrySet()) {
-                calculation -= requirements.getValue();
-            }
-            if (calculation >= 0) {
-                pens.add(pen);
-            }
-        }
-        return pens;
-    }
-
-    public static ArrayList<Aviary> getAllPensWithNoDisliked (Animal animalToPutIn) {
-        if (allPens.isEmpty()) { setAllPens(); }
-        ArrayList<Breed> cannotLiveWith = animalToPutIn.getBreed().getCannotLiveWith();
+        Double currentSpace = 0.0;
         ArrayList<Aviary> appropriatePens = new ArrayList<>();
-        Boolean penIsAppropriate;
-        Iterator<Breed> breedIterator;
-
         for (Aviary pen : allPens) {
-            penIsAppropriate = true;
-            breedIterator = pen.getContainedBreeds().iterator();
-            while (breedIterator.hasNext() && penIsAppropriate) {
-                if (cannotLiveWith.contains(breedIterator.next())) {
-                    penIsAppropriate = false;
-                }
-            }
-            if (penIsAppropriate) {
+            if ( animalsInPenDoNotDislikeAnimalToFit(pen, animal) && animalHasNoDislikesInPen(pen, animal) && spaceRemaining(pen, animal, currentSpace)) {
                 appropriatePens.add(pen);
             }
         }
         return appropriatePens;
+    }
+
+    private static boolean spaceRemaining (Aviary pen, Animal toFit, Double currentSpace) {
+        currentSpace += pen.getCurrentVolume();
+        for (Map.Entry<String,Double> requirements : toFit.getBreedRequirements().entrySet()) {
+            currentSpace -= requirements.getValue();
+        }
+        return currentSpace >= 0;
+    }
+
+    private static boolean animalHasNoDislikesInPen (Aviary pen, Animal toFit) {
+        for (Breed dislike : toFit.getBreedDislikes()) {
+            System.out.println(dislike);
+            if (pen.getContainedBreedNames().contains(dislike.getName())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean animalsInPenDoNotDislikeAnimalToFit (Aviary pen, Animal toFit) {
+        for (Animal containedAnimal : pen.getContainedAnimals()) {
+            for (Breed dislikedBreed : containedAnimal.getBreedDislikes()) {
+                if (dislikedBreed.getName().equals(toFit.getBreedName())) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static Aviary getPenBy(String penID) {

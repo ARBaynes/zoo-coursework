@@ -157,6 +157,11 @@ public class AviaryController {
     }
 
     public static void addAviary () {
+        if (StaffModel.getAllStaffBy("aviary").isEmpty() || StaffModel.getAllStaffBy("aviary") == null) {
+            noKeepersAlert().showAndWait();
+            return;
+        }
+
         Dialog<Aviary> dialog = new Dialog<>();
         dialog.setTitle("Add Aviary");
         dialog.setHeaderText("Add a new aviary: ");
@@ -253,6 +258,11 @@ public class AviaryController {
     }
 
     public static void editAviary(Aviary aviary) {
+        if (StaffModel.getAllStaffBy("aviary").isEmpty() || StaffModel.getAllStaffBy("aviary") == null) {
+            noKeepersAlert(aviary).showAndWait();
+            return;
+        }
+
         Dialog<Aviary> dialog = new Dialog<>();
         dialog.setTitle("Edit Aviary");
         dialog.setHeaderText("Edit Aviary #" + aviary.getPenID());
@@ -335,6 +345,20 @@ public class AviaryController {
         } else {
             System.out.println(aviary.getPenID() + " will not be deleted");
         }
+    }
+
+    private static Alert noKeepersAlert (Aviary pen) {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After Pen #" + pen.getPenID() + ". " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
+    }
+
+    private static Alert noKeepersAlert () {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After an Aviary. " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
     }
 
 }

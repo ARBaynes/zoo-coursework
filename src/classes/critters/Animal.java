@@ -55,6 +55,7 @@ public class Animal implements Serializable{
     public String getBreedName () {return breed.getName();}
     public String getBreedPenType  () {return breed.getPenType();}
     public HashMap<String, Double> getBreedRequirements () {return breed.getRequirements();}
+    public ArrayList<Breed> getBreedDislikes () {return breed.getCannotLiveWith();}
     public String getBreedRequirementsToString () {return breed.requirementsToString();}
 
     //OTHER
@@ -78,12 +79,4 @@ public class Animal implements Serializable{
         AnimalModel.editAnimal(this);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!obj.getClass().equals(this.getClass())) { return false; }
-        Animal a = (Animal) obj;
-        return a.getID().equals(this.getID()) &&
-                a.getName().equals(this.getName()) &&
-                a.getBreed().equals(this.getBreed());
-    }
 }

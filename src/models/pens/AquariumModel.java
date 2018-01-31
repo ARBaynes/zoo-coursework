@@ -41,7 +41,7 @@ public class AquariumModel extends PenModel{
         Double currentSpace = 0.0;
         ArrayList<Aquarium> appropriatePens = new ArrayList<>();
         for (Aquarium pen : allPens) {
-            if (noDislikeToFit(pen,animal) && noDislikedInPen(pen, animal) && spaceRemaining(pen, animal, currentSpace)) {
+            if ( animalsInPenDoNotDislikeAnimalToFit(pen, animal) && animalHasNoDislikesInPen(pen, animal) && spaceRemaining(pen, animal, currentSpace)) {
                 appropriatePens.add(pen);
             }
         }
@@ -56,70 +56,26 @@ public class AquariumModel extends PenModel{
         return currentSpace >= 0;
     }
 
-    private static boolean noDislikedInPen (Aquarium pen, Animal toFit) {
-        ArrayList<Breed> cannotLiveWith = toFit.getBreed().getCannotLiveWith();
-        Iterator<Breed> breedIterator = pen.getContainedBreeds().iterator();
-        boolean penIsAppropriate;
-        penIsAppropriate = true;
-        while (breedIterator.hasNext() && penIsAppropriate) {
-            if (cannotLiveWith.contains(breedIterator.next())) {
-                penIsAppropriate = false;
+    private static boolean animalHasNoDislikesInPen (Aquarium pen, Animal toFit) {
+        for (Breed dislike : toFit.getBreedDislikes()) {
+            System.out.println(dislike);
+            if (pen.getContainedBreedNames().contains(dislike.getName())) {
+                return false;
             }
         }
-        return penIsAppropriate;
+        return true;
     }
 
-    private static boolean noDislikeToFit (Aquarium pen, Animal toFit) {
-        Iterator<Breed> breedIterator = pen.getContainedBreeds().iterator();
-        boolean penIsAppropriate;
-        penIsAppropriate = true;
-        while (breedIterator.hasNext() && penIsAppropriate) {
-            if (breedIterator.next().getCannotLiveWith().contains(toFit.getBreed())) {
-                penIsAppropriate = false;
-            }
-        }
-        return penIsAppropriate;
-    }
-
-
-
-    /*public static ArrayList<Aquarium> getAllPensWithSpaceRemaining(Animal animalToFit) {
-        if (allPens.isEmpty()) { setAllPens(); }
-        ArrayList<Aquarium> aquariums = new ArrayList<>();
-        Double calculation = 0.0;
-        for (Aquarium pen : allPens) {
-            calculation += pen.getCurrentVolume();
-            for (Map.Entry<String,Double> requirements : animalToFit.getBreedRequirements().entrySet()) {
-                 calculation -= requirements.getValue();
-            }
-            if (calculation >= 0) {
-                aquariums.add(pen);
-            }
-        }
-        return aquariums;
-    }
-
-    public static ArrayList<Aquarium> getAllPensWithNoDisliked (Animal animalToPutIn) {
-        if (allPens.isEmpty()) { setAllPens(); }
-        ArrayList<Breed> cannotLiveWith = animalToPutIn.getBreed().getCannotLiveWith();
-        ArrayList<Aquarium> appropriatePens = new ArrayList<>();
-        Boolean penIsAppropriate;
-        Iterator<Breed> breedIterator;
-
-        for (Aquarium pen : allPens) {
-            penIsAppropriate = true;
-            breedIterator = pen.getContainedBreeds().iterator();
-            while (breedIterator.hasNext() && penIsAppropriate) {
-                if (cannotLiveWith.contains(breedIterator.next())) {
-                    penIsAppropriate = false;
+    private static boolean animalsInPenDoNotDislikeAnimalToFit (Aquarium pen, Animal toFit) {
+        for (Animal containedAnimal : pen.getContainedAnimals()) {
+            for (Breed dislikedBreed : containedAnimal.getBreedDislikes()) {
+                if (dislikedBreed.getName().equals(toFit.getBreedName())) {
+                    return false;
                 }
             }
-            if (penIsAppropriate) {
-                appropriatePens.add(pen);
-            }
         }
-        return appropriatePens;
-    }*/
+        return true;
+    }
 
     public static Aquarium getPenBy(String aquariumID) {
         if (allPens.isEmpty()) { setAllPens(); }

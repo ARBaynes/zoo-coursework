@@ -53,11 +53,11 @@ public abstract class Pen implements Serializable {
 
     public Integer getContainedAnimalNumber () { return this.containedAnimals.size(); }
 
-    public ArrayList<Breed> getContainedBreeds () {
-        ArrayList<Breed> breeds = new ArrayList<>();
+    public ArrayList<String> getContainedBreedNames () {
+        ArrayList<String> breeds = new ArrayList<>();
         for (Animal animal : this.containedAnimals){
-            if (!breeds.contains(animal.getBreed())){
-                breeds.add(animal.getBreed());
+            if (!breeds.contains(animal.getBreedName())){
+                breeds.add(animal.getBreedName());
             }
         }
         return breeds;

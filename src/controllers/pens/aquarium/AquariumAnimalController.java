@@ -17,14 +17,13 @@ import controllers.critters.AnimalToPenController;
 
 public class AquariumAnimalController {
 
-    protected static ObservableList<Animal> aquariumAnimalTableViewItems = FXCollections.observableArrayList();
+    private static ObservableList<Animal> aquariumAnimalTableViewItems = FXCollections.observableArrayList();
 
-    protected static Label aquariumAnimalLabel;
-    protected static TableView aquariumAnimalTableView;
-    protected static TableColumn aquariumAnimalName;
-    protected static TableColumn aquariumAnimalBreed;
-    protected static TableColumn aquariumAnimalRequirements;
-    protected static TableColumn aquariumAnimalID;
+    private static TableView<Animal> aquariumAnimalTableView;
+    private static TableColumn aquariumAnimalName;
+    private static TableColumn aquariumAnimalBreed;
+    private static TableColumn aquariumAnimalRequirements;
+    private static TableColumn aquariumAnimalID;
 
     public static void construct (TableView tableView, TableColumn name, TableColumn breed,
                                   TableColumn requirements,TableColumn id) {
@@ -71,14 +70,10 @@ public class AquariumAnimalController {
         aquariumAnimalTableViewItems.clear();
     }
 
-    public static Label getAquariumAnimalLabel () {
-        return aquariumAnimalLabel;
-    }
-
     private static void aquariumAnimalTableContextMenu(TableRow<Animal> animalTableRow) {
         Animal selectedAnimal = animalTableRow.getItem();
         final ContextMenu contextMenu = new ContextMenu();
-        final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen");
+        final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen #" + selectedAnimal.getCurrentPenID());
         removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

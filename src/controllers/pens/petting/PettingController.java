@@ -153,6 +153,11 @@ public class PettingController {
     }
 
     public static void addPetting () {
+        if (StaffModel.getAllStaffBy("petting").isEmpty() || StaffModel.getAllStaffBy("petting") == null) {
+            noKeepersAlert().showAndWait();
+            return;
+        }
+
         Dialog<Petting> dialog = new Dialog<>();
         dialog.setTitle("Add Petting Pen");
         dialog.setHeaderText("Add a new petting pen: ");
@@ -241,6 +246,11 @@ public class PettingController {
     }
 
     public static void editPetting(Petting petting) {
+        if (StaffModel.getAllStaffBy("petting").isEmpty() || StaffModel.getAllStaffBy("petting") == null) {
+            noKeepersAlert(petting).showAndWait();
+            return;
+        }
+
         Dialog<Petting> dialog = new Dialog<>();
         dialog.setTitle("Edit Petting Pen");
         dialog.setHeaderText("Edit petting pen #" + petting.getPenID());
@@ -317,6 +327,20 @@ public class PettingController {
         } else {
             System.out.println(petting.getPenID() + " will not be deleted");
         }
+    }
+
+    private static Alert noKeepersAlert (Petting pen) {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After Pen #" + pen.getPenID() + ". " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
+    }
+
+    private static Alert noKeepersAlert () {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After a Petting Pen. " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
     }
 
 }

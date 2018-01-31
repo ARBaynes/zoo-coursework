@@ -39,7 +39,6 @@ public class AquariumController {
     private static TableColumn aquariumWaterType;
     private static TableColumn aquariumKeeperID;
 
-    private static String currentPenID;
 
 
     public static void construct (ToolBar toolBar, Button addButton, TableView tableView, TableColumn id, TableColumn temp,
@@ -95,8 +94,6 @@ public class AquariumController {
             penRow.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && (!penRow.isEmpty()) ) {
                     Aquarium pen = penRow.getItem();
-                    currentPenID = pen.getPenID();
-                    //AquariumAnimalController.getAquariumAnimalLabel().setText("Aquarium #" + penRow.getItem().getPenID() + ": ");
                     if (pen.getContainedAnimals().isEmpty() || pen.getContainedAnimals() == null ) {
                         Alert noAnimals = new Alert(Alert.AlertType.INFORMATION);
                         noAnimals.setHeaderText("Caution");
@@ -163,7 +160,26 @@ public class AquariumController {
         );
     }
 
+    private static Alert noKeepersAlert (Aquarium pen) {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After Pen #" + pen.getPenID() + ". " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
+    }
+
+    private static Alert noKeepersAlert () {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After an Aquarium. " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
+    }
+
     public static void addAquarium () {
+        if (StaffModel.getAllStaffBy("aquarium").isEmpty() || StaffModel.getAllStaffBy("aquarium") == null) {
+            noKeepersAlert().showAndWait();
+            return;
+        }
+
         Dialog<Aquarium> dialog = new Dialog<>();
         dialog.setTitle("Add Aquarium");
         dialog.setHeaderText("Add a new aquarium: ");
@@ -279,6 +295,11 @@ public class AquariumController {
     }
 
     public static void editAquarium (Aquarium aquarium) {
+        if (StaffModel.getAllStaffBy("aquarium").isEmpty() || StaffModel.getAllStaffBy("aquarium") == null) {
+            noKeepersAlert(aquarium).showAndWait();
+            return;
+        }
+
         Dialog<Aquarium> dialog = new Dialog<>();
         dialog.setTitle("Edit Aquarium");
         dialog.setHeaderText("Edit Aquarium #" + aquarium.getPenID());

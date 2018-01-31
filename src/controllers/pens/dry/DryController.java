@@ -154,6 +154,11 @@ public class DryController {
     }
 
     public static void addDry () {
+        if (StaffModel.getAllStaffBy("dry").isEmpty() || StaffModel.getAllStaffBy("dry") == null) {
+            noKeepersAlert().showAndWait();
+            return;
+        }
+
         Dialog<Dry> dialog = new Dialog<>();
         dialog.setTitle("Add Dry Pen");
         dialog.setHeaderText("Add a new dry pen: ");
@@ -243,6 +248,11 @@ public class DryController {
     }
 
     public static void editDry(Dry dry) {
+        if (StaffModel.getAllStaffBy("dry").isEmpty() || StaffModel.getAllStaffBy("dry") == null) {
+            noKeepersAlert(dry).showAndWait();
+            return;
+        }
+
         Dialog<Dry> dialog = new Dialog<>();
         dialog.setTitle("Edit Dry Pen");
         dialog.setHeaderText("Edit dry pen #" + dry.getPenID());
@@ -320,6 +330,20 @@ public class DryController {
         } else {
             System.out.println(dry.getPenID() + " will not be deleted");
         }
+    }
+
+    private static Alert noKeepersAlert (Dry pen) {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After Pen #" + pen.getPenID() + ". " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
+    }
+
+    private static Alert noKeepersAlert () {
+        Alert noKeepersAlert = new Alert(Alert.AlertType.ERROR);
+        noKeepersAlert.setHeaderText("Error");
+        noKeepersAlert.setContentText("No Keepers to Look After a Dry Pen. " + System.lineSeparator() + "Please Create Keepers Before Pens. ");
+        return noKeepersAlert;
     }
 
 }

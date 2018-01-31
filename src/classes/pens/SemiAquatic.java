@@ -141,21 +141,6 @@ public class SemiAquatic extends Pen implements WaterVolume, Area, WaterTypes, S
         }
         return area;
     }
-    @Override
-    public boolean equals(Object obj) {
-        if (!obj.getClass().equals(this.getClass())) { return false; }
-        SemiAquatic a = (SemiAquatic) obj;
-        return a.getPenID().equals(this.getPenID()) &&
-                a.getLength().equals(this.getLength()) &&
-                a.getWidth().equals(this.getWidth()) &&
-                a.getWaterLength().equals(this.getWaterLength()) &&
-                a.getWaterWidth().equals(this.getWaterWidth()) &&
-                a.getWaterDepth().equals(this.getWaterDepth()) &&
-                a.getTemperature().equals(this.getTemperature()) &&
-                a.getKeeperID().equals(this.getKeeperID()) &&
-                a.getContainedAnimals().equals(this.getContainedAnimals()
-                );
-    }
 
 
 }

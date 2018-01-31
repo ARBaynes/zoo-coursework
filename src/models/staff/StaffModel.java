@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StaffModel {
-    protected static String filePath = "data/staff_data/";
-    protected static ArrayList<Staff> allStaff = new ArrayList<>();
+    private static String filePath = "data/staff_data/";
+    private static ArrayList<Staff> allStaff = new ArrayList<>();
 
     //SETTERS
 

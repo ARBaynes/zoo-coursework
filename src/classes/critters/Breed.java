@@ -90,13 +90,4 @@ public class Breed implements Serializable {
                 "Area Requirements:  " + getRequirements().toString() + System.lineSeparator();
 
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!obj.getClass().equals(this.getClass())) { return false; }
-        Breed b = (Breed) obj;
-        return b.getName().equals(this.getName()) &&
-                b.getRequirements().equals(this.getRequirements()) &&
-                b.getPenType().equals(this.getPenType());
-    }
 }

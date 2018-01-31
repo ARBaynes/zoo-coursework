@@ -31,19 +31,21 @@ public class AnimalController {
     private static TableColumn animalName;
     private static TableColumn animalHasPen;
     private static Label animalTypeLabel;
+    private static Button animalTableRefreshButton;
     private static ObservableList<Animal> animalTableItems = FXCollections.observableArrayList();
 
     public static Label getAnimalTypeLabel() {
         return animalTypeLabel;
     }
 
-    public static void construct(TableView<Animal> table, TableColumn breed, TableColumn id, TableColumn name, TableColumn hasPen, Label typeLabel) {
+    public static void construct(TableView<Animal> table, TableColumn breed, TableColumn id, TableColumn name, TableColumn hasPen, Label typeLabel, Button refreshButton) {
         animalTable = table;
         animalBreed = breed;
         animalID = id;
         animalName = name;
         animalHasPen = hasPen;
         animalTypeLabel = typeLabel;
+        animalTableRefreshButton = refreshButton;
 
         animalTable.setItems(animalTableItems);
     }
@@ -77,6 +79,13 @@ public class AnimalController {
                 }
             });
             return row ;
+        });
+
+        animalTableRefreshButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                refresh();
+            }
         });
     }
 
