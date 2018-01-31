@@ -234,39 +234,7 @@ public class BreedController {
             @Override
             public Breed call(ButtonType button) {
                 if (button == buttonTypeOk && !penTypeChoiceBox.getSelectionModel().getSelectedItem().isEmpty()) {
-                    Breed breed;
-                    switch (penTypeChoiceBox.getSelectionModel().getSelectedItem()) {
-                        case "aquarium":
-                        case "aviary":
-                            breed = new Breed(nameTextField.getText(),
-                                    penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                                    Double.parseDouble(volumeRequirementsTextField.getText()),
-                                    "volume"
-                            );
-                            break;
-                        case "dry":
-                        case "petting":
-                            breed = new Breed(nameTextField.getText(),
-                                    penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                                    Double.parseDouble(areaRequirementsTextField.getText()),
-                                    "area"
-                            );
-                            break;
-                        case "semiaquatic":
-                            breed = new Breed(nameTextField.getText(),
-                                penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                                Double.parseDouble(areaRequirementsTextField.getText()),
-                                Double.parseDouble(volumeRequirementsTextField.getText())
-                            );
-                            break;
-                        default:
-                            breed = new Breed(nameTextField.getText(),
-                                    penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                                    Double.parseDouble(areaRequirementsTextField.getText()),
-                                    "area"
-                            );
-                    }
-                    return breed;
+                    return getBreed(penTypeChoiceBox, nameTextField, volumeRequirementsTextField, areaRequirementsTextField);
                 }
                 return null;
             }
@@ -373,39 +341,7 @@ public class BreedController {
             public Breed call(ButtonType button) {
 
                 if (button == buttonTypeOk) {
-                    Breed breed;
-                    switch (penTypeChoiceBox.getSelectionModel().getSelectedItem()) {
-                        case "aquarium":
-                        case "aviary":
-                            breed = new Breed(nameTextField.getText(),
-                                    penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                                    Double.parseDouble(volumeRequirementsTextField.getText()),
-                                    "volume"
-                            );
-                            break;
-                        case "dry":
-                        case "petting":
-                            breed = new Breed(nameTextField.getText(),
-                                    penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                                    Double.parseDouble(areaRequirementsTextField.getText()),
-                                    "area"
-                            );
-                            break;
-                        case "semiaquatic":
-                            breed = new Breed(nameTextField.getText(),
-                                    penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                                    Double.parseDouble(areaRequirementsTextField.getText()),
-                                    Double.parseDouble(volumeRequirementsTextField.getText())
-                            );
-                            break;
-                        default:
-                            breed = new Breed(nameTextField.getText(),
-                                    penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
-                                    Double.parseDouble(areaRequirementsTextField.getText()),
-                                    "area"
-                            );
-                    }
-                    return breed;
+                    return getBreed(penTypeChoiceBox, nameTextField, volumeRequirementsTextField, areaRequirementsTextField);
                 }
                 return null;
             }
@@ -490,5 +426,43 @@ public class BreedController {
         breedDislikesTableViewItems.clear();
         breedDislikesTableViewItems.addAll(BreedModel.getAllBreedsExcept(currentBreed));
     }
+
+    private static Breed getBreed (ChoiceBox<String> penTypeChoiceBox, TextField nameTextField, TextField volumeRequirementsTextField,
+                                   TextField areaRequirementsTextField) {
+        Breed breed;
+        switch (penTypeChoiceBox.getSelectionModel().getSelectedItem()) {
+            case "aquarium":
+            case "aviary":
+                breed = new Breed(nameTextField.getText(),
+                        penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
+                        Double.parseDouble(volumeRequirementsTextField.getText()),
+                        "volume"
+                );
+                break;
+            case "dry":
+            case "petting":
+                breed = new Breed(nameTextField.getText(),
+                        penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
+                        Double.parseDouble(areaRequirementsTextField.getText()),
+                        "area"
+                );
+                break;
+            case "semiaquatic":
+                breed = new Breed(nameTextField.getText(),
+                        penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
+                        Double.parseDouble(areaRequirementsTextField.getText()),
+                        Double.parseDouble(volumeRequirementsTextField.getText())
+                );
+                break;
+            default:
+                breed = new Breed(nameTextField.getText(),
+                        penTypeChoiceBox.getSelectionModel().getSelectedItem().toLowerCase(),
+                        Double.parseDouble(areaRequirementsTextField.getText()),
+                        "area"
+                );
+        }
+        return breed;
+    }
+
 
 }

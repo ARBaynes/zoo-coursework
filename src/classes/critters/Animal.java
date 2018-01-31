@@ -1,7 +1,6 @@
 package classes.critters;
 
 import models.critters.AnimalModel;
-import models.pens.AquariumModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -13,7 +13,7 @@ import javafx.scene.input.MouseButton;
 import javafx.util.Callback;
 import classes.critters.Animal;
 import classes.pens.Aquarium;
-import controllers.critters.AnimalToPenController;
+import controllers.critters.AnimalToPenFilter;
 
 public class AquariumAnimalController {
 
@@ -77,7 +77,7 @@ public class AquariumAnimalController {
         removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                AnimalToPenController.removeAnimalFromPen(selectedAnimal);
+                AnimalToPenFilter.removeAnimalFromPen(selectedAnimal);
             }
         });
         contextMenu.getItems().add(removePenMenuItem);

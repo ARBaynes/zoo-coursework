@@ -1,30 +1,26 @@
 package controllers.pens.dry;
 
-import javafx.beans.binding.Bindings;
+import controllers.pens.PenAnimalController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.util.Callback;
 import classes.critters.Animal;
 import classes.pens.Dry;
-import controllers.critters.AnimalToPenController;
 
-public class DryAnimalController {
+public class DryAnimalController extends PenAnimalController {
 
-    protected static ObservableList<Animal> dryAnimalTableViewItems = FXCollections.observableArrayList();
+    private static ObservableList<Animal> dryAnimalTableViewItems = FXCollections.observableArrayList();
 
-    protected static Label dryAnimalLabel;
-    protected static TableView dryAnimalTableView;
-    protected static TableColumn dryAnimalName;
-    protected static TableColumn dryAnimalBreed;
-    protected static TableColumn dryAnimalRequirements;
-    protected static TableColumn dryAnimalID;
+    private static TableView dryAnimalTableView;
+    private static TableColumn dryAnimalName;
+    private static TableColumn dryAnimalBreed;
+    private static TableColumn dryAnimalRequirements;
+    private static TableColumn dryAnimalID;
 
     public static void construct (TableView tableView, TableColumn name, TableColumn breed,
                                   TableColumn requirements,TableColumn id) {
@@ -71,25 +67,7 @@ public class DryAnimalController {
         dryAnimalTableViewItems.clear();
     }
 
-    public static Label getDryAnimalLabel () {
-        return dryAnimalLabel;
-    }
-
     private static void dryAnimalTableContextMenu(TableRow<Animal> animalTableRow) {
-        Animal selectedAnimal = animalTableRow.getItem();
-        final ContextMenu contextMenu = new ContextMenu();
-        final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen");
-        removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                AnimalToPenController.removeAnimalFromPen(selectedAnimal);
-            }
-        });
-        contextMenu.getItems().add(removePenMenuItem);
-        animalTableRow.contextMenuProperty().bind(
-                Bindings.when(animalTableRow.emptyProperty())
-                        .then((ContextMenu)null)
-                        .otherwise(contextMenu)
-        );
+        setContextMenu(animalTableRow);
     }
 }

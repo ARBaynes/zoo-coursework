@@ -1,30 +1,26 @@
 package controllers.pens.aviary;
 
-import javafx.beans.binding.Bindings;
+import controllers.pens.PenAnimalController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.util.Callback;
 import classes.critters.Animal;
 import classes.pens.Aviary;
-import controllers.critters.AnimalToPenController;
 
-public class AviaryAnimalController {
+public class AviaryAnimalController extends PenAnimalController {
 
-    protected static ObservableList<Animal> aviaryAnimalTableViewItems = FXCollections.observableArrayList();
+    private static ObservableList<Animal> aviaryAnimalTableViewItems = FXCollections.observableArrayList();
 
-    protected static Label aviaryAnimalLabel;
-    protected static TableView aviaryAnimalTableView;
-    protected static TableColumn aviaryAnimalName;
-    protected static TableColumn aviaryAnimalBreed;
-    protected static TableColumn aviaryAnimalRequirements;
-    protected static TableColumn aviaryAnimalID;
+    private static TableView aviaryAnimalTableView;
+    private static TableColumn aviaryAnimalName;
+    private static TableColumn aviaryAnimalBreed;
+    private static TableColumn aviaryAnimalRequirements;
+    private static TableColumn aviaryAnimalID;
 
     public static void construct (TableView tableView, TableColumn name, TableColumn breed,
                                   TableColumn requirements,TableColumn id) {
@@ -55,7 +51,7 @@ public class AviaryAnimalController {
             TableRow<Animal> penRow = new TableRow<>();
             penRow.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.SECONDARY  && (!penRow.isEmpty()) ) {
-                    aviaryAnimalTableContextMenu(penRow);
+                    setContextMenu(penRow);
                 }
             });
             return penRow ;
@@ -71,25 +67,5 @@ public class AviaryAnimalController {
         aviaryAnimalTableViewItems.clear();
     }
 
-    public static Label getAviaryAnimalLabel () {
-        return aviaryAnimalLabel;
-    }
 
-    private static void aviaryAnimalTableContextMenu(TableRow<Animal> animalTableRow) {
-        Animal selectedAnimal = animalTableRow.getItem();
-        final ContextMenu contextMenu = new ContextMenu();
-        final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen");
-        removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                AnimalToPenController.removeAnimalFromPen(selectedAnimal);
-            }
-        });
-        contextMenu.getItems().add(removePenMenuItem);
-        animalTableRow.contextMenuProperty().bind(
-                Bindings.when(animalTableRow.emptyProperty())
-                        .then((ContextMenu)null)
-                        .otherwise(contextMenu)
-        );
-    }
 }

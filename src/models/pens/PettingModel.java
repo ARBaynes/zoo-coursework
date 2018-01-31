@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class PettingModel extends PenModel{
-    protected static String filePath = "data/pen_data/petting_data/";
-    protected static ArrayList<Petting> allPens = new ArrayList<>();
+    private static String filePath = "data/pen_data/petting_data/";
+    private static ArrayList<Petting> allPens = new ArrayList<>();
 
     //SETTERS
 

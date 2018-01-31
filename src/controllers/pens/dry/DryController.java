@@ -1,6 +1,7 @@
 package controllers.pens.dry;
 
 import controllers.main.MainController;
+import controllers.pens.PenController;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 
-public class DryController {
+public class DryController extends PenController {
     private static ObservableList<Dry> dryTableViewItems = FXCollections.observableArrayList();
     private static ToolBar dryToolbar;
     private static Button addDryButton;
@@ -185,13 +186,7 @@ public class DryController {
         autoAssignCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (autoAssignCheckBox.isSelected()) {
-                    staffLabel.setVisible(false);
-                    staffChoiceBox.setVisible(false);
-                } else {
-                    staffLabel.setVisible(true);
-                    staffChoiceBox.setVisible(true);
-                }
+                disableKeeper(autoAssignCheckBox, staffLabel, staffChoiceBox);
             }
         });
 

@@ -5,7 +5,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -133,13 +132,13 @@ public class AnimalController {
         addAnimaltoPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                AnimalToPenController.addAnimalToPen(selectedAnimal);
+                AnimalToPenFilter.addAnimalToPen(selectedAnimal);
             }
         });
         removeAnimalfromPenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                AnimalToPenController.removeAnimalFromPen(selectedAnimal);
+                AnimalToPenFilter.removeAnimalFromPen(selectedAnimal);
             }
         });
         addAnimalMenuItem.setOnAction(new EventHandler<ActionEvent>() {
@@ -218,7 +217,7 @@ public class AnimalController {
             refresh(animal.getBreed());
             MainController.refresh();
             if (autoAssignCheckBox.isSelected()) {
-                AnimalToPenController.autoAddAnimalToPen(animal);
+                AnimalToPenFilter.autoAddAnimalToPen(animal);
             }
         }
     }

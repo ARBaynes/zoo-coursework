@@ -1,8 +1,6 @@
 package classes.pens;
 
 import classes.critters.Animal;
-import classes.critters.Breed;
-import classes.staff.Staff;
 
 import java.io.Serializable;
 import java.util.ArrayList;

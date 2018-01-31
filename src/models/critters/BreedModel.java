@@ -1,17 +1,15 @@
 package models.critters;
 
-import classes.critters.Animal;
 import classes.critters.Breed;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class BreedModel {
-    protected static String filePath = "data/breed_data/";
-    protected static ArrayList<Breed> allBreeds = new ArrayList<>();
+    private static String filePath = "data/breed_data/";
+    private static ArrayList<Breed> allBreeds = new ArrayList<>();
 
     //GETTERS
 

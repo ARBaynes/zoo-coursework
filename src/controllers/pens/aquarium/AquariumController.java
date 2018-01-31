@@ -1,6 +1,7 @@
 package controllers.pens.aquarium;
 
 import controllers.main.MainController;
+import controllers.pens.PenController;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,9 +26,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 
-public class AquariumController {
+public class AquariumController extends PenController {
     private static ObservableList<Aquarium> aquariumTableViewItems = FXCollections.observableArrayList();
-    private static ToolBar aquariumToolbar;
     private static Button addAquariumButton;
     private static TableView aquariumPenTableView;
     private static TableColumn aquariumPenID;
@@ -41,10 +41,9 @@ public class AquariumController {
 
 
 
-    public static void construct (ToolBar toolBar, Button addButton, TableView tableView, TableColumn id, TableColumn temp,
+    public static void construct (Button addButton, TableView tableView, TableColumn id, TableColumn temp,
                                   TableColumn containedAnimals, TableColumn height, TableColumn waterVolume, TableColumn currentVolume,
                                   TableColumn waterType, TableColumn keeperID) {
-        aquariumToolbar = toolBar;
         addAquariumButton = addButton;
         aquariumPenTableView = tableView;
         aquariumPenID = id;
@@ -222,13 +221,7 @@ public class AquariumController {
         autoAssignCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (autoAssignCheckBox.isSelected()) {
-                    staffLabel.setVisible(false);
-                    staffChoiceBox.setVisible(false);
-                } else {
-                    staffLabel.setVisible(true);
-                    staffChoiceBox.setVisible(true);
-                }
+                disableKeeper(autoAssignCheckBox, staffLabel, staffChoiceBox);
             }
         });
 

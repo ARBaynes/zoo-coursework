@@ -1,6 +1,7 @@
 package controllers.pens.aviary;
 
 import controllers.main.MainController;
+import controllers.pens.PenController;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,9 +26,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 
-public class AviaryController {
+public class AviaryController extends PenController {
     private static ObservableList<Aviary> aviaryTableViewItems = FXCollections.observableArrayList();
-    private static ToolBar aviaryToolbar;
     private static Button addAviaryButton;
     private static TableView<Aviary> aviaryPenTableView;
     private static TableColumn aviaryPenID;
@@ -38,12 +38,9 @@ public class AviaryController {
     private static TableColumn aviaryCurrentVolume;
     private static TableColumn aviaryKeeperID;
 
-    private static String currentPenID;
 
-
-    public static void construct (ToolBar toolBar, Button addButton, TableView<Aviary> tableView, TableColumn id, TableColumn temp,
+    public static void construct (Button addButton, TableView<Aviary> tableView, TableColumn id, TableColumn temp,
                                   TableColumn containedAnimals, TableColumn height, TableColumn maxVolume, TableColumn currentVolume, TableColumn keeperID) {
-        aviaryToolbar = toolBar;
         addAviaryButton = addButton;
         aviaryPenTableView = tableView;
         aviaryPenID = id;
@@ -89,7 +86,6 @@ public class AviaryController {
             penRow.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 && (!penRow.isEmpty()) ) {
                     Aviary pen = penRow.getItem();
-                    currentPenID = pen.getPenID();
                     if (pen.getContainedAnimals().isEmpty() || pen.getContainedAnimals() == null ) {
                         Alert noAnimals = new Alert(Alert.AlertType.INFORMATION);
                         noAnimals.setHeaderText("Caution");
@@ -190,13 +186,7 @@ public class AviaryController {
         autoAssignCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (autoAssignCheckBox.isSelected()) {
-                    staffLabel.setVisible(false);
-                    staffChoiceBox.setVisible(false);
-                } else {
-                    staffLabel.setVisible(true);
-                    staffChoiceBox.setVisible(true);
-                }
+                disableKeeper(autoAssignCheckBox, staffLabel, staffChoiceBox);
             }
         });
 

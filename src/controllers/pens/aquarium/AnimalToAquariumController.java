@@ -5,12 +5,11 @@ import classes.pens.Aquarium;
 import controllers.critters.AnimalController;
 import controllers.critters.BreedController;
 import controllers.main.MainController;
-import javafx.beans.property.SimpleStringProperty;
+import controllers.pens.AnimalToSpecificPenController;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import models.critters.AnimalModel;
@@ -19,7 +18,7 @@ import models.pens.AquariumModel;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class AnimalToAquariumController {
+public class AnimalToAquariumController extends AnimalToSpecificPenController{
 
     public static void animalFromAquarium (Animal animal) {
         String currentPenID = animal.getCurrentPenID();
@@ -157,22 +156,5 @@ public class AnimalToAquariumController {
     private static void refresh (ObservableList<Animal> animalList, Aquarium pen) {
         animalList.clear();
         animalList.addAll(pen.getContainedAnimals());
-    }
-
-    private static void animalToPenCellFactories (TableColumn<Animal, Integer> ID, TableColumn<Animal, String> name,
-                                                  TableColumn<Animal, String> breed, TableColumn<Animal, String> requirements) {
-
-        ID.setCellValueFactory(new PropertyValueFactory<Animal, Integer>("ID"));
-        name.setCellValueFactory(new PropertyValueFactory<Animal, String>("Name"));
-        breed.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
-                return new SimpleStringProperty(p.getValue().getBreedName());
-            }
-        });
-        requirements.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
-                return new SimpleStringProperty(p.getValue().getBreedRequirementsToString());
-            }
-        });
     }
 }

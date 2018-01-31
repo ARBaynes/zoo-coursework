@@ -1,6 +1,7 @@
 package controllers.pens.petting;
 
 import controllers.main.MainController;
+import controllers.pens.PenController;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 
-public class PettingController {
+public class PettingController extends PenController {
     private static ObservableList<Petting> pettingTableViewItems = FXCollections.observableArrayList();
     private static ToolBar pettingToolbar;
     private static Button addPettingButton;
@@ -184,13 +185,7 @@ public class PettingController {
         autoAssignCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (autoAssignCheckBox.isSelected()) {
-                    staffLabel.setVisible(false);
-                    staffChoiceBox.setVisible(false);
-                } else {
-                    staffLabel.setVisible(true);
-                    staffChoiceBox.setVisible(true);
-                }
+                disableKeeper(autoAssignCheckBox, staffLabel, staffChoiceBox);
             }
         });
         GridPane penDialogGridPane = new GridPane();

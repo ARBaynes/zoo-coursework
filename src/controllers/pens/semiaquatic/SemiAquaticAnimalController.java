@@ -1,30 +1,26 @@
 package controllers.pens.semiaquatic;
 
-import javafx.beans.binding.Bindings;
+import controllers.pens.PenAnimalController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.util.Callback;
 import classes.critters.Animal;
 import classes.pens.SemiAquatic;
-import controllers.critters.AnimalToPenController;
 
-public class SemiAquaticAnimalController {
+public class SemiAquaticAnimalController extends PenAnimalController {
 
-    protected static ObservableList<Animal> semiAquaticAnimalTableViewItems = FXCollections.observableArrayList();
+    private static ObservableList<Animal> semiAquaticAnimalTableViewItems = FXCollections.observableArrayList();
 
-    protected static Label semiAquaticAnimalLabel;
-    protected static TableView semiAquaticAnimalTableView;
-    protected static TableColumn semiAquaticAnimalName;
-    protected static TableColumn semiAquaticAnimalBreed;
-    protected static TableColumn semiAquaticAnimalSize;
-    protected static TableColumn semiAquaticAnimalID;
+    private static TableView semiAquaticAnimalTableView;
+    private static TableColumn semiAquaticAnimalName;
+    private static TableColumn semiAquaticAnimalBreed;
+    private static TableColumn semiAquaticAnimalSize;
+    private static TableColumn semiAquaticAnimalID;
 
     public static void construct (TableView tableView, TableColumn name, TableColumn breed,
                                   TableColumn requirements,TableColumn id) {
@@ -71,25 +67,7 @@ public class SemiAquaticAnimalController {
         semiAquaticAnimalTableViewItems.clear();
     }
 
-    public static Label getSemiAquaticAnimalLabel () {
-        return semiAquaticAnimalLabel;
-    }
-
     private static void semiAquaticAnimalTableContextMenu(TableRow<Animal> animalTableRow) {
-        Animal selectedAnimal = animalTableRow.getItem();
-        final ContextMenu contextMenu = new ContextMenu();
-        final MenuItem removePenMenuItem = new MenuItem("Remove "+selectedAnimal.getName() +" From Pen");
-        removePenMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                AnimalToPenController.removeAnimalFromPen(selectedAnimal);
-            }
-        });
-        contextMenu.getItems().add(removePenMenuItem);
-        animalTableRow.contextMenuProperty().bind(
-                Bindings.when(animalTableRow.emptyProperty())
-                        .then((ContextMenu)null)
-                        .otherwise(contextMenu)
-        );
+        setContextMenu(animalTableRow);
     }
 }

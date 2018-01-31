@@ -212,14 +212,14 @@ public class Controller {
                 breedTableView, breedName, breedPenType, breedRequirements, breedDislikes, addBreedButton
         );
         AquariumController.construct(
-                aquariumToolbar,addAquariumButton, aquariumPenTableView, aquariumPenID, aquariumTemp, aquariumContainedAnimals, aquariumHeight,
+                addAquariumButton, aquariumPenTableView, aquariumPenID, aquariumTemp, aquariumContainedAnimals, aquariumHeight,
                 aquariumWaterVolume, aquariumCurrentVolume, aquariumWaterType, aquariumKeeperID
         );
         AquariumAnimalController.construct(
                 aquariumAnimalTableView, aquariumAnimalName, aquariumAnimalBreed, aquariumAnimalSize, aquariumAnimalID
         );
         AviaryController.construct(
-                aviaryToolbar, addAviaryButton, aviaryPenTableView, aviaryPenID, aviaryTemp, aviaryContainedAnimals, aviaryHeight,
+                addAviaryButton, aviaryPenTableView, aviaryPenID, aviaryTemp, aviaryContainedAnimals, aviaryHeight,
                 aviaryMaxVolume, aviaryCurrentVolume, aviaryKeeperID
         );
         AviaryAnimalController.construct(

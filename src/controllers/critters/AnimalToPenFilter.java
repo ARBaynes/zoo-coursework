@@ -1,45 +1,22 @@
 package controllers.critters;
 
-import controllers.main.MainController;
 import controllers.pens.aquarium.AnimalToAquariumController;
 import controllers.pens.aviary.AnimalToAviaryController;
 import controllers.pens.dry.AnimalToDryController;
 import controllers.pens.petting.AnimalToPettingController;
-import controllers.pens.semiaquatic.AnimalToSemiAquatic;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import controllers.pens.semiaquatic.AnimalToSemiAquaticController;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
-import javafx.util.Callback;
 import classes.critters.Animal;
 import classes.pens.*;
-import models.critters.AnimalModel;
-import controllers.pens.aquarium.AquariumAnimalController;
-import controllers.pens.aquarium.AquariumController;
-import models.pens.AquariumModel;
-import controllers.pens.aviary.AviaryAnimalController;
-import controllers.pens.aviary.AviaryController;
-import models.pens.AviaryModel;
-import controllers.pens.dry.DryAnimalController;
-import controllers.pens.dry.DryController;
 import models.pens.DryModel;
-import controllers.pens.petting.PettingAnimalController;
-import controllers.pens.petting.PettingController;
 import models.pens.PettingModel;
-import controllers.pens.semiaquatic.SemiAquaticAnimalController;
-import controllers.pens.semiaquatic.SemiAquaticController;
-import models.pens.SemiAquaticModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.function.Consumer;
 
-public class AnimalToPenController {
+public class AnimalToPenFilter {
     public static void addAnimalToPen (Animal animal) {
         switch (animal.getBreedPenType().toLowerCase()) {
             case "aquarium":
@@ -55,7 +32,7 @@ public class AnimalToPenController {
                 AnimalToPettingController.animalToPetting(animal);
                 break;
             case "semiaquatic":
-                AnimalToSemiAquatic.animalToSemiAquatic(animal);
+                AnimalToSemiAquaticController.animalToSemiAquatic(animal);
                 break;
             default:
                 AnimalToDryOrPettingController.animalToDryOrPetting(animal);
@@ -77,7 +54,7 @@ public class AnimalToPenController {
                 AnimalToPettingController.autoAddAnimalToPetting(animal);
                 break;
             case "semiaquatic":
-                AnimalToSemiAquatic.autoAddAnimalToSemiAquatic(animal);
+                AnimalToSemiAquaticController.autoAddAnimalToSemiAquatic(animal);
                 break;
             default:
                 AnimalToDryOrPettingController.autoAddAnimalToDryOrPetting(animal);
@@ -100,15 +77,12 @@ public class AnimalToPenController {
                 AnimalToPettingController.animalFromPetting(animal);
                 break;
             case "semiaquatic":
-                AnimalToSemiAquatic.animalFromSemiAquatic(animal);
+                AnimalToSemiAquaticController.animalFromSemiAquatic(animal);
                 break;
             default:
                 AnimalToDryOrPettingController.animalFromDryOrPetting(animal);
         }
     }
-
-
-
 
     private static class AnimalToDryOrPettingController {
         public static void animalFromDryOrPetting(Animal animal) {

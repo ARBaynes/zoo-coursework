@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class SemiAquaticModel extends PenModel{
-    protected static String filePath = "data/pen_data/semiaquatic_data/";
-    protected static ArrayList<SemiAquatic> allPens = new ArrayList<>();
+    private static String filePath = "data/pen_data/semiaquatic_data/";
+    private static ArrayList<SemiAquatic> allPens = new ArrayList<>();
 
     //SETTERS
 

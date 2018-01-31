@@ -5,6 +5,7 @@ import classes.pens.Dry;
 import controllers.critters.AnimalController;
 import controllers.critters.BreedController;
 import controllers.main.MainController;
+import controllers.pens.AnimalToSpecificPenController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,7 +20,7 @@ import models.pens.DryModel;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class AnimalToDryController {
+public class AnimalToDryController extends AnimalToSpecificPenController {
     public static void animalFromDry (Animal animal) {
         String currentPenID = animal.getCurrentPenID();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -63,23 +64,11 @@ public class AnimalToDryController {
 
         TableView<Animal> currentAnimalsInPen = new TableView<>();
         TableColumn<Animal, Integer> animalIDCol = new TableColumn<>("ID");
-        animalIDCol.setCellValueFactory(new PropertyValueFactory<Animal, Integer>("ID"));
         TableColumn<Animal, String> animalNameCol = new TableColumn<>("Name");
-        animalNameCol.setCellValueFactory(new PropertyValueFactory<Animal, String>("Name"));
         TableColumn<Animal, String> animalBreedCol = new TableColumn<>("Breed");
-        animalBreedCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
-                return new SimpleStringProperty(p.getValue().getBreedName());
-            }
-        });
-
         TableColumn<Animal, String> animalRequirementsCol = new TableColumn<>("Requirements");
-        animalRequirementsCol.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
-                return new SimpleStringProperty(p.getValue().getBreedRequirementsToString());
-            }
-        });
 
+        animalToPenCellFactories(animalIDCol, animalNameCol, animalBreedCol, animalRequirementsCol);
         currentAnimalsInPen.getColumns().addAll(animalIDCol, animalNameCol, animalBreedCol, animalRequirementsCol);
 
         ObservableList<Animal> animalsinPen = FXCollections.observableArrayList();
@@ -164,22 +153,5 @@ public class AnimalToDryController {
     public static void refresh (ObservableList<Animal> animalList, Dry pen) {
         animalList.clear();
         animalList.addAll(pen.getContainedAnimals());
-    }
-
-    private static void animalToPenCellFactories (TableColumn<Animal, Integer> ID, TableColumn<Animal, String> name,
-                                                  TableColumn<Animal, String> breed, TableColumn<Animal, String> requirements) {
-
-        ID.setCellValueFactory(new PropertyValueFactory<Animal, Integer>("ID"));
-        name.setCellValueFactory(new PropertyValueFactory<Animal, String>("Name"));
-        breed.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
-                return new SimpleStringProperty(p.getValue().getBreedName());
-            }
-        });
-        requirements.setCellValueFactory( new Callback<TableColumn.CellDataFeatures<Animal, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Animal, String> p) {
-                return new SimpleStringProperty(p.getValue().getBreedRequirementsToString());
-            }
-        });
     }
 }
