@@ -1,132 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="zoo-coursework" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="da7d6afd-c34d-4fb7-bbd4-c0574254eec5" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/controllers/pens/AnimalToSpecificPenController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/controllers/pens/PenAnimalController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/controllers/pens/PenController.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Verification.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/classes/critters/Animal.java" afterPath="$PROJECT_DIR$/src/classes/critters/Animal.java" />
-      <change beforePath="$PROJECT_DIR$/src/classes/pens/Pen.java" afterPath="$PROJECT_DIR$/src/classes/pens/Pen.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/Controller.java" afterPath="$PROJECT_DIR$/src/controllers/Controller.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/critters/AnimalController.java" afterPath="$PROJECT_DIR$/src/controllers/critters/AnimalController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/critters/AnimalToPenController.java" afterPath="$PROJECT_DIR$/src/controllers/critters/AnimalToPenFilter.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/critters/BreedController.java" afterPath="$PROJECT_DIR$/src/controllers/critters/BreedController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/aquarium/AnimalToAquariumController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/aquarium/AnimalToAquariumController.java" />
+      <change beforePath="$PROJECT_DIR$/src/classes/critters/Breed.java" afterPath="$PROJECT_DIR$/src/classes/critters/Breed.java" />
       <change beforePath="$PROJECT_DIR$/src/controllers/pens/aquarium/AquariumAnimalController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/aquarium/AquariumAnimalController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/aquarium/AquariumController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/aquarium/AquariumController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/aviary/AnimalToAviaryController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/aviary/AnimalToAviaryController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/aviary/AviaryAnimalController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/aviary/AviaryAnimalController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/aviary/AviaryController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/aviary/AviaryController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/dry/AnimalToDryController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/dry/AnimalToDryController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/dry/DryAnimalController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/dry/DryAnimalController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/dry/DryController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/dry/DryController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/petting/AnimalToPettingController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/petting/AnimalToPettingController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/petting/PettingAnimalController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/petting/PettingAnimalController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/petting/PettingController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/petting/PettingController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/semiaquatic/AnimalToSemiAquatic.java" afterPath="$PROJECT_DIR$/src/controllers/pens/semiaquatic/AnimalToSemiAquaticController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/semiaquatic/SemiAquaticAnimalController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/semiaquatic/SemiAquaticAnimalController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pens/semiaquatic/SemiAquaticController.java" afterPath="$PROJECT_DIR$/src/controllers/pens/semiaquatic/SemiAquaticController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main.fxml" afterPath="$PROJECT_DIR$/src/main.fxml" />
       <change beforePath="$PROJECT_DIR$/src/models/critters/BreedModel.java" afterPath="$PROJECT_DIR$/src/models/critters/BreedModel.java" />
+      <change beforePath="$PROJECT_DIR$/src/models/pens/AquariumModel.java" afterPath="$PROJECT_DIR$/src/models/pens/AquariumModel.java" />
+      <change beforePath="$PROJECT_DIR$/src/models/pens/AviaryModel.java" afterPath="$PROJECT_DIR$/src/models/pens/AviaryModel.java" />
+      <change beforePath="$PROJECT_DIR$/src/models/pens/DryModel.java" afterPath="$PROJECT_DIR$/src/models/pens/DryModel.java" />
       <change beforePath="$PROJECT_DIR$/src/models/pens/PettingModel.java" afterPath="$PROJECT_DIR$/src/models/pens/PettingModel.java" />
       <change beforePath="$PROJECT_DIR$/src/models/pens/SemiAquaticModel.java" afterPath="$PROJECT_DIR$/src/models/pens/SemiAquaticModel.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Verification.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/classes/critters/Animal.class" afterPath="$PROJECT_DIR$/target/classes/classes/critters/Animal.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/classes/pens/Pen.class" afterPath="$PROJECT_DIR$/target/classes/classes/pens/Pen.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/Controller.class" afterPath="$PROJECT_DIR$/target/classes/controllers/Controller.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$10.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$10.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$3.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$3.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$4.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$4.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$5.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$5.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$6.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$6.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$7.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$7.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$8.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$8.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$9.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController$9.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/AnimalToPenController.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/critters/BreedController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/critters/BreedController.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/classes/critters/Breed.class" afterPath="$PROJECT_DIR$/target/classes/classes/critters/Breed.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumAnimalController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumAnimalController$1.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumAnimalController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumAnimalController$2.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumAnimalController$3.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumAnimalController$3.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$10.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$10.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$11.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$11.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$3.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$3.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$4.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$4.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$5.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$5.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$6.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$6.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$7.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$7.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$8.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$8.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$9.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController$9.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryAnimalController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryAnimalController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryAnimalController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryAnimalController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryAnimalController$3.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryAnimalController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryAnimalController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$10.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$10.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$11.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$11.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$3.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$3.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$4.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$4.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$5.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$5.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$6.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$6.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$7.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$7.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$8.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$8.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$9.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController$9.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aviary/AviaryController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryAnimalController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryAnimalController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryAnimalController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryAnimalController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryAnimalController$3.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryAnimalController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryAnimalController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$10.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$10.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$11.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$11.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$3.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$3.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$4.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$4.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$5.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$5.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$6.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$6.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$7.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$7.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$8.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$8.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$9.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController$9.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/dry/DryController.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumAnimalController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/aquarium/AquariumAnimalController.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingAnimalController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingAnimalController$1.class" />
       <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingAnimalController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingAnimalController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingAnimalController$3.class" afterPath="" />
       <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingAnimalController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingAnimalController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$10.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$10.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$11.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$11.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$3.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$3.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$4.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$4.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$5.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$5.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$6.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$6.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$7.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$7.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$8.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$8.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$9.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController$9.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/petting/PettingController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticAnimalController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticAnimalController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticAnimalController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticAnimalController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticAnimalController$3.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticAnimalController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticAnimalController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$1.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$10.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$10.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$11.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$11.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$12.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$12.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$13.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$13.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$2.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$3.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$3.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$4.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$4.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$5.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$5.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$6.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$6.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$7.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$7.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$8.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$8.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$9.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController$9.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController.class" afterPath="$PROJECT_DIR$/target/classes/controllers/pens/semiaquatic/SemiAquaticController.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main.fxml" afterPath="$PROJECT_DIR$/target/classes/main.fxml" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/critters/BreedModel.class" afterPath="$PROJECT_DIR$/target/classes/models/critters/BreedModel.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/pens/AquariumModel.class" afterPath="$PROJECT_DIR$/target/classes/models/pens/AquariumModel.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/pens/AviaryModel.class" afterPath="$PROJECT_DIR$/target/classes/models/pens/AviaryModel.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/pens/DryModel.class" afterPath="$PROJECT_DIR$/target/classes/models/pens/DryModel.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/pens/PettingModel.class" afterPath="$PROJECT_DIR$/target/classes/models/pens/PettingModel.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/pens/SemiAquaticModel.class" afterPath="$PROJECT_DIR$/target/classes/models/pens/SemiAquaticModel.class" />
+      <change beforePath="$PROJECT_DIR$/zoo-coursework.iml" afterPath="$PROJECT_DIR$/zoo-coursework.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -138,7 +44,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -151,7 +68,13 @@
     <findStrings>
       <find>dese</find>
       <find>protected</find>
+      <find>dislikes</find>
+      <find>configure</find>
+      <find>label</find>
     </findStrings>
+    <dirStrings>
+      <dir>C:\Users\a-abaynes\IdeaProjects\zoo-coursework\src\controllers</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -166,19 +89,14 @@
       <list>
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/models/staff/StaffModel.java" />
-        <option value="$PROJECT_DIR$/src/controllers/pens/aquarium/AquariumAnimalController.java" />
         <option value="$PROJECT_DIR$/src/classes/pens/SemiAquatic.java" />
         <option value="$PROJECT_DIR$/src/classes/pens/Petting.java" />
         <option value="$PROJECT_DIR$/src/classes/pens/Aviary.java" />
         <option value="$PROJECT_DIR$/src/classes/pens/Dry.java" />
-        <option value="$PROJECT_DIR$/src/classes/critters/Breed.java" />
         <option value="$PROJECT_DIR$/src/classes/staff/Staff.java" />
         <option value="$PROJECT_DIR$/test/models/critters/BreedModelTest.java" />
         <option value="$PROJECT_DIR$/test/models/critters/AnimalModelTest.java" />
         <option value="$PROJECT_DIR$/src/classes/pens/Aquarium.java" />
-        <option value="$PROJECT_DIR$/src/models/pens/AviaryModel.java" />
-        <option value="$PROJECT_DIR$/src/models/pens/AquariumModel.java" />
-        <option value="$PROJECT_DIR$/src/models/pens/DryModel.java" />
         <option value="$PROJECT_DIR$/src/controllers/pens/semiaquatic/AnimalToSemiAquatic.java" />
         <option value="$PROJECT_DIR$/src/controllers/critters/BreedController.java" />
         <option value="$PROJECT_DIR$/src/controllers/pens/dry/DryAnimalController.java" />
@@ -203,10 +121,15 @@
         <option value="$PROJECT_DIR$/src/controllers/pens/semiaquatic/AnimalToSemiAquaticController.java" />
         <option value="$PROJECT_DIR$/src/controllers/critters/AnimalToPenFilter.java" />
         <option value="$PROJECT_DIR$/src/controllers/Controller.java" />
-        <option value="$PROJECT_DIR$/src/models/pens/SemiAquaticModel.java" />
-        <option value="$PROJECT_DIR$/src/models/critters/BreedModel.java" />
-        <option value="$PROJECT_DIR$/src/models/pens/PettingModel.java" />
         <option value="$PROJECT_DIR$/src/controllers/pens/petting/PettingAnimalController.java" />
+        <option value="$PROJECT_DIR$/src/models/pens/AquariumModel.java" />
+        <option value="$PROJECT_DIR$/src/classes/critters/Breed.java" />
+        <option value="$PROJECT_DIR$/src/models/pens/AviaryModel.java" />
+        <option value="$PROJECT_DIR$/src/models/pens/SemiAquaticModel.java" />
+        <option value="$PROJECT_DIR$/src/models/pens/DryModel.java" />
+        <option value="$PROJECT_DIR$/src/models/pens/PettingModel.java" />
+        <option value="$PROJECT_DIR$/src/models/critters/BreedModel.java" />
+        <option value="$PROJECT_DIR$/src/controllers/pens/aquarium/AquariumAnimalController.java" />
       </list>
     </option>
   </component>
@@ -217,10 +140,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="64" />
-    <option name="y" value="-11" />
+    <option name="x" value="1920" />
+    <option name="y" value="1" />
     <option name="width" value="1857" />
-    <option name="height" value="1092" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -238,6 +161,22 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="zoo-coursework" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zoo-coursework" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zoo-coursework" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zoo-coursework" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
@@ -251,31 +190,16 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="zoo-coursework" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zoo-coursework" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zoo-coursework" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zoo-coursework" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/UML" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -487,6 +411,9 @@
       <workItem from="1517305472997" duration="7948000" />
       <workItem from="1517325619141" duration="10514000" />
       <workItem from="1517408118230" duration="3145000" />
+      <workItem from="1517825681510" duration="5525000" />
+      <workItem from="1517997592015" duration="7729000" />
+      <workItem from="1518084315697" duration="8110000" />
     </task>
     <task id="LOCAL-00001" summary="Likely finished now, writeup to do next.">
       <created>1517402065324</created>
@@ -525,10 +452,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27758000" />
+    <option name="totallyTimeSpent" value="49122000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
+    <frame x="1912" y="1" width="1936" height="1096" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -539,12 +466,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924336" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43141362" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3787721" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14040907" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5465969" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06716418" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5465969" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -577,120 +504,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/Desktop/jdk1.8.0_161/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="393" column="0" lean-forward="false" selection-start-line="393" selection-start-column="0" selection-end-line="393" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="184" column="72" lean-forward="true" selection-start-line="184" selection-start-column="72" selection-end-line="184" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/critters/AnimalModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/pens/AquariumModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="936">
-          <caret line="61" column="75" lean-forward="false" selection-start-line="61" selection-start-column="75" selection-end-line="61" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/interfaces/Area.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/pens/AviaryModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-951">
-          <caret line="39" column="22" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/pens/dry/DryController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="188" column="78" lean-forward="false" selection-start-line="188" selection-start-column="78" selection-end-line="188" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/pens/DryModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/pens/dry/DryAnimalController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="74" column="38" lean-forward="false" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
-          <folding>
-            <element signature="e#2908#2909#0" expanded="false" />
-            <element signature="e#2954#2955#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/pens/PenModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/pens/petting/PettingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="187" column="78" lean-forward="false" selection-start-line="187" selection-start-column="78" selection-end-line="187" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/pens/semiaquatic/SemiAquaticController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="226" column="78" lean-forward="false" selection-start-line="226" selection-start-column="78" selection-end-line="226" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/interfaces/WaterVolume.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -698,7 +515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -706,61 +522,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Verification.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Verification.java" />
     <entry file="file://$PROJECT_DIR$/src/models/staff/StaffModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/critters/Animal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/critters/Breed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/main/Weather.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/pens/Aquarium.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -768,9 +537,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -778,17 +544,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/pens/Pen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -796,9 +551,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -806,9 +558,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -816,9 +565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -830,23 +576,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/critters/BreedController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controllers/main/WeatherController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -854,9 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -884,9 +614,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1188">
           <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -894,9 +621,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -904,9 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="11" column="15" lean-forward="false" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -922,19 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="10" lean-forward="false" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/pens/aquarium/AquariumAnimalController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-447">
-          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -968,7 +676,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -998,39 +705,366 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/critters/BreedModel.java">
+    <entry file="file://$PROJECT_DIR$/src/controllers/pens/petting/PettingAnimalController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        <state relative-caret-position="900">
+          <caret line="60" column="50" lean-forward="true" selection-start-line="60" selection-start-column="50" selection-end-line="60" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/critters/Animal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/critters/AnimalModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/pens/Pen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="58" column="13" lean-forward="true" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/critters/Breed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="e#1372#1373#0" expanded="false" />
+            <element signature="e#1430#1431#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/pens/Aquarium.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-595">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/pens/AquariumModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="88" column="5" lean-forward="true" selection-start-line="59" selection-start-column="4" selection-end-line="88" selection-end-column="5" />
+          <folding>
+            <element signature="e#3511#3512#0" expanded="false" />
+            <element signature="e#3541#3542#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/pens/AviaryModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="82" column="17" lean-forward="true" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/pens/SemiAquaticModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="204">
+          <caret line="67" column="56" lean-forward="false" selection-start-line="67" selection-start-column="56" selection-end-line="67" selection-end-column="56" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/pens/petting/PettingAnimalController.java">
+    <entry file="file://$PROJECT_DIR$/src/models/pens/DryModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="60" column="50" lean-forward="true" selection-start-line="60" selection-start-column="50" selection-end-line="60" selection-end-column="50" />
+        <state relative-caret-position="421">
+          <caret line="67" column="20" lean-forward="true" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controllers/critters/BreedController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="75" column="56" lean-forward="true" selection-start-line="75" selection-start-column="56" selection-end-line="75" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/critters/BreedModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="96" column="26" lean-forward="false" selection-start-line="96" selection-start-column="25" selection-end-line="96" selection-end-column="26" />
+          <folding>
+            <element signature="e#2335#2336#0" expanded="false" />
+            <element signature="e#2367#2368#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="177" column="0" lean-forward="false" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/pens/PettingModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="386">
+          <caret line="57" column="60" lean-forward="false" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UML/controllers/controllersUML.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UML/controllers/critterUML.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">models.critters.BreedModel</node>
+            <node x="" y="">controllers.critters.AnimalController</node>
+            <node x="" y="">controllers.critters.AnimalToPenFilter</node>
+            <node x="" y="">models.critters.AnimalModel</node>
+            <node x="" y="">controllers.critters.BreedController</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UML/controllers/mainUML.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">controllers.main.MainController</node>
+            <node x="" y="">controllers.main.WeatherController</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="5.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UML/controllers/penUML.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">controllers.pens.dry.DryController</node>
+            <node x="" y="">controllers.pens.semiaquatic.AnimalToSemiAquaticController</node>
+            <node x="" y="">controllers.pens.AnimalToSpecificPenController</node>
+            <node x="" y="">controllers.pens.semiaquatic.SemiAquaticAnimalController</node>
+            <node x="" y="">controllers.pens.aviary.AviaryController</node>
+            <node x="" y="">controllers.pens.aquarium.AquariumController</node>
+            <node x="" y="">controllers.pens.petting.PettingAnimalController</node>
+            <node x="" y="">controllers.pens.PenAnimalController</node>
+            <node x="" y="">controllers.pens.petting.AnimalToPettingController</node>
+            <node x="" y="">controllers.pens.aquarium.AnimalToAquariumController</node>
+            <node x="" y="">controllers.pens.aviary.AnimalToAviaryController</node>
+            <node x="" y="">controllers.pens.aquarium.AquariumAnimalController</node>
+            <node x="" y="">controllers.pens.aviary.AviaryAnimalController</node>
+            <node x="" y="">controllers.pens.petting.PettingController</node>
+            <node x="" y="">controllers.pens.PenController</node>
+            <node x="" y="">controllers.pens.dry.DryAnimalController</node>
+            <node x="" y="">controllers.pens.semiaquatic.SemiAquaticController</node>
+            <node x="" y="">controllers.pens.dry.AnimalToDryController</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="185.0" y="65.5" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UML/controllers/staffUML.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">models.staff.StaffModel</node>
+            <node x="" y="">controllers.staff.StaffController</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="5.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controllers/pens/aquarium/AquariumAnimalController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/main/Weather.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UML/classes/classesUML.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">interfaces.Volume</node>
+            <node x="" y="">classes.pens.Pen</node>
+            <node x="" y="">classes.pens.SemiAquatic</node>
+            <node x="" y="">classes.critters.Animal</node>
+            <node x="" y="">classes.pens.Petting</node>
+            <node x="" y="">interfaces.WaterVolume</node>
+            <node x="" y="">classes.main.Weather.WeatherJSON</node>
+            <node x="" y="">classes.pens.Aquarium</node>
+            <node x="" y="">interfaces.Area</node>
+            <node x="" y="">classes.pens.Dry</node>
+            <node x="" y="">classes.main.Weather</node>
+            <node x="" y="">interfaces.WaterTypes</node>
+            <node x="" y="">classes.pens.Aviary</node>
+            <node x="" y="">classes.critters.Breed</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.8999999999999996" x="911.4444444444447" y="867.6666666666674" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Inner Classes</Category>
+            <Category>Constructors</Category>
+            <Category>Properties</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UML/allUML.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">models.critters.BreedModel</node>
+            <node x="" y="">controllers.pens.semiaquatic.AnimalToSemiAquaticController</node>
+            <node x="" y="">controllers.pens.AnimalToSpecificPenController</node>
+            <node x="" y="">interfaces.Volume</node>
+            <node x="" y="">controllers.main.MainController</node>
+            <node x="" y="">models.staff.StaffModel</node>
+            <node x="" y="">classes.critters.Animal</node>
+            <node x="" y="">controllers.pens.aquarium.AquariumController</node>
+            <node x="" y="">controllers.pens.petting.AnimalToPettingController</node>
+            <node x="" y="">controllers.pens.aviary.AnimalToAviaryController</node>
+            <node x="" y="">models.pens.SemiAquaticModel</node>
+            <node x="" y="">controllers.pens.aquarium.AquariumAnimalController</node>
+            <node x="" y="">classes.pens.Aquarium</node>
+            <node x="" y="">interfaces.Area</node>
+            <node x="" y="">controllers.pens.aviary.AviaryAnimalController</node>
+            <node x="" y="">controllers.pens.petting.PettingController</node>
+            <node x="" y="">classes.main.Weather</node>
+            <node x="" y="">classes.pens.Aviary</node>
+            <node x="" y="">controllers.pens.dry.DryAnimalController</node>
+            <node x="" y="">controllers.pens.dry.DryController</node>
+            <node x="" y="">models.pens.AquariumModel</node>
+            <node x="" y="">classes.pens.Pen</node>
+            <node x="" y="">controllers.pens.semiaquatic.SemiAquaticAnimalController</node>
+            <node x="" y="">classes.pens.SemiAquatic</node>
+            <node x="" y="">controllers.pens.aviary.AviaryController</node>
+            <node x="" y="">classes.pens.Petting</node>
+            <node x="" y="">controllers.critters.AnimalController</node>
+            <node x="" y="">models.pens.PenModel</node>
+            <node x="" y="">controllers.pens.petting.PettingAnimalController</node>
+            <node x="" y="">controllers.pens.PenAnimalController</node>
+            <node x="" y="">models.pens.PettingModel</node>
+            <node x="" y="">controllers.pens.aquarium.AnimalToAquariumController</node>
+            <node x="" y="">controllers.main.WeatherController</node>
+            <node x="" y="">controllers.staff.StaffController</node>
+            <node x="" y="">interfaces.WaterVolume</node>
+            <node x="" y="">controllers.critters.AnimalToPenFilter</node>
+            <node x="" y="">classes.pens.Dry</node>
+            <node x="" y="">models.critters.AnimalModel</node>
+            <node x="" y="">controllers.critters.BreedController</node>
+            <node x="" y="">models.pens.DryModel</node>
+            <node x="" y="">controllers.pens.PenController</node>
+            <node x="" y="">interfaces.WaterTypes</node>
+            <node x="" y="">classes.staff.Staff</node>
+            <node x="" y="">classes.critters.Breed</node>
+            <node x="" y="">controllers.pens.semiaquatic.SemiAquaticController</node>
+            <node x="" y="">controllers.pens.dry.AnimalToDryController</node>
+            <node x="" y="">Main</node>
+            <node x="" y="">models.pens.AviaryModel</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="1229.9999999999998" y="403.71428571428567" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,6 +1074,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>zoo-coursework</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1091,6 +1126,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

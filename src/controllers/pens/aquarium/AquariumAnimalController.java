@@ -1,5 +1,6 @@
 package controllers.pens.aquarium;
 
+import controllers.pens.PenAnimalController;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -15,7 +16,7 @@ import classes.critters.Animal;
 import classes.pens.Aquarium;
 import controllers.critters.AnimalToPenFilter;
 
-public class AquariumAnimalController {
+public class AquariumAnimalController extends PenAnimalController {
 
     private static ObservableList<Animal> aquariumAnimalTableViewItems = FXCollections.observableArrayList();
 

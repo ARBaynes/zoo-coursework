@@ -22,6 +22,8 @@ public class Breed implements Serializable {
         this.setPenType(penType);
         this.setRequirements(landRequirements, waterRequirements);
     }
+
+
     //SETTERS
 
     public void setPenType(String penType) {
@@ -40,7 +42,7 @@ public class Breed implements Serializable {
     public void setName(String name) { this.name = name; }
 
     public void setCannotLiveWith(ArrayList<Breed> cannotLiveWith) {
-        this.cannotLiveWith = cannotLiveWith;
+        this.cannotLiveWith.addAll(cannotLiveWith);
     }
 
     //GETTERS

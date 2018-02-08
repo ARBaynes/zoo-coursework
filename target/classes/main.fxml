@@ -231,7 +231,7 @@
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                     <children>
-                                                          <SplitPane dividerPositions="0.5108517608517609" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                          <SplitPane dividerPositions="0.5681818181818182" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                               <items>
                                                                   <AnchorPane fx:id="aquariumPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                       <children>
@@ -360,7 +360,7 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <SplitPane dividerPositions="0.5108517608517609" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <SplitPane dividerPositions="0.5743243243243243" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <items>
                                                 <AnchorPane fx:id="dryAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
@@ -370,7 +370,7 @@
                                                                <columns>
                                                                   <TableColumn fx:id="dryPenID" prefWidth="68.99999856948853" text="Pen ID" />
                                                                   <TableColumn fx:id="dryTemp" prefWidth="104.00000762939453" text="Temperature" />
-                                                                  <TableColumn fx:id="dryMaxArea" prefWidth="126.0" text="Current Area" />
+                                                                  <TableColumn fx:id="dryMaxArea" prefWidth="126.0" text="Maximum Area" />
                                                                   <TableColumn fx:id="dryCurrentArea" prefWidth="126.0" text="Current Area" />
                                                                   <TableColumn fx:id="dryContainedAnimals" prefWidth="165.99996948242188" text="Contained Animals" />
                                                                   <TableColumn fx:id="dryKeeperID" prefWidth="75.0" text="Keeper ID" />
@@ -423,7 +423,7 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <SplitPane dividerPositions="0.5108517608517609" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <SplitPane dividerPositions="0.47092547092547093" layoutX="9.600000381469727" layoutY="9.600000381469727" prefHeight="620.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <items>
                                                 <AnchorPane fx:id="pettingPenAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>

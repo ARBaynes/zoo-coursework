@@ -1,5 +1,6 @@
 package models.critters;
 
+import classes.critters.Animal;
 import classes.critters.Breed;
 
 import java.io.*;

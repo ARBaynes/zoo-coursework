@@ -3,6 +3,7 @@ package models.pens;
 import classes.critters.Animal;
 import classes.critters.Breed;
 import classes.pens.Aviary;
+import models.critters.BreedModel;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -56,21 +57,31 @@ public class AviaryModel extends PenModel{
     }
 
     private static boolean animalHasNoDislikesInPen (Aviary pen, Animal toFit) {
-        for (Breed dislike : toFit.getBreedDislikes()) {
-            System.out.println(dislike);
-            if (pen.getContainedBreedNames().contains(dislike.getName())) {
-                return false;
+        Breed toFitBreed = BreedModel.getABreedWhere(toFit.getBreedName());
+        if (toFitBreed != null) {
+            for (Breed dislike : toFitBreed.getCannotLiveWith()) {
+                if (pen.getContainedBreedNames().contains(dislike.getName())) {
+                    return false;
+                }
             }
         }
         return true;
     }
 
     private static boolean animalsInPenDoNotDislikeAnimalToFit (Aviary pen, Animal toFit) {
-        for (Animal containedAnimal : pen.getContainedAnimals()) {
-            for (Breed dislikedBreed : containedAnimal.getBreedDislikes()) {
-                if (dislikedBreed.getName().equals(toFit.getBreedName())) {
-                    return false;
+        Breed toFitBreed = BreedModel.getABreedWhere(toFit.getBreedName());
+        Breed inPenBreed;
+        if (toFitBreed != null) {
+            for (Animal containedAnimal : pen.getContainedAnimals()) {
+                inPenBreed = BreedModel.getABreedWhere(containedAnimal.getBreedName());
+                if (inPenBreed != null) {
+                    for (Breed dislikedBreed : inPenBreed.getCannotLiveWith()) {
+                        if (dislikedBreed.getName().equals(toFitBreed.getName())) {
+                            return false;
+                        }
+                    }
                 }
+
             }
         }
         return true;
